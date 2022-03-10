@@ -33,6 +33,7 @@ class CreateUsersSeeder extends Seeder
             [
 
                'nom'=>'User',
+               'prenoms'=>'toto',
 
                'email'=>'user@itsolutionstuff.com',
 

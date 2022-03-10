@@ -62,10 +62,10 @@
 
 
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="{{ route('message') }}" class="nav-link">
                     <i class="fas fa-envelope"></i>
                     <p>
-                      Messages
+                      Messages 
                       <span class="right badge badge-danger messages"></span>
                     </p>
                   </a>

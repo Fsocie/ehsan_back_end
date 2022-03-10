@@ -6,6 +6,7 @@ use App\Http\Controllers\CasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\CarnetController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParamètreController;
 use App\Http\Controllers\SimpleQRcodeController;
 
@@ -27,6 +28,9 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
+Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
+Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
+Route::get('/read-message', [App\Http\Controllers\ReadMessageController::class, 'read-message'])->name('rm');
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
 

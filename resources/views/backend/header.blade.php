@@ -30,4 +30,5 @@
 
       <!--  <link rel="stylesheet" href="{{ asset('admin/select2/select2.css') }}"> -->
     @yield('linkCss')
+    
 </head>
