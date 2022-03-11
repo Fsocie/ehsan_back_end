@@ -18,7 +18,7 @@ class CreatePaysTable extends Migration
             $table->string('nom');
             $table->string('abr');
             $table->string('indicatif')->unique();
-            $table->string('icone');
+            $table->string('icone')->default('pays.png');
             $table->timestamps();
         });
     }

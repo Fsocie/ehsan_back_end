@@ -1,7 +1,6 @@
 @extends('backend.layouts.app')
 
     @section('button')
-
     @endsection
 
 	@section('page')
