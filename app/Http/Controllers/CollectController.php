@@ -16,7 +16,7 @@ class CollectController extends Controller
     public function index()
     {
         //
-        $collectes = Collecte::all();
+        $collectes = Collecte::latest()->get();
         return view('backend.collectes.index',compact('collectes'));
     }
 

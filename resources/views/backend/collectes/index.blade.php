@@ -23,6 +23,7 @@
                         </div>
                         <div class="float-right">
                             <p class="lead">
+                             
                                 <a type="button" class="btn btn-success " href="{{route('admin.collectes.create')}}">Ajouter </a>
                             </p>
                         </div>
@@ -71,20 +72,16 @@
                                                 <div class="d-flex" style="justify-content: space-between">
                                                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$collecte->id}}" href="{{ route('admin.collectes.show', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
                                                     <a type="button" class="btn btn-warning" href="{{ route('admin.collectes.edit', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
-                                                    <form action="{{route('admin.collectes.delete', $collecte->id) }}" method="post">
-                                                        @csrf
-                                                        @method("delete")
-                                                        <button class="btn btn-danger start_chat" title="delete"><i class="fas fa-trash"></i></button>
-                                                    </form>
-                                                   
+                                                    <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$collecte->id}}" title="delete"><i class="fas fa-trash"></i></button>
                                                 </div>
 
                                              </div>
                                         </td>
                                     </tr>
 
-                                  @include('backend.collectes.view')
-                                
+                               
+                                    @include('backend.collectes.delete')
+                                    @include('backend.collectes.view')
                                 @empty
                                     <tr class="text-danger text-center"><td>Pas de collectes disponibles</td></tr>
                                 @endforelse
@@ -124,6 +121,7 @@
                 "autoWidth": false,
             });
             })
+
         </script>
 
     @endsection

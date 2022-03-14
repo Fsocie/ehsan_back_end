@@ -3,7 +3,7 @@
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Voire la collecte: <em>{{$collecte->titre}}</em> </h3>
+                <h5 class="modal-title">Voire la collecte: <em>{{$collecte->titre}}</em> </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
