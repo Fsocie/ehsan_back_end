@@ -69,7 +69,7 @@
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
-                                                    <a type="button" class="btn btn-primary" href="{{ route('admin.collectes.show', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
+                                                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$collecte->id}}" href="{{ route('admin.collectes.show', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
                                                     <a type="button" class="btn btn-warning" href="{{ route('admin.collectes.edit', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
                                                     <form action="{{route('admin.collectes.delete', $collecte->id) }}" method="post">
                                                         @csrf
@@ -82,6 +82,9 @@
                                              </div>
                                         </td>
                                     </tr>
+
+                                  @include('backend.collectes.view')
+                                
                                 @empty
                                     <tr class="text-danger text-center"><td>Pas de collectes disponibles</td></tr>
                                 @endforelse
@@ -95,7 +98,7 @@
             </div>
         </div>
 
-
+     
 
     @endsection
 

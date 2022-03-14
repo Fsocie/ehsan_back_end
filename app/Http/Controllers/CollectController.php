@@ -42,9 +42,15 @@ class CollectController extends Controller
         //
         /*dd($request->image);
         die();*/
+        $data = $request->validate([
+            'titre'=>'required|string',
+            'description'=>'required|string',
+            'image'=>'required|file|max:1024'
+        ]);
         $filename = time().'.'.$request->image->extension();
         $img = $request->file('image')->storeAs('collectesImages',$filename,'public');
         $data = new Collecte();
+
         $data->titre = $request->titre;
         $data->image = $img;
         $data->description = $request->description;
@@ -61,7 +67,7 @@ class CollectController extends Controller
     public function show(Collecte $collecte)
     {
         //
-        
+        return view('backend.collectes.view',compact('collecte'));
     }
 
     /**
@@ -83,12 +89,27 @@ class CollectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Collecte $collecte)
     {
         //
-        /*if(Storage::disk('public')->exists($collecte->image)){
+        /*dd($request->image);
+        die();*/
+        $data = $request->validate([
+            'titre'=>'required|string',
+            'description'=>'required|string',
+            'image'=>'required|file|max:1024'
+        ]);
+        $filename = time().'.'.$request->image->extension();
+
+        if(Storage::disk('public')->exists($collecte->image)){
             Storage::disk('public')->delete($collecte->image);
-        }*/
+            $collecte->titre = $request->titre;
+            $collecte->image = $request->file('image')->storeAs('collectesImages',$filename,'public');
+            $collecte->description = $request->description;
+            $collecte->update();
+        }
+    
+        return redirect()->route('admin.collectes.index')->with('success','Collecte mise a jour avec succès');
     }
 
     /**
