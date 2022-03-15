@@ -76,57 +76,135 @@
                 <div class="col-md-9">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h3 class="card-title">Compose New Message</h3>
+                            <h3 class="card-title">Ecrire un nouveau message</h3>
                         </div>
-                        <div class="card-body">
+                        <style>
+                            *
+                            {
+                                padding: 0;
+                                margin: 0;
+                                font-family: sans-serif;
+                                box-sizing: border-box;
+                            }
+                            
+                            #screen
+                            {
+                                height: 670px;
+                                width: 400px;
+                                margin: 10px auto;
+                                border-radius: 20px;
+                                background: #f6f6f6;
+                                border-radius: 20px;
+                                border: 15px solid #fff;
+                                box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
+                                position: relative;
+                                overflow: hidden;
+                            }
+                            #header
+                            {
+                                height: 80px;
+                                width: 100%;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background: #007bff;
+                                display: grid;
+                                place-items: center;
+                                font-size: 25px;
+                                color: #fff;
+                                font-weight: bold;
+                                text-shadow: 1px 1px 2px #000000a1;
+                            }
+                            #messageDisplaySection
+                            {
+                                height: 450px;
+                                width: 100%;
+                                position: absolute;
+                                left: 0;
+                                top: 100px;
+                                padding: 0 20px;
+                                overflow-y: auto;
+                            }
+                            .chat
+                            {
+                                min-height: 40px;
+                                max-width: 60%;
+                                padding: 15px;
+                                border-radius: 10px;
+                                margin: 15px 0;
+                            }
+                            .botMessages
+                            {
+                                background: #007bff;
+                                color: #fff;
+                                text-shadow: 1px 1px 2px #000000d4;
+                            }
+                            #messagesContainer
+                            {
+                                height: auto;
+                                width: 100%;
+                                display: flex;
+                                justify-content: flex-end;
+                            }
+                            .usersMessages
+                            {
+                                background: #00000010;
+                            }
+                            #userInput
+                            {
+                                height: 50px;
+                                width: 90%;
+                                position: absolute;
+                                left: 5%;
+                                bottom: 3%;
+                                background: #fff;
+                                border-radius: 10px;
+                                overflow: hidden;
+                                box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+                            }
+                            #messages
+                            {
+                                height: 50px;
+                                width: 90%;
+                                position: absolute;
+                                left: 0;
+                                border: none;
+                                outline: none;
+                                background: transparent;
+                                padding: 0px 15px;
+                                font-size: 17px;
+                            }
+                            #send
+                            {
+                                height: 50px;
+                                width: 24%;
+                                position: absolute;
+                                right: 0;
+                                border: none;
+                                outline: none;
+                                display: grid;
+                                place-items: center;
+                                color: #fff;
+                                font-size: 20px;
+                                background: #007bff;
+                                cursor: pointer;
+                                display: none;
+                            }
+                        </style>
+                        <div class="card-body"> 
                             <div class="form-group">
-                                <input class="form-control" placeholder="To:">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Subject:">
-                            </div>
-                            <div class="form-group">
-                                <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                                    <h1><u>Heading Of Message</u></h1>
-                                    <h4>Subheading</h4>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                                    was born and I will give you a complete account of the system, and expound the actual teachings
-                                    of the great explorer of the truth, the master-builder of human happiness. No one rejects,
-                                    dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know
-                                    how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again
-                                    is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain,
-                                    but because occasionally circumstances occur in which toil and pain can procure him some great
-                                    pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise,
-                                    except to obtain some advantage from it? But who has any right to find fault with a man who
-                                    chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that
-                                    produces no resultant pleasure? On the other hand, we denounce with righteous indignation and
-                                    dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so
-                                    blinded by desire, that they cannot foresee</p>
-                                    <ul>
-                                        <li>List item one</li>
-                                        <li>List item two</li>
-                                        <li>List item three</li>
-                                        <li>List item four</li>
-                                    </ul>
-                                    <p>Thank you,</p>
-                                    <p>John Doe</p>
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="btn btn-default btn-file">
-                                    <i class="fas fa-paperclip"></i> Attachment
-                                    <input type="file" name="attachment">
-                                </div>
-                                <p class="help-block">Max. 32MB</p>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="float-right">
-                                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-                                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
-                            </div>
-                            <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
-                        </div>
+                                <div id="screen">
+                                    <div id="header">Ehsan Afrique</div>
+                                    <div id="messageDisplaySection">
+                                        
+                                    </div>
+                                    <div id="userInput">
+                                        <input type="text" name="messages" id="messages" autocomplete="OFF" placeholder="Entrez votre message" required>
+                                        <input type="submit" value="Send" id="send" name="send">
+                                    </div>
+                                </div>                          
+                            </div>                                                         
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -134,10 +212,47 @@
     </section>
 @endsection
 @section('javascripts')
+    
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <!-- Jquery Start -->
     <script>
-        $(function () {
-            //Add text editor
-            $('#compose-textarea').summernote()
-        })
-    </script>
+        $(document).ready(function(){
+            $("#messages").on("keyup",function(){
+
+                if($("#messages").val()){
+                    $("#send").css("display","block");
+                }else{
+                    $("#send").css("display","none");
+                }
+            });
+        });
+        // when send button clicked
+        $("#send").on("click",function(e){
+            $userMessage = $("#messages").val();
+            $appendUserMessage = '<div class="chat usersMessages">'+ $userMessage +'</div>';
+            $("#messageDisplaySection").append($appendUserMessage);
+            // ajax start   
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });                                 
+            $.ajax({
+                url: '{{ route('composePost') }}',
+                type: 'POST',
+                // sending data
+                data: {messageValue: $userMessage},
+                // response text
+                success: function(data){
+                    // show response
+                    $appendBotResponse = '<div id="messagesContainer"><div class="chat botMessages">'+data+'</div></div>';
+                    $("#messageDisplaySection").append($appendBotResponse);
+                }
+            });
+            $("#messages").val("");
+            $("#send").css("display","none");
+        });
+    </script>   
 @endsection
