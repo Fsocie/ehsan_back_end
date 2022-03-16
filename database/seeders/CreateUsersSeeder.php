@@ -14,43 +14,41 @@ class CreateUsersSeeder extends Seeder
      */
     public function run()
     {
-        $user = [
+      
+        $userAdmin= User::create([
+                    'nom'=>'admin',
+                    'prenoms'=>'admin',
+                    'telephone'=>'10101010',
+                    'email'=>'admin@admin.com',
+                    'is_admin'=>'1',
+                    'password'=> bcrypt('123456789'),
+                    ]);
 
-            [
-
-               'nom'=>'Admin',
-               'prenoms'=>'dav',
-               'telephone'=>'93624686',
-               'email'=>'admin@ehsan.com',
-                'is_admin'=>'1',
-               'password'=> bcrypt('123456'),
-            ],
-
-            [
-               'nom'=>'User',
-               'prenoms'=>'dav',
-               'telephone'=>'90909090',
-               'email'=>'user@itsolutionstuff.com',
-               'is_admin'=>'0',
-               'password'=> bcrypt('123456'),
-            ],
-            [
-                'nom'=>'admin',
-                'prenoms'=>'admin',
-                'telephone'=>'10101010',
-                'email'=>'admin@admin.com',
-                'is_admin'=>'1',
-                'password'=> bcrypt('123456789'),
-             ],
-
-        ];
+        $userWriter=User::create([
+                    'nom'=>'writer',
+                    'prenoms'=>'writer',
+                    'telephone'=>'20202020',
+                    'email'=>'writer@writer.com',
+                    'is_admin'=>'1',
+                    'password'=> bcrypt('123456789'),
+        ]);
+        $userUser=User::create([
+                    'nom'=>'user',
+                    'prenoms'=>'user',
+                    'telephone'=>'30303030',
+                    'email'=>'user@user.com',
+                    'is_admin'=>'0',
+                    'password'=> bcrypt('123456789'),
+                ]);
+        
+             $userAdmin->assignRole('admin',"writer","user");
+             $userWriter->assignRole("writer","user");
+             $userUser->assignRole("user");
 
 
 
-        foreach ($user as $key => $value) {
-
+        /*foreach ($user as $key => $value) {
             User::create($value);
-
-        }
+        }*/
     }
 }

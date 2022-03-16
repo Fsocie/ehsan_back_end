@@ -26,7 +26,32 @@
                     </p>
                   </a>
                 </li>
-
+                
+                <!--users begin-->
+                <li class="nav-item">
+                  <a href="{{route('users.index')}}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <p>Users<span class="right badge badge-danger commandes"></span></p>
+                  </a>
+                </li>
+                <!--users end-->
+                <!--roles begin-->
+                <li class="nav-item">
+                  <a href="{{route('roles.index')}}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <p>Roles<span class="right badge badge-danger commandes"></span></p>
+                  </a>
+                </li>
+                <!--roles end-->
+                <!--permissions begin-->
+                 <li class="nav-item">
+                  <a href="{{route('permissions.index')}}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <p>Permissions<span class="right badge badge-danger commandes"></span></p>
+                  </a>
+                </li>
+                <!--permissions end-->
+                
                 <li class="nav-item">
                   <a href="{{route('admin.signal.index')}}" class="nav-link">
                     <i class="fab fa-shopify"></i>

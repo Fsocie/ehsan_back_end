@@ -8,7 +8,10 @@ use App\Models\HashChild;
 use Illuminate\Support\Facades\Auth;
 
 class CasController extends Controller
+
 {
+
+    
     public function index() {
 
         $signal=Geolocalisation::all();

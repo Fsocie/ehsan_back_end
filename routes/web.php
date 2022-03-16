@@ -9,6 +9,9 @@ use App\Http\Controllers\CarnetController;
 use App\Http\Controllers\ParamètreController;
 use App\Http\Controllers\SimpleQRcodeController;
 use App\Http\Controllers\CollectController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -67,5 +70,17 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
 
 
+});
+
+Route::group(['middleware' => 'auth:sanctum'],function(){
+  //users
+  Route::resource("/users",UserController::class);
+  //roles
+  Route::get("/roles/{role}/assign-permission",[RoleController::class,'assignPermissionView'])->name('roles.assign.permission');
+  Route::post("/roles/{role}/assign-permission",[RoleController::class,'assignPermission'])->name('roles.store.permission');
+  Route::resource("/roles",RoleController::class);
+ 
+  //permissions
+  Route::resource("/permissions",PermissionController::class);
 });
 
