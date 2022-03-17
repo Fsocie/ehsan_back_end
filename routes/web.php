@@ -32,7 +32,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::post('/home', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
 
-//Route::group(['middleware' => 'auth:sanctum'], function(){
+Route::group(['middleware' => 'auth:sanctum'], function(){
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
     Route::get('/parametre', [ParamètreController::class, 'index'])->name('admin.paramatre.index');
@@ -64,16 +64,11 @@ Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout
     Route::get("collectes/edit/{collecte}",[CollectController::class,'edit'])->name("admin.collectes.edit");
     Route::put("collectes/update/{collecte}",[CollectController::class,'update'])->name("admin.collectes.update");
     Route::delete("collectes/delete/{collecte}",[CollectController::class,'destroy'])->name("admin.collectes.delete");
-  
 
-
-
-
-
-//});
+});
 
 //Route::group(['middleware' => 'auth:sanctum'],function(){
-//Route::group(['middleware' => 'auth:sanctum'],function(){
+//Route::group(['middleware' => 'role:admin|writer'],function(){
 Route::group(['middleware' => 'role:admin|writer'],function(){
   //users
   Route::resource("/users",UserController::class);
@@ -81,7 +76,6 @@ Route::group(['middleware' => 'role:admin|writer'],function(){
   Route::get("/roles/{role}/assign-permission",[RoleController::class,'assignPermissionView'])->name('roles.assign.permission');
   Route::post("/roles/{role}/assign-permission",[RoleController::class,'assignPermission'])->name('roles.store.permission');
   Route::resource("/roles",RoleController::class);
- 
   //permissions
   Route::resource("/permissions",PermissionController::class);
 });

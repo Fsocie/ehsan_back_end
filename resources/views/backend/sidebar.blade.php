@@ -26,11 +26,11 @@
                     </p>
                   </a>
                 </li>
-                
+                @role('admin')
                 <!--users begin-->
                 <li class="nav-item">
                   <a href="{{route('users.index')}}" class="nav-link">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-user"></i>
                     <p>Users<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
@@ -38,7 +38,7 @@
                 <!--roles begin-->
                 <li class="nav-item">
                   <a href="{{route('roles.index')}}" class="nav-link">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-lock"></i>
                     <p>Roles<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
@@ -46,12 +46,12 @@
                 <!--permissions begin-->
                  <li class="nav-item">
                   <a href="{{route('permissions.index')}}" class="nav-link">
-                    <i class="fas fa-home"></i>
+                    <i class="fas fa-pen"></i>
                     <p>Permissions<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
                 <!--permissions end-->
-                
+                @endrole
                 <li class="nav-item">
                   <a href="{{route('admin.signal.index')}}" class="nav-link">
                     <i class="fab fa-shopify"></i>
@@ -99,10 +99,8 @@
 
                 <li class="nav-item">
                   <a href="{{route("admin.collectes.index")}}" class="nav-link">
-                    <i class="fas fa-envelope"></i>
-                    <p>
-                      Lancer une collecte
-                      <span class="right badge badge-danger messages"></span>
+                    <i class="fas fa-dice"></i>
+                    <p>Lancer une collecte<span class="right badge badge-danger messages"></span>
                     </p>
                   </a>
                 </li>
