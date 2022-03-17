@@ -84,5 +84,5 @@ Route::group(['middleware' => 'role:admin|writer'],function(){
  
   //permissions
   Route::resource("/permissions",PermissionController::class);
-//});
+});
 
