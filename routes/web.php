@@ -32,7 +32,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::post('/home', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
 
-Route::group(['middleware' => 'auth:sanctum'], function(){
+//Route::group(['middleware' => 'auth:sanctum'], function(){
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
     Route::get('/parametre', [ParamètreController::class, 'index'])->name('admin.paramatre.index');
@@ -70,9 +70,9 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
 
 
-});
-
-Route::group(['middleware' => 'auth:sanctum'],function(){
+//});
+//Route::group(['middleware' => 'auth:sanctum'],function(){
+Route::group(['middleware' => 'role:admin|writer'],function(){
   //users
   Route::resource("/users",UserController::class);
   //roles
