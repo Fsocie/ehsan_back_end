@@ -71,13 +71,10 @@ Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout
 
 
 //});
-<<<<<<< HEAD
 
 //Route::group(['middleware' => 'auth:sanctum'],function(){
-=======
 //Route::group(['middleware' => 'auth:sanctum'],function(){
 Route::group(['middleware' => 'role:admin|writer'],function(){
->>>>>>> 3c9a29bfeb01ffefce5f976a57f8a49261a9586d
   //users
   Route::resource("/users",UserController::class);
   //roles
