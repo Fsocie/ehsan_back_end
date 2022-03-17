@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function child(){
         return $this->hasMany('App\Models\HasChild');
     }
+
+    public function contacts(){
+        return $this->belongsTo(contacts::class, 'id_user', 'id');
+    }
 }

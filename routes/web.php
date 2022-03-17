@@ -31,7 +31,7 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
 Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
 Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
-Route::get('/read-message', [App\Http\Controllers\ReadMessageController::class, 'read-message'])->name('rm');
+Route::get('/read-message', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
