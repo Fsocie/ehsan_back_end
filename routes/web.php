@@ -77,5 +77,6 @@ Route::group(['middleware' => 'role:admin|writer'],function(){
   Route::resource("/roles",RoleController::class);
   //permissions
   Route::resource("/permissions",PermissionController::class);
+  
 });
 
