@@ -28,10 +28,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/home', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
-Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
-Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
-Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
-Route::get('/read-message', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -56,4 +53,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   //Qr code enfant
   Route::get("simple-qrcode/{id}",  [SimpleQRcodeController::class, 'generate'])->name('admin.qrcode.show');
   Route::get("index",  [SimpleQRcodeController::class, 'index'])->name('admin.qrcode.index');
+
+  //message
+  Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
+  Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
+  Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
+  Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
 });

@@ -21,7 +21,7 @@
                             <li class="nav-item active">
                                 <a href="{{ route('message') }}" class="nav-link">
                                     <i class="fas fa-inbox"></i> Boîte de réception
-                                    <span class="badge bg-primary float-right">{{ $message->count() }}</span>
+                                    <span class="badge bg-primary float-right">{{ $message->where('lu',null)->count() }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">

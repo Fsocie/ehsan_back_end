@@ -10,16 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public $contacts;
+    public $contact_id;
 
-    public function mount($contacts)
+    public function mount($contact_id)
     {
-        $this->contacts = $contacts;
+        $this->contact_id = $contact_id;
     }
+
 
     public function message(){
         $user = Auth::user();
-        $message = contacts::where('user_id', '=', $user->id)->get();    
+        $message = contacts::where('user_id',$user->id)->get();
         return view('backend.message.message', ['message'=>$message, 'user'=>$user]);
     }
 }

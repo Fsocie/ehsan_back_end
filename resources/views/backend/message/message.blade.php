@@ -23,7 +23,7 @@
                                 <li class="nav-item active">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-inbox"></i> Boîte de réception
-                                        <span class="badge bg-primary float-right">{{ $message->count() }}</span>
+                                        <span class="badge bg-primary float-right">{{ $message->where('lu',null)->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -60,8 +60,8 @@
                                     <tbody>
                                         @foreach ($message as $msg)
                                         <tr>
-                                            <td class="mailbox-name"><a href="{{ route('rm') }}">{{ $user->nom }}</a></td>
-                                            <td class="mailbox-subject"><b>Problème Ehsan Afrique</b> - {{ $msg->audio }}</td>
+                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} " wire:click.prevent="updateLu({{ $msg->id }})">{{ $user->nom }}</a></td>
+                                            <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">{{ $msg->created_at }}</td>
                                         </tr>

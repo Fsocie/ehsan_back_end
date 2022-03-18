@@ -10,17 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ReadMessageController extends Controller
 {
-    public $contacts_id;
-
-    public function mount($contacts_id)
+    
+    public function updateLu($contact_id)
     {
-        $this->contacts_id = $contacts_id;
+        $contacts = contacts::find($contact_id);
+        $contacts->lu = 1;
+        $contacts->save();
     }
 
-    public function readMessage(){
+    public function readMessage($contact_id){
         $user = Auth::user();
-        $message = contacts::find($this->contacts_id);
-        $message = contacts::where('id', '=', $this->contacts_id)->get();
+        $message = contacts::where('user_id',$user->id)->where('id',$contact_id)->get();
+        //dump($contact_id);
         return view('backend.message.read-message', ['message'=>$message, 'user'=>$user]);
     }
 }
