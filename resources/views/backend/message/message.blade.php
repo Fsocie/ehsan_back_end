@@ -60,7 +60,7 @@
                                     <tbody>
                                         @foreach ($message as $msg)
                                         <tr>
-                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} " wire:click.prevent="updateLu({{ $msg->id }})">{{ $user->nom }}</a></td>
+                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $user->nom }}</a></td>
                                             <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">{{ $msg->created_at }}</td>

@@ -20,7 +20,7 @@ class MessageController extends Controller
 
     public function message(){
         $user = Auth::user();
-        $message = contacts::where('user_id',$user->id)->get();
+        $message = contacts::orderBy('created_at','DESC')->where('user_id',$user->id)->get();
         return view('backend.message.message', ['message'=>$message, 'user'=>$user]);
     }
 }
