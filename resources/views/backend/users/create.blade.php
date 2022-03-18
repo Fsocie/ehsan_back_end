@@ -72,7 +72,7 @@
             <!---->
             <div class="form-group">
                 <label>Roles</label>
-                    <select class="form-control" name="role_id">
+                    <select class="form-control" multiple name="roles[]">
                         @forelse ($roles as $role)
                             <option value="{{$role->id}}">{{$role->name}}</option>
                         @empty  

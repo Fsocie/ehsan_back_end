@@ -23,8 +23,9 @@
                         </div>
                         <div class="float-right">
                             <p class="lead">
-                             
-                                <a type="button" class="btn btn-success " href="{{route('admin.collectes.create')}}">Ajouter </a>
+                                @can('collecte-create')
+                                    <a type="button" class="btn btn-success " href="{{route('admin.collectes.create')}}">Ajouter </a>
+                                @endcan
                             </p>
                         </div>
 
@@ -71,8 +72,12 @@
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
                                                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$collecte->id}}" href="{{ route('admin.collectes.show', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
-                                                    <a type="button" class="btn btn-warning" href="{{ route('admin.collectes.edit', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
-                                                    <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$collecte->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @can('collecte-edit')
+                                                        <a type="button" class="btn btn-warning" href="{{ route('admin.collectes.edit', $collecte->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                    @endcan
+                                                    @can('collecte-delete')
+                                                        <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$collecte->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @endcan
                                                 </div>
 
                                              </div>

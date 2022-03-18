@@ -13,7 +13,7 @@
 @section('content')
 
 
-    <form method="POST"  action="{{route('admin.roles.store')}}">
+    <form method="POST"  action="{{route('roles.store')}}">
         @csrf
    
             <div class="form-group">

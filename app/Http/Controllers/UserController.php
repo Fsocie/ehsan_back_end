@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $users = User::all();
@@ -20,7 +27,7 @@ class UserController extends Controller
     }
     public function store(Request $request,User $user)
     {
-        //dd($request->role_id);
+        //dd($request->roles);
         //die();
         //dd($request->nom);
         $data = $request->validate([
@@ -30,8 +37,8 @@ class UserController extends Controller
             'email'=>'required|string',
             'password'=>'required|string'
         ]);
-        User::create($data);
-        $user->assignRole($request->role_id);
+        $user = User::create($data);
+        $user->assignRole($request->roles);
         return redirect()->route('users.index')->with('success','Nouveau user ajouté avec succès');
     }
 

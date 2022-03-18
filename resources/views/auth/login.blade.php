@@ -34,38 +34,46 @@
           @csrf
 
           @if ($errors->any())
-
+         
               <font color="red"><center>Certaines informations ne correspondent pas, vérifiez s'il vous plait </center> </font>
 
           @endif
 
           <div class="input-group mb-3">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+            {{-- comment --}}
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
+             {{-- comment --}}
+            @error('email')
+              <div class="invalid-feedback">
+                {{$errors->first('email')}}
+              </div>
+            @enderror
+            {{-- comment --}}
           </div>
-          @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+
 
           <div class="input-group mb-3">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" id="password" class="form-control  @error('password') is-invalid @enderror" placeholder="Password">
+            {{-- comment --}}
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            {{-- comment --}}
+            @error('password')
+              <div class="invalid-feedback">
+                  {{ $errors->first("password") }}
+              </div>
+            @enderror
+            {{-- comment --}}
           </div>
-          @error('password')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+
 
           <div class="row">
             <div class="col-6">

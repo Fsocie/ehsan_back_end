@@ -23,11 +23,11 @@
                         </div>
                         <div class="float-right">
                             <p class="lead">
-                             
-                                <a type="button" class="btn btn-success " href="{{route('users.create')}}">Ajouter </a>
+                                @can('user-create')
+                                    <a type="button" class="btn btn-success " href="{{route('users.create')}}">Ajouter </a>
+                                @endcan
                             </p>
                         </div>
-
 
                     </div>
 
@@ -70,14 +70,25 @@
                                         <td>{{$user->prenoms}}</td>  
                                         <td>{{$user->email}}</td>  
                                         <td>{{$user->is_admin}}</td>
-                                        <td>{{implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
+                                        <td>
+                                            @if(!empty($user->getRoleNames()))
+                                                @foreach($user->getRoleNames() as $val)
+                                                    <label class="badge badge-dark">{{ $val }}</label>
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                        
                                         {{--<td>{{$user->roles[0]->name}}</td> --}} 
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
                                                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$user->id}}" href="{{ route('users.show', $user->id) }}" title="Voire" ><i class="nav-icon fas fa-eye"></i></a>
-                                                    <a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
-                                                    <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @can("user-edit")
+                                                        <a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                    @endcan
+                                                    @can("user-delete")
+                                                        <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

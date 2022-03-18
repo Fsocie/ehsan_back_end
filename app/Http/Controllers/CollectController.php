@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 class CollectController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:collecte-list|collecte-create|collecte-edit|collecte-delete', ['only' => ['index', 'show']]);
+         $this->middleware('permission:collecte-create', ['only' => ['create', 'store']]);
+         $this->middleware('permission:collecte-edit', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:collecte-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

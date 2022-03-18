@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class CreateUsersSeeder extends Seeder
@@ -15,7 +17,7 @@ class CreateUsersSeeder extends Seeder
     public function run()
     {
       
-        $userAdmin= User::create([
+        /*$userAdmin= User::create([
                     'nom'=>'admin',
                     'prenoms'=>'admin',
                     'telephone'=>'10101010',
@@ -44,9 +46,25 @@ class CreateUsersSeeder extends Seeder
              $userAdmin->assignRole('admin',"writer","user");
              $userWriter->assignRole("writer","user");
              $userUser->assignRole("user");
-
-
-
+             $user = User::create([
+                'name' => 'Olamide Bado', 
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('123456789')
+            ]);*/
+            /************************************/
+            $user = User::create([
+                'nom'=>'admin',
+                'prenoms'=>'admin',
+                'telephone'=>'10101010',
+                'email'=>'admin@admin.com',
+                'is_admin'=>'1',
+                'password'=> bcrypt('123456789'),
+            ]);
+            $role = Role::find(1);
+            $permissions = Permission::pluck('id', 'id')->all();
+            $role->syncPermissions($permissions);
+            $user->assignRole([$role->id]);
+            /************************************/
         /*foreach ($user as $key => $value) {
             User::create($value);
         }*/

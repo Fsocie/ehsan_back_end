@@ -23,8 +23,9 @@
                         </div>
                         <div class="float-right">
                             <p class="lead">
-                             
-                                <a type="button" class="btn btn-success " href="{{route('roles.create')}}">Ajouter </a>
+                                @can('role-create')
+                                    <a type="button" class="btn btn-success " href="{{route('roles.create')}}">Ajouter </a>
+                                @endcan
                             </p>
                         </div>
 
@@ -66,10 +67,14 @@
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
-                                                    <a type="button" class="btn btn-primary" href="{{ route('roles.assign.permission',$role->id) }}" title="assigner permission">assign Permission</a>
+                                                    <a type="button" class="btn btn-secondary btn-sm" href="{{ route('roles.assign.permission',$role->id) }}" title="assigner permission">assign Permission</a>
                                                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$role->id}}" href="{{ route('roles.show', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
-                                                    <a type="button" class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
-                                                    <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$role->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @can('role-edit')
+                                                        <a type="button" class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                    @endcan
+                                                    @can('role-delete')
+                                                        <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$role->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                    @endcan
                                                 </div>
 
                                              </div>

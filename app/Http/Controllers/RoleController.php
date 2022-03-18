@@ -7,6 +7,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:role-create', ['only' => ['create','store']]);
+         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    }
     //
     public function index()
     {
@@ -25,7 +32,7 @@ class RoleController extends Controller
             'name'=>'required|string',
         ]);
         Role::create($data);
-        return redirect()->route('admin.roles.index')->with('success','Nouveau role ajouté avec succès');
+        return redirect()->route('roles.index')->with('success','Nouveau role ajouté avec succès');
     }
 
     public function edit(Role $role)

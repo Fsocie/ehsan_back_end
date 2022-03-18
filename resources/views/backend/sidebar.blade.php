@@ -28,43 +28,46 @@
                 </li>
                 @role('admin')
                 <!--users begin-->
+                @can('user-list')
                 <li class="nav-item">
                   <a href="{{route('users.index')}}" class="nav-link">
                     <i class="fas fa-user"></i>
                     <p>Users<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
+                @endcan
                 <!--users end-->
                 <!--roles begin-->
+                @can('role-list')
                 <li class="nav-item">
                   <a href="{{route('roles.index')}}" class="nav-link">
                     <i class="fas fa-lock"></i>
                     <p>Roles<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
+                @endcan
                 <!--roles end-->
                 <!--permissions begin-->
+                @can('permission-list')
                  <li class="nav-item">
                   <a href="{{route('permissions.index')}}" class="nav-link">
                     <i class="fas fa-pen"></i>
                     <p>Permissions<span class="right badge badge-danger commandes"></span></p>
                   </a>
                 </li>
+                @endcan
                 <!--permissions end-->
                 @endrole
                 <li class="nav-item">
                   <a href="{{route('admin.signal.index')}}" class="nav-link">
                     <i class="fab fa-shopify"></i>
-
                     <p>
-
-                       Listes des cas signalés
+                      Listes des cas signalés
                       <span class="right badge badge-danger commandes"></span>
                     </p>
                   </a>
                 </li>
-
-
+                {{-- comment --}}
                   <li class="nav-item">
                     <a href="{{route('admin.carnet.index')}}" class="nav-link">
                       <i class="fas fa-users"></i>
@@ -74,18 +77,16 @@
                       </p>
                     </a>
                   </li>
-
+                {{-- comment --}}
                 <li class="nav-item">
-                <a href="{{route('admin.qrcode.index')}}" class="nav-link">
+                  <a href="{{route('admin.qrcode.index')}}" class="nav-link">
                       <i class="fa fa-cubes"></i>
-                    <p>
-                    Enfants & code Qr
+                    <p>Enfants & code Qr
                       <span class="right badge badge-danger "></span>
                     </p>
                   </a>
                 </li>
-
-
+                {{-- comment --}}
                 <li class="nav-item">
                   <a href="" class="nav-link">
                     <i class="fas fa-envelope"></i>
@@ -95,8 +96,8 @@
                     </p>
                   </a>
                 </li>
-
-
+                {{-- comment --}}
+                @can('collecte-list')
                 <li class="nav-item">
                   <a href="{{route("admin.collectes.index")}}" class="nav-link">
                     <i class="fas fa-dice"></i>
@@ -104,21 +105,13 @@
                     </p>
                   </a>
                 </li>
-
-
-
-
-                  <li class="nav-item" >
+                @endcan
+                {{-- comment --}}
+                <li class="nav-item" >
                       <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
-                      <i class="fas fa-cog">
-
-
-
-                      </i> Paramètre
-                      </a>
-
-                  </li>
-
+                      <i class="fas fa-cog"></i> Paramètre</a>
+                </li>
+                {{-- comment --}}
 
 
 

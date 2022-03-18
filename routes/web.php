@@ -68,7 +68,6 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 });
 
 //Route::group(['middleware' => 'auth:sanctum'],function(){
-//Route::group(['middleware' => 'role:admin|writer'],function(){
 Route::group(['middleware' => 'role:admin|writer'],function(){
   //users
   Route::resource("/users",UserController::class);
