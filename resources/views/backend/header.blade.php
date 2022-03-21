@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,4 +30,5 @@
 
       <!--  <link rel="stylesheet" href="{{ asset('admin/select2/select2.css') }}"> -->
     @yield('linkCss')
+    
 </head>

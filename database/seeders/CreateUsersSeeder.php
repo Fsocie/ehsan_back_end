@@ -58,6 +58,7 @@ class CreateUsersSeeder extends Seeder
                 'telephone'=>'10101010',
                 'email'=>'admin@admin.com',
                 'is_admin'=>'1',
+
                 'password'=> bcrypt('123456789'),
             ]);
             $role = Role::find(1);
@@ -65,8 +66,6 @@ class CreateUsersSeeder extends Seeder
             $role->syncPermissions($permissions);
             $user->assignRole([$role->id]);
             /************************************/
-        /*foreach ($user as $key => $value) {
-            User::create($value);
-        }*/
+
     }
 }

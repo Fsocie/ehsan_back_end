@@ -25,12 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users=User::where('is_admin','0')->limit(50)->get();
+        $users = User::where('is_admin', '0')->limit(50)->get();
 
-       $cas=Geolocalisation::orderBy('id','desc')
-       ->limit(10) ->get();
+        $cas = Geolocalisation::orderBy('id', 'desc')
+            ->limit(10)->get();
 
-        return view('backend.home.index',compact('users','cas'));
+        return view('backend.home.index', compact('users', 'cas'));
     }
 
 
@@ -39,7 +39,5 @@ class HomeController extends Controller
     {
 
         return view('auth.login');
-
     }
-
 }

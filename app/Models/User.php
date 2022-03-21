@@ -62,11 +62,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\HasChild');
     }
 
+
     //setters
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);
     }
     public function getRoleIdAttribute($value){
         return $this->roles[0]->id;
+    }
+    public function contacts(){
+        return $this->belongsTo(contacts::class, 'id_user', 'id');
     }
 }
