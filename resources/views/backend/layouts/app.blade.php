@@ -49,3 +49,4 @@
 		</div>
 
 @include('backend.footer')
+@yield('custum_js')

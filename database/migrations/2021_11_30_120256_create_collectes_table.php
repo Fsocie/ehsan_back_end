@@ -15,6 +15,7 @@ class CreateCollectesTable extends Migration
     {
         Schema::create('collectes', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->string('titre');
             $table->string('image');
             $table->string('description');
             $table->timestamps();

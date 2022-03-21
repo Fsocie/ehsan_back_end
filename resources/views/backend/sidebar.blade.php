@@ -71,30 +71,28 @@
                   </a>
                 </li>
 
-
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class="fas fa-envelope"></i>
-                    <p>
-                      Lancer une collecte
-                      <span class="right badge badge-danger messages"></span>
-                    </p>
-                  </a>
-                </li>
-
-
-
-
-                  <li class="nav-item" >
-                      <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
-                      <i class="fas fa-cog">
-
-
-
-                      </i> Paramètre
-                      </a>
-
-                  </li>
+                 {{-- collecte begin --}}
+                 @can('collecte-list')
+                 <li class="nav-item">
+                   <a href="{{route("admin.collectes.index")}}" class="nav-link">
+                     <i class="fas fa-dice"></i>
+                     <p>Lancer une collecte<span class="right badge badge-danger messages"></span>
+                     </p>
+                   </a>
+                 </li>
+                 @endcan
+                 {{-- collecte begin --}}
+                 @role('Admin')
+                 {{-- parametre begin --}}
+                  @can('parametre-list')
+                    <li class="nav-item" >
+                        <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
+                        <i class="fas fa-cog"></i> Paramètre
+                        </a>
+                    </li>
+                  @endcan
+                  {{-- parametre end --}}
+                  @endrole
 
 
 

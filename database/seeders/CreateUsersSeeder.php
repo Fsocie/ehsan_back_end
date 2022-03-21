@@ -21,24 +21,18 @@ class CreateUsersSeeder extends Seeder
                'nom'=>'Admin',
                'prenoms'=>'dav',
                'telephone'=>'93624686',
-
                'email'=>'admin@ehsan.com',
-
                 'is_admin'=>'1',
-
                'password'=> bcrypt('123456'),
 
             ],
 
             [
-
                'nom'=>'User',
                'prenoms'=>'toto',
-
+               'telephone'=>'101010',
                'email'=>'user@itsolutionstuff.com',
-
                 'is_admin'=>'0',
-
                'password'=> bcrypt('123456'),
 
             ],
