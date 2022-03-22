@@ -60,6 +60,38 @@
               <!-- /.col -->
 
 
+
+                    <div class="col-12 col-sm-4 col-md-4">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                            <div class="info-box-content">
+                                    <a href="{{route('users.index')}}">
+                                    <span class="info-box-text">Listes des utilisateurs </span>
+                                    <span class="info-box-number"> </span>
+                                    </a>
+                            </div>
+                                <!-- /.info-box-content -->
+                        </div>
+                    <!-- /.info-box -->
+                </div>  
+
+
+                <div class="col-12 col-sm-4 col-md-4">
+                    <div class="info-box mb-3">
+                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-lock"></i></span>
+    
+                        <div class="info-box-content">
+                                <a href="{{route('roles.index')}}">
+                                <span class="info-box-text">Listes des roles  </span>
+                                <span class="info-box-number"> </span>
+                                </a>
+                        </div>
+                             <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+              </div>
+
           </div>
 
     @endsection

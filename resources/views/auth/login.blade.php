@@ -29,7 +29,15 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Veuillez insérer vos données de connexion</p>
+      
+      @if ($message = Session::get('error'))
 
+      <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+          </button>
+          {{ $message }}
+      </div>
+  @endif
       <form action="{{ route('admin.login') }}" method="post">
           @csrf
 
@@ -38,6 +46,7 @@
               <font color="red"><center>Certaines informations ne correspondent pas, vérifiez s'il vous plait </center> </font>
 
           @endif
+    
 
           <div class="input-group mb-3">
             <input type="email" name="email" id="email" class="form-control" placeholder="Email">
