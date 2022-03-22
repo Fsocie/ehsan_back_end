@@ -73,7 +73,7 @@
                                     </tbody>
                                 </table>
                             @else
-                                <p style="padding-top: 30px;">Aucun nouveau message</p>
+                                <h5><p style="padding-top: 30px; text-align: center;">Aucun nouveau message</p></h5>
                             @endif                            
                         </div>
                     </div>
