@@ -42,12 +42,10 @@
                 @foreach ($message as $msg)
                     <div class="card-body p-0">
                         <div class="mailbox-read-info">
-                            <h6>De: Opérateur 0
+                            <h6>De : {{ $user->nom }}
                             <span class="mailbox-read-time float-right">{{ $msg->created_at }}</span></h6>
                         </div>
-                        
                         <div class="mailbox-read-message">
-                            <p>Salut ! {{ $user->nom }},</p>
                             <p>{{$msg->audio}}</p>
                         </div>
                     </div>

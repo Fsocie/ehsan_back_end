@@ -64,7 +64,7 @@
                                             @if ($msg->lu == '')
                                                 <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - <b>{{ $msg->audio }}</b></td>
                                             @else
-                                                <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
+                                                <td class="mailbox-subject"> Message Ehsan Afrique - {{ $msg->audio }}</td>
                                             @endif                                            
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">{{ $msg->created_at }}</td>

@@ -136,7 +136,7 @@ class UserController extends Controller
 
     
 
-        return view('backend.users.edit',compact('user','roles','userRole'));
+        return view('backend.users.update',compact('user','roles','userRole'));
 
     }
 
