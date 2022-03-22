@@ -56,7 +56,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   //message
   Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
+  Route::get('/recherche',[App\Http\Controllers\MessageController::class, 'recherche'])->name('message.recherche');
+
   Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
+  
   Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
+  
 });

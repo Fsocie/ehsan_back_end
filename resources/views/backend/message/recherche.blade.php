@@ -17,13 +17,13 @@
                             </button>
                         </div>
                     </div>
-                    @if ($message->count() > 0)
+                    @if ($rechercher->count() > 0)
                         <div class="card-body p-0">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item active">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-inbox"></i> Boîte de réception
-                                        <span class="badge bg-primary float-right">{{ $message->where('lu',null)->count() }}</span>
+                                        <span class="badge bg-primary float-right">{{ $rechercher->where('lu',null)->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -55,17 +55,13 @@
                     
                     <div class="card-body p-0">
                         <div class="table-responsive mailbox-messages">
-                            @if ($message->count() > 0)
+                            @if ($rechercher->count() > 0)
                                 <table class="table table-hover table-striped">
                                     <tbody>
-                                        @foreach ($message as $msg)
+                                        @foreach ($rechercher as $msg)
                                         <tr>
                                             <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $user->nom }}</a></td>
-                                            @if ($msg->lu == '')
-                                                <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - <b>{{ $msg->audio }}</b></td>
-                                            @else
-                                                <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
-                                            @endif                                            
+                                            <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">{{ $msg->created_at }}</td>
                                         </tr>

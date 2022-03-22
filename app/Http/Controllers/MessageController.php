@@ -11,12 +11,23 @@ use Illuminate\Support\Facades\Auth;
 class MessageController extends Controller
 {
     public $contact_id;
+    public $trouver;
 
     public function mount($contact_id)
     {
         $this->contact_id = $contact_id;
     }
 
+    public function recherche()
+    {
+        $q = request()->input('q');
+        //dump($q);    
+        $rechercher = contacts::where('audio', 'LIKE', "%$q%")
+                            ->orWhere('id', 'LIKE', "%$q%")
+                            ->get();
+        $user = Auth::user();
+        return view('backend.message.recherche', ['user'=>$user, 'rechercher'=>$rechercher]);
+    }
 
     public function message(){
         $user = Auth::user();
