@@ -71,6 +71,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
       Route::get("collectes/edit/{collecte}",[CollectController::class,'edit'])->name("admin.collectes.edit");
       Route::put("collectes/update/{collecte}",[CollectController::class,'update'])->name("admin.collectes.update");
       Route::delete("collectes/delete/{collecte}",[CollectController::class,'destroy'])->name("admin.collectes.delete");
+      //whatsapp
+      //https://web.whatsapp.com/
+      Route::view("whatsapp","backend/whatsapp/whatsapp")->name("whatsapp.index");
 
 });
 
