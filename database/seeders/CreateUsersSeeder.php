@@ -15,32 +15,40 @@ class CreateUsersSeeder extends Seeder
     public function run()
     {
         $user = [
-
             [
 
-               'nom'=>'Admin',
-               'prenoms'=>'dav',
-               'telephone'=>'93624686',
-               'email'=>'admin@ehsan.com',
-                'is_admin'=>'1',
-               'password'=> bcrypt('123456'),
-
-            ],
-
-            [
-               'nom'=>'User',
-               'prenoms'=>'toto',
+               'nom'=>'admin',
+               'prenoms'=>'admin',
                'telephone'=>'101010',
-               'email'=>'user@itsolutionstuff.com',
-                'is_admin'=>'0',
-               'password'=> bcrypt('123456'),
+               'email'=>'admin@admin.com',
+                'is_admin'=>'1',
+               'password'=> bcrypt('123456789'),
 
             ],
+            [
+               'nom'=>'writer',
+               'prenoms'=>'writer',
+               'telephone'=>'111111',
+               'email'=>'writer@writer.com',
+               'is_admin'=>'0',
+               'password'=> bcrypt('123456789'),
+
+            ],
+            [
+                'nom'=>'user',
+                'prenoms'=>'user',
+                'telephone'=>'121212',
+                'email'=>'user@user.com',
+                'is_admin'=>'0',
+                'password'=> bcrypt('123456789'),
+ 
+             ],
+ 
 
         ];
 
 
-
+        // php artisan db:seed --class=CreateUsersSeeder
         foreach ($user as $key => $value) {
 
             User::create($value);
