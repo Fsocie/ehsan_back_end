@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Geolocalisation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,7 @@ class HomeController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,7 +32,15 @@ class HomeController extends Controller
         $cas = Geolocalisation::orderBy('id', 'desc')
             ->limit(10)->get();
 
-        return view('backend.home.index', compact('users', 'cas'));
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
+
+        return view('backend.home.index', compact('users', 'cas', 'message'));
     }
 
 

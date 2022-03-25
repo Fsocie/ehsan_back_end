@@ -17,13 +17,13 @@
                             </button>
                         </div>
                     </div>
-                    @if ($rechercher->count() > 0)
+                    @if ($recherchers->count() > 0)
                         <div class="card-body p-0">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item active">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-inbox"></i> Boîte de réception
-                                        <span class="badge bg-primary float-right">{{ $rechercher->where('lu',null)->count() }}</span>
+                                        <span class="badge bg-primary float-right">{{ $recherchers->where('lu',null)->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -55,15 +55,19 @@
                     
                     <div class="card-body p-0">
                         <div class="table-responsive mailbox-messages">
-                            @if ($rechercher->count() > 0)
+                            @if ($recherchers->count() > 0)
                                 <table class="table table-hover table-striped">
                                     <tbody>
-                                        @foreach ($rechercher as $msg)
+                                        @foreach ($recherchers as $rechercher)
                                         <tr>
-                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $user->nom }}</a></td>
-                                            <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
+                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$rechercher->id]) }} ">{{ $rechercher->nom }}</a></td>
+                                            @if ($rechercher->lu == '')
+                                                <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - <b> {{ $rechercher->audio }} </b></td>
+                                            @else
+                                                <td class="mailbox-subject">Message Ehsan Afrique - {{ $rechercher->audio }}</td>
+                                            @endif                                            
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">{{ $msg->created_at }}</td>
+                                            <td class="mailbox-date">{{ $rechercher->created_at }}</td>
                                         </tr>
                                         @endforeach                        
                                     </tbody>

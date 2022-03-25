@@ -7,11 +7,12 @@ use App\Models\User;
 use App\Notifications\message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
     public $contact_id;
-    public $trouver;
+    public $message;
 
     public function mount($contact_id)
     {
@@ -22,16 +23,47 @@ class MessageController extends Controller
     {
         $q = request()->input('q');
         //dump($q);    
-        $rechercher = contacts::where('audio', 'LIKE', "%$q%")
-                            ->orWhere('id', 'LIKE', "%$q%")
-                            ->get();
-        $user = Auth::user();
-        return view('backend.message.recherche', ['user'=>$user, 'rechercher'=>$rechercher]);
+        $recherchers = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->where('contacts.audio', 'LIKE', "%$q%")
+            ->orWhere('contacts.id', 'LIKE', "%$q%")
+            ->orWhere('users.nom', 'LIKE', "%$q%")
+            ->select('*')
+            ->get();
+
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
+
+        return view('backend.message.recherche', ['recherchers' => $recherchers, 'message' => $message]);
     }
 
-    public function message(){
-        $user = Auth::user();
-        $message = contacts::orderBy('created_at','DESC')->where('user_id',$user->id)->get();
-        return view('backend.message.message', ['message'=>$message, 'user'=>$user]);
+    public function notification()
+    {
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
+        return view('backend.message.notification', ['message' => $message]);
+    }
+
+
+
+    public function message()
+    {
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+        return view('backend.message.message', ['message' => $message]);
     }
 }

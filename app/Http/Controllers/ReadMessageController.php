@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReadMessageController extends Controller
 {
@@ -20,18 +21,23 @@ class ReadMessageController extends Controller
 
     public function updateLu($contact_id)
     {
-        
     }
 
-    public function readMessage($contact_id){
-        
+    public function readMessage($contact_id)
+    {
+
         $contact = contacts::find($contact_id);
         $contact->lu = 1;
         $contact->save();
 
-        $user = Auth::user();
-        $message = contacts::where('user_id',$user->id)->where('id',$contact_id)->get();
+        //$user = Auth::user();
+        //$message = contacts::where('id',$contact_id)->get();
         //dump($contact_id);
-        return view('backend.message.read-message', ['message'=>$message, 'user'=>$user]);
+
+        $message = DB::table('contacts')->where('contacts.id', $contact_id)
+            ->join('users', 'users.id', '=', 'contacts.user_id')
+            ->select('*')
+            ->get();
+        return view('backend.message.read-message', ['message' => $message]);
     }
 }

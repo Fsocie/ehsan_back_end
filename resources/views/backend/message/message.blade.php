@@ -60,7 +60,7 @@
                                     <tbody>
                                         @foreach ($message as $msg)
                                         <tr>
-                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $user->nom }}</a></td>
+                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $msg->nom }}</a></td>
                                             @if ($msg->lu == '')
                                                 <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - <b>{{ $msg->audio }}</b></td>
                                             @else

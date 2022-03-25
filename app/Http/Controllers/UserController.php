@@ -13,24 +13,30 @@ class UserController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:user-create', ['only' => ['create','store']]);
-         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
     public function index(Request $request)
 
     {
 
-        $users = User::orderBy('id','DESC')->paginate(5)->where('is_admin',1);
+        $users = User::orderBy('id', 'DESC')->paginate(5)->where('is_admin', 1);
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
 
-        return view('backend.users.index',compact('users'))
+        return view('backend.users.index', compact('users', 'message'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
-
     }
 
-    
+
 
     /**
 
@@ -47,12 +53,18 @@ class UserController extends Controller
     {
 
         $roles = Role::all();
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
 
-        return view('backend.users.create',compact('roles'));
-
+        return view('backend.users.create', compact('roles', 'message'));
     }
 
-    
+
 
     /**
 
@@ -71,9 +83,9 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'nom'=>'required|string',
-            'prenoms'=>'required|string',
-            'telephone'=>'required|string|unique:users',
+            'nom' => 'required|string',
+            'prenoms' => 'required|string',
+            'telephone' => 'required|string|unique:users',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'roles' => 'required'
@@ -83,10 +95,10 @@ class UserController extends Controller
         $input['is_admin'] = 1;
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        return redirect()->route('users.index')->with('success','User created successfully');
+        return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 
-    
+
 
     /**
 
@@ -105,12 +117,18 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
 
-        return view('backend.users.show',compact('user'));
-
+        return view('backend.users.show', compact('user', 'message'));
     }
 
-    
+
 
     /**
 
@@ -130,17 +148,23 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::pluck('name', 'name')->all();
 
-        $userRole = $user->roles->pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
 
-    
 
-        return view('backend.users.update',compact('user','roles','userRole'));
 
+        return view('backend.users.update', compact('user', 'roles', 'userRole', 'message'));
     }
 
-    
+
 
     /**
 
@@ -164,7 +188,7 @@ class UserController extends Controller
 
             'name' => 'required',
 
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
 
             'password' => 'same:confirm-password',
 
@@ -172,41 +196,38 @@ class UserController extends Controller
 
         ]);
 
-    
+
 
         $input = $request->all();
 
-        if(!empty($input['password'])){ 
+        if (!empty($input['password'])) {
 
             $input['password'] = Hash::make($input['password']);
+        } else {
 
-        }else{
-
-            $input = Arr::except($input,array('password'));    
-
+            $input = Arr::except($input, array('password'));
         }
 
-    
+
 
         $user = User::find($id);
 
         $user->update($input);
 
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
 
-    
+
 
         $user->assignRole($request->input('roles'));
 
-    
+
 
         return redirect()->route('users.index')
 
-                        ->with('success','User updated successfully');
-
+            ->with('success', 'User updated successfully');
     }
 
-    
+
 
     /**
 
@@ -228,8 +249,6 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
 
-                        ->with('success','User deleted successfully');
-
+            ->with('success', 'User deleted successfully');
     }
-
 }

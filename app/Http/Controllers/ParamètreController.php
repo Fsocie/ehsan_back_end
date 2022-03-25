@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ParamètreController extends Controller
 
@@ -11,14 +12,18 @@ class ParamètreController extends Controller
 
     {
 
-         $this->middleware('permission:parametre-list', ['only' => ['index']]);
-
-        
+        $this->middleware('permission:parametre-list', ['only' => ['index']]);
     }
     public function index()
     {
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(3)
+            ->take(2)
+            ->select('*')
+            ->get();
 
-        return view('backend.parametre.index');
+        return view('backend.parametre.index', ['message' => $message]);
     }
-
 }
