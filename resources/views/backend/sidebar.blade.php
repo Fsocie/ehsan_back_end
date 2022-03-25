@@ -52,7 +52,7 @@
 
                 <li class="nav-item">
                 <a href="{{route('admin.qrcode.index')}}" class="nav-link">
-                      <i class="fa fa-cubes"></i>
+                      <i class="fa fa-qrcode"></i>
                     <p>
                     Enfants & code Qr
                       <span class="right badge badge-danger "></span>
@@ -81,6 +81,13 @@
                    </a>
                  </li>
                  @endcan
+                  {{-- collecte begin pizza-slice--}}
+                  <li class="nav-item">
+                    <a href="{{ route('whatsapp.index')}}" target="_top" class="nav-link">
+                      <i class="fas fa-pizza-slice"></i>
+                      <p>WhatsApp<span class="right badge badge-danger messages"></span></p>
+                    </a>
+                  </li>
                  {{-- collecte begin --}}
                  @role('Admin')
                  {{-- parametre begin --}}
