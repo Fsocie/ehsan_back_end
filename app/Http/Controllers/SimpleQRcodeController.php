@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HashChild;
+use App\Models\Has_children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -29,9 +29,7 @@ class SimpleQRcodeController extends Controller
 
      public function generate ($id) {
 
-
-
-         $enfant=HashChild::find($id);
+        $enfant=Has_children::find($id);
 
             $response = [
                 'nom' =>  $enfant->nom,
@@ -42,7 +40,10 @@ class SimpleQRcodeController extends Controller
 
             $info=json_encode($response);
 
+            $identifiant = $enfant->nom.'+'.$enfant->prenom;
+    	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$identifiant.'.svg');
 
+<<<<<<< HEAD
     	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$enfant->prenom.'.svg');
 
         $message = DB::table('users')
@@ -55,5 +56,9 @@ class SimpleQRcodeController extends Controller
 
 
     	return view("backend.enfant.showCode", compact('qrcode','message'))->with('success','code Qr générer et enregistrer ');;
+=======
+           // dd($qrcode );
+    	return view("backend.enfant.showCode", compact('qrcode'))->with('success','code Qr générer et enregistrer ');;
+>>>>>>> 103e9e7bf498de6f5fc60fd5d2b98a4689b88423
     }
 }
