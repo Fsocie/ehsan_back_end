@@ -57,7 +57,7 @@
                                 @php ($i = 0)
                                 @foreach($enfant as $enfant)
 
-                                    <tr >
+                                    <tr>
 
                                         <th>
                                             {{ ++$i }}

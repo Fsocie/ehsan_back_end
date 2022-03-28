@@ -13,7 +13,7 @@ class CreateHasChildrenTable extends Migration
      */
     public function up()
     {
-        Schema::create('has_children', function (Blueprint $table) {
+        Schema::create('has_childrens', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('nom')->nullable();

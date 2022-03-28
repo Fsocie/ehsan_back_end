@@ -18,7 +18,7 @@ class CreateAdminUserSeeder extends Seeder
     public function run()
     {
         //
-        $user = User::create([
+        $user1 = User::create([
             'nom'=>'Admin',
             'prenoms'=>'dav',
             'telephone'=>'93624686',
@@ -26,12 +26,34 @@ class CreateAdminUserSeeder extends Seeder
             'is_admin'=>'1',
             'password'=> bcrypt('123456'),
         ]);
+        $user2 = User::create([
+            'nom'=>'editeur',
+            'prenoms'=>'editeur',
+            'telephone'=>'1010',
+            'email'=>'editeur@editeur.com',
+            'is_admin'=>'1',
+            'password'=> bcrypt('123456'),
+        ]);
+        $user3 = User::create([
+            'nom'=>'utilisateur',
+            'prenoms'=>'utilisateur',
+            'telephone'=>'1111',
+            'email'=>'utilisateur@utilisateur.com',
+            'is_admin'=>'1',
+            'password'=> bcrypt('123456'),
+        ]);
 
     
 
-        $role = Role::create(['name' => 'Admin']);
+        $roleAdmin = Role::create(['name' => 'Admin']);
+        $roleEditeur = Role::create(['name' => 'Editeur']);
+        $roleUtilisateur = Role::create(['name' => 'Utilisateur']);
+
         $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
-        $user->assignRole([$role->id]);
+        $roleAdmin->syncPermissions($permissions);
+
+        $user1->assignRole([$roleAdmin->id]);
+        $user2->assignRole([$roleEditeur->id]);
+        $user3->assignRole([$roleUtilisateur->id]);
     }
 }
