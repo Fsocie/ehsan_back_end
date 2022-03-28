@@ -30,12 +30,12 @@ class SimpleQRcodeController extends Controller
                 'date de naissance' =>  $enfant->date_naissance,
             ];
 
-            $info=json_encode($response);
+        $info=json_encode($response);
 
-            $identifiant = $enfant->nom.'+'.$enfant->prenom;
+        $identifiant = $enfant->nom.'+'.$enfant->prenom;
     	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$identifiant.'.svg');
 
            // dd($qrcode );
-    	return view("backend.enfant.showCode", compact('qrcode'))->with('success','code Qr générer et enregistrer ');;
+    	return view("backend.enfant.showCode", compact('qrcode','enfant'))->with('success','code Qr générer et enregistrer ');;
     }
 }
