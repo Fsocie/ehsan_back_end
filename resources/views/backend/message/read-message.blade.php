@@ -47,6 +47,9 @@
                         </div>
                         <div class="mailbox-read-message">
                             <p>{{$msg->audio}}</p>
+                            <audio controls="" style="vertical-align: middle" src="https://app.ehsan.com.atisarltogo.com/storage/audio/user/{{ $msg->audio }}" type="audio/mp3" controlslist="nodownload">
+                                Votre navigateur ne supporte pas l'élément audio.
+                            </audio>
                         </div>
                     </div>
                     <div class="card-footer">

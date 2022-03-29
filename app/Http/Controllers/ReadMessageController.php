@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\contacts;
 use App\Models\User;
 use App\Notifications\message;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +20,17 @@ class ReadMessageController extends Controller
         $contact->lu = $this->lu;
     }
 
-    public function updateLu($contact_id)
-    {
-    }
+    // public function audioT(Request $request)
+    // {
+    // $filePath = public_path() . '/admin/dist/audio/' . $request->file . '.' . $request->extension;
+
+    // try {
+    //     $file = file_exists($filePath);
+    // } catch (FileNotFoundException $e) {
+    //     return redirect()->back()->withErrors(["Le fichier n'existe pas"])->withInput();
+    // }
+    // return response()->file($filePath);
+    //}
 
     public function readMessage($contact_id)
     {
@@ -29,10 +38,6 @@ class ReadMessageController extends Controller
         $contact = contacts::find($contact_id);
         $contact->lu = 1;
         $contact->save();
-
-        //$user = Auth::user();
-        //$message = contacts::where('id',$contact_id)->get();
-        //dump($contact_id);
 
         $message = DB::table('contacts')->where('contacts.id', $contact_id)
             ->join('users', 'users.id', '=', 'contacts.user_id')
