@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CollectController extends Controller
 {
+    public $message;
     function __construct()
     {
         $this->middleware('permission:collecte-list|collecte-create|collecte-edit|collecte-delete', ['only' => ['index', 'show']]);
@@ -24,15 +25,16 @@ class CollectController extends Controller
     public function index()
     {
         //
-        $collectes = Collecte::latest()->get();
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
-        return view('backend.collectes.index', ['collectes'=>$collectes, 'message'=>$message]);
+        $collectes = Collecte::latest()->get();
+
+        return view('backend.collectes.index', ['collectes' => $collectes, 'message' => $message]);
     }
 
     /**
@@ -46,11 +48,11 @@ class CollectController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
-        return view('backend.collectes.create',['message'=>$message]);
+        return view('backend.collectes.create', ['message' => $message]);
     }
 
     /**
@@ -92,8 +94,8 @@ class CollectController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
         return view('backend.collectes.view', compact('collecte', 'message'));
@@ -111,8 +113,8 @@ class CollectController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
         return view('backend.collectes.update', compact('collecte', 'message'));

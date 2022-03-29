@@ -12,53 +12,49 @@ class SimpleQRcodeController extends Controller
 
 
 
-     public function index(){
+    public function index()
+    {
 
-        $enfant=HashChild::all();
+        $enfant = HashChild::all();
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 
-        return view("backend.enfant.index", compact('enfant','message'));
+        return view("backend.enfant.index", compact('enfant', 'message'));
+    }
 
-     }
+    public function generate($id)
+    {
 
-     public function generate ($id) {
+        $enfant = Has_children::find($id);
 
-        $enfant=Has_children::find($id);
+        $response = [
+            'nom' =>  $enfant->nom,
+            'prenom' =>  $enfant->prenom,
+            'description' =>  $enfant->description,
+            'date de naissance' =>  $enfant->date_naissance,
+        ];
 
-            $response = [
-                'nom' =>  $enfant->nom,
-                'prenom' =>  $enfant->prenom,
-                'description' =>  $enfant->description,
-                'date de naissance' =>  $enfant->date_naissance,
-            ];
+        $info = json_encode($response);
 
-            $info=json_encode($response);
+        $identifiant = $enfant->nom . '+' . $enfant->prenom;
+        $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $identifiant . '.svg');
 
-            $identifiant = $enfant->nom.'+'.$enfant->prenom;
-    	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$identifiant.'.svg');
-
-<<<<<<< HEAD
-    	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$enfant->prenom.'.svg');
+        $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $enfant->prenom . '.svg');
 
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 
 
-    	return view("backend.enfant.showCode", compact('qrcode','message'))->with('success','code Qr générer et enregistrer ');;
-=======
-           // dd($qrcode );
-    	return view("backend.enfant.showCode", compact('qrcode'))->with('success','code Qr générer et enregistrer ');;
->>>>>>> 103e9e7bf498de6f5fc60fd5d2b98a4689b88423
+        return view("backend.enfant.showCode", compact('qrcode', 'message'))->with('success', 'code Qr générer et enregistrer ');;
     }
 }

@@ -26,8 +26,8 @@ class UserController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 
@@ -56,8 +56,8 @@ class UserController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 
@@ -120,8 +120,8 @@ class UserController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 
@@ -154,8 +154,8 @@ class UserController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
 

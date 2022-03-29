@@ -67,33 +67,32 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
-
 });
 
 
 
-     //collectes
-     Route::get("collectes",[CollectController::class,'index'])->name("admin.collectes.index");
-     Route::get("collectes/create",[CollectController::class,'create'])->name("admin.collectes.create");
-     Route::POST("collectes/store",[CollectController::class,'store'])->name("admin.collectes.store");
-     Route::get("collectes/show/{collect}",[CollectController::class,'show'])->name("admin.collectes.show");
-     Route::get("collectes/edit/{collecte}",[CollectController::class,'edit'])->name("admin.collectes.edit");
-     Route::put("collectes/update/{collecte}",[CollectController::class,'update'])->name("admin.collectes.update");
-     Route::delete("collectes/delete/{collecte}",[CollectController::class,'destroy'])->name("admin.collectes.delete");
-     //whatsapp
-     //https://web.whatsapp.com/
-     Route::view("whatsapp","backend/whatsapp/whatsapp")->name("whatsapp.index");
+//collectes
+Route::get("collectes", [CollectController::class, 'index'])->name("admin.collectes.index");
+Route::get("collectes/create", [CollectController::class, 'create'])->name("admin.collectes.create");
+Route::POST("collectes/store", [CollectController::class, 'store'])->name("admin.collectes.store");
+Route::get("collectes/show/{collect}", [CollectController::class, 'show'])->name("admin.collectes.show");
+Route::get("collectes/edit/{collecte}", [CollectController::class, 'edit'])->name("admin.collectes.edit");
+Route::put("collectes/update/{collecte}", [CollectController::class, 'update'])->name("admin.collectes.update");
+Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy'])->name("admin.collectes.delete");
+//whatsapp
+//https://web.whatsapp.com/
+Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 
-   
 
-Route::group(['middleware' => 'role:Admin'],function(){
-     //users
-     Route::resource("/users",UserController::class);
-     //roles
-     Route::resource("/roles",RoleController::class);
+
+Route::group(['middleware' => 'role:Admin'], function () {
+  //users
+  Route::resource("/users", UserController::class);
+  //roles
+  Route::resource("/roles", RoleController::class);
 });
-   
-  
+
+
 
 
 
@@ -106,5 +105,4 @@ Route::group(['middleware' => 'role:Admin'], function () {
   Route::resource("/users", UserController::class);
   //roles
   Route::resource("/roles", RoleController::class);
-  
 });

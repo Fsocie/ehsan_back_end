@@ -15,8 +15,8 @@ class CarnetController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
         return view('backend.carnet.index',['carnet' => $carnet, 'message'=>$message]);
@@ -28,8 +28,8 @@ class CarnetController extends Controller
         $message = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(3)
-            ->take(2)
+            ->skip(5)
+            ->take(4)
             ->select('*')
             ->get();
         return view('backend.carnet.show',['carnet' => $carnet,'message'=>$message]);
