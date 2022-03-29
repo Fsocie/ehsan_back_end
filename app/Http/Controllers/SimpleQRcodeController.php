@@ -16,7 +16,7 @@ class SimpleQRcodeController extends Controller
     {
 
         $enfant = HashChild::all();
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -24,7 +24,13 @@ class SimpleQRcodeController extends Controller
             ->select('*')
             ->get();
 
-        return view("backend.enfant.index", compact('enfant', 'message'));
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view("backend.enfant.index", compact('enfant', 'messageNotification', 'compter'));
     }
 
     public function generate($id)
@@ -46,7 +52,7 @@ class SimpleQRcodeController extends Controller
 
         $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $enfant->prenom . '.svg');
 
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -54,7 +60,13 @@ class SimpleQRcodeController extends Controller
             ->select('*')
             ->get();
 
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-        return view("backend.enfant.showCode", compact('qrcode', 'message'))->with('success', 'code Qr générer et enregistrer ');;
+
+        return view("backend.enfant.showCode", compact('qrcode', 'messageNotification', 'compter'))->with('success', 'code Qr générer et enregistrer ');
     }
 }

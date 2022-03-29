@@ -12,7 +12,7 @@ class PaysController extends Controller
     {
 
         $pays = Pays::all();
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -20,8 +20,13 @@ class PaysController extends Controller
             ->select('*')
             ->get();
 
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-        return view('backend.pays.index', ['pays' => $pays, 'message' => $message]);
+        return view('backend.pays.index', ['pays' => $pays, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
 
@@ -29,7 +34,7 @@ class PaysController extends Controller
     {
 
         $pays = Pays::find($id);
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -37,15 +42,20 @@ class PaysController extends Controller
             ->select('*')
             ->get();
 
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-        return view('backend.pays.update', ['pays' => $pays, 'message' => $message]);
+        return view('backend.pays.update', ['pays' => $pays, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
 
     public function viewformadd()
     {
 
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -53,7 +63,13 @@ class PaysController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.pays.add', ['message' => $message]);
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.pays.add', ['messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
 

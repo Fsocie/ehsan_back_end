@@ -16,7 +16,7 @@ class ParamètreController extends Controller
     }
     public function index()
     {
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -24,6 +24,12 @@ class ParamètreController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.parametre.index', ['message' => $message]);
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.parametre.index', ['messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 }

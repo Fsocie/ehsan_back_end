@@ -31,7 +31,13 @@ class UserController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.users.index', compact('users', 'message'))
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.users.index', compact('users', 'message', 'compter'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -61,7 +67,13 @@ class UserController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.users.create', compact('roles', 'message'));
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.users.create', compact('roles', 'message', 'compter'));
     }
 
 
@@ -125,7 +137,13 @@ class UserController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.users.show', compact('user', 'message'));
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.users.show', compact('user', 'message', 'compter'));
     }
 
 
@@ -159,9 +177,13 @@ class UserController extends Controller
             ->select('*')
             ->get();
 
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-
-        return view('backend.users.update', compact('user', 'roles', 'userRole', 'message'));
+        return view('backend.users.update', compact('user', 'roles', 'userRole', 'message', 'compter'));
     }
 
 

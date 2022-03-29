@@ -32,7 +32,7 @@ class HomeController extends Controller
         $cas = Geolocalisation::orderBy('id', 'desc')
             ->limit(10)->get();
 
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -40,7 +40,21 @@ class HomeController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.home.index', compact('users', 'cas', 'message'));
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(1)
+            ->select('*')
+            ->get();
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.home.index', compact('users', 'cas', 'messageNotification', 'message', 'compter'));
     }
 
 

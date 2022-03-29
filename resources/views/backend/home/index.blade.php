@@ -172,8 +172,8 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Derniers messages</h3>
-
+                  <h3 class="card-title">Derniers messages </h3>
+                  <span class="badge bg-primary float-left">{{ $compter->where('lu',null)->count() }}</span>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
@@ -188,15 +188,34 @@
                   <ul class="products-list product-list-in-card pl-2 pr-2">
 
                     <li class="item">
-                      <div class="product-img">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                      <span class="online_icon"></span> </div>
-                      <div class="product-info">
-
-                        <span class="product-description">
-
-                        </span>
-                      </div>
+                      @foreach ($message as $msg)
+                        @if ($msg->lu == '')
+                            <a href="{{ route('rm', ['contact_id'=>$msg->id]) }} " class="dropdown-item">
+                                <div class="media">           
+                                    <img src="{{ asset('admin/dist/img/default.jpg') }}" alt="{{ $msg->nom }}" class="img-size-50 mr-3 img-circle">
+                                        @if ($msg->lu == '')
+                                            <b>
+                                                <div class="media-body">
+                                                    <h3 class="dropdown-item-title">
+                                                        {{ $msg->nom }}
+                                                    </h3>
+                                                    <p class="text-sm">{{ $msg->audio }}</p>
+                                                    
+                                                </div> 
+                                            </b>
+                                        @else
+                                            <div class="media-body">
+                                                <h3 class="dropdown-item-title">
+                                                    {{ $msg->nom }}
+                                                </h3>
+                                                <p class="text-sm">{{ $msg->audio }}</p>
+                                                
+                                            </div> 
+                                        @endif       
+                                </div>
+                            </a>
+                        @endif
+                      @endforeach
                     </li>
 
                   </ul>

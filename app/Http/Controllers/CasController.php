@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class CasController extends Controller
 {
-    public $message;
+    
     public function index()
     {
 
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -22,8 +22,14 @@ class CasController extends Controller
             ->select('*')
             ->get();
 
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
         $signal = Geolocalisation::all();
-        return view('backend.signal.index', ['signal' => $signal, 'message'=>$message]);
+        return view('backend.signal.index', ['signal' => $signal, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
     public function show($id)
@@ -35,7 +41,7 @@ class CasController extends Controller
         $all = Geolocalisation::all();
         $child = HashChild::where("user_id", $signal->user->id)->get();
 
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -43,6 +49,12 @@ class CasController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.signal.show', ['signal' => $signal, 'all' => $all, 'child' => $child, 'message' => $message]);
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.signal.show', ['signal' => $signal, 'all' => $all, 'child' => $child, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 }

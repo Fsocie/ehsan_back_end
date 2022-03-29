@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CollectController extends Controller
 {
-    public $message;
+
     function __construct()
     {
         $this->middleware('permission:collecte-list|collecte-create|collecte-edit|collecte-delete', ['only' => ['index', 'show']]);
@@ -25,16 +25,23 @@ class CollectController extends Controller
     public function index()
     {
         //
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
         $collectes = Collecte::latest()->get();
 
-        return view('backend.collectes.index', ['collectes' => $collectes, 'message' => $message]);
+        return view('backend.collectes.index', ['collectes' => $collectes, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
     /**
@@ -45,14 +52,20 @@ class CollectController extends Controller
     public function create()
     {
         //
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
-        return view('backend.collectes.create', ['message' => $message]);
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+        return view('backend.collectes.create', ['messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
     /**
@@ -91,7 +104,7 @@ class CollectController extends Controller
     public function show(Collecte $collecte)
     {
         //
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -110,14 +123,20 @@ class CollectController extends Controller
     public function edit(Collecte $collecte)
     {
         //
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
-        return view('backend.collectes.update', compact('collecte', 'message'));
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+        return view('backend.collectes.update', compact('collecte', 'messageNotification', 'compter'));
     }
 
     /**
