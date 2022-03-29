@@ -172,8 +172,10 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Derniers messages </h3>
-                  <span class="badge bg-primary float-left">{{ $compter->where('lu',null)->count() }}</span>
+                  <h3 class="card-title">Derniers messages 
+                    <span class="badge bg-primary float-right">{{ $compter->where('lu',null)->count() }}</span>
+                  </h3>
+                  
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
