@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\contacts;
 use App\Models\User;
 use App\Notifications\message;
+use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,25 +13,31 @@ use Illuminate\Support\Facades\DB;
 
 class ReadMessageController extends Controller
 {
+    public $contact_id;
     public function mount($contact_id)
     {
         $contact = contacts::find($contact_id);
         $contact->audio = $this->audio;
         $contact->user_id = $this->user_id;
+        $contact->reponses = $this->reponses;
         $contact->lu = $this->lu;
     }
+    
+    public function postMessage($contact_id)
+    {
+        if ((isset($_POST['messageValue']))) {
 
-    // public function audioT(Request $request)
-    // {
-    // $filePath = public_path() . '/admin/dist/audio/' . $request->file . '.' . $request->extension;
+            DB::table('contacts')
+                ->where('id',$contact_id)
+                ->update(['reponses' => $_POST['messageValue']]);
 
-    // try {
-    //     $file = file_exists($filePath);
-    // } catch (FileNotFoundException $e) {
-    //     return redirect()->back()->withErrors(["Le fichier n'existe pas"])->withInput();
-    // }
-    // return response()->file($filePath);
-    //}
+            echo "Votre message a été bien enrégistré";
+            //dump($_POST['messageValue'], $contact_id);
+        } else {
+            echo "Echec";
+        }
+        
+    }
 
     public function readMessage($contact_id)
     {

@@ -64,9 +64,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/notification', [App\Http\Controllers\MessageController::class, 'notification'])->name('notification');
 
   Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
-
   Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
+
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
+  Route::post('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'postMessage'])->name('rm-post');
 });
 
 

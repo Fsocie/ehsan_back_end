@@ -233,7 +233,7 @@
             $userMessage = $("#messages").val();
             $appendUserMessage = '<div class="chat usersMessages">'+ $userMessage +'</div>';
             $("#messageDisplaySection").append($appendUserMessage);
-            // ajax start   
+            // ajax start    
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
