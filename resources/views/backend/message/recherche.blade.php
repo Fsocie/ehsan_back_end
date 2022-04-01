@@ -17,13 +17,13 @@
                             </button>
                         </div>
                     </div>
-                    @if ($recherchers->count() > 0)
+                    @if ($compter->count() > 0)
                         <div class="card-body p-0">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item active">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('message') }}" class="nav-link">
                                         <i class="fas fa-inbox"></i> Boîte de réception
-                                        <span class="badge bg-primary float-right">{{ $recherchers->where('lu',null)->count() }}</span>
+                                        <span class="badge bg-primary float-right">{{ $compter->where('lu',null)->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
