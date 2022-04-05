@@ -132,7 +132,7 @@
                         </div>
                         <div id="mailbox-read-message">
                             <p>{{$msg->audio}}</p>
-                            <audio controls="" style="vertical-align: middle" src="https://app.ehsan.com.atisarltogo.com/storage/audio/user/{{ $msg->audio }}" type="audio/mp3" controlslist="nodownload">
+                            <audio controls="" style="vertical-align: middle" src="https://app.ehsan.com.atisarltogo.com/storage/audio/user/{{ $msg->audio }}" type="audio/mp3" controlslist="nodownload" autoplay="autoplay">
                                 Votre navigateur ne supporte pas l'élément audio.
                             </audio>
                         </div>
@@ -140,13 +140,11 @@
                             <form action="{{ route('rm-post',['contact_id'=>$msg->id]) }}" class="form-group">
                                 
                                 <div id="userInput">
-                                    <input type="text" name="messages" id="messages" autocomplete="OFF" placeholder="Entrez votre message" required>
-                                    <input type="submit" value="Send" id="send" name="send">
-                                </div>                   
+                                    <input type="text" name="messages" id="messages" autocomplete="OFF" placeholder="Entrez votre message" required />  
+                                    <input type="submit" value="Send" id="send" name="send" />
+                                </div>         
                             </form>                                                         
-                        </div>
-                    </div>
-                    
+                        </div>                    
                     <div class="card-footer">
                     </div>
                 @endforeach
@@ -156,7 +154,6 @@
 @endsection
 
 @section('javascripts')
-@foreach ($message as $msg )
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         
@@ -202,7 +199,4 @@
             $("#send").css("display","none");
         });
     </script>  
-@endforeach
-        
-
 @endsection
