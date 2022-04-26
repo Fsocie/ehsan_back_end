@@ -28,6 +28,8 @@ class MessageController extends Controller
             ->where('contacts.audio', 'LIKE', "%$q%")
             ->orWhere('contacts.id', 'LIKE', "%$q%")
             ->orWhere('users.nom', 'LIKE', "%$q%")
+            //->orWhereDay('contacts.created_at', 'LIKE', "%$q%")
+            //->orWhereMonth('contacts.created_at', 'LIKE', "%$q%")
             ->select('*')
             ->get();
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+
 class PermissionTableSeeder extends Seeder
 {
     /**
@@ -16,7 +17,7 @@ class PermissionTableSeeder extends Seeder
         //
         $permissions = [
             'parametre-list',
-            
+
             'role-list',
             'role-create',
             'role-edit',
@@ -31,12 +32,12 @@ class PermissionTableSeeder extends Seeder
             'collecte-create',
             'collecte-edit',
             'collecte-delete',
-         ];
- 
-      
- 
-         foreach ($permissions as $permission) {
-              Permission::create(['name' => $permission]);
-         }
+        ];
+
+
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
     }
 }

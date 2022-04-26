@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
   Route::get('/parametre', [ParamètreController::class, 'index'])->name('admin.paramatre.index');
+  Route::get('/parametre/records', [ParamètreController::class, 'records'])->name('admin.paramatre.records');
 
   //pays
   Route::get('/pays', [PaysController::class, 'index'])->name('admin.pays.index');

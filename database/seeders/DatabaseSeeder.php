@@ -17,6 +17,5 @@ class DatabaseSeeder extends Seeder
         // \App\Models\contacts::factory(10)->create();
         $this->call(PermissionTableSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
-      
     }
 }

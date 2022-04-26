@@ -17,33 +17,33 @@ class CreateUsersSeeder extends Seeder
         $user = [
             [
 
-               'nom'=>'admin',
-               'prenoms'=>'admin',
-               'telephone'=>'101010',
-               'email'=>'admin@admin.com',
-                'is_admin'=>'1',
-               'password'=> bcrypt('123456789'),
+                'nom' => 'admin',
+                'prenoms' => 'admin',
+                'telephone' => '101010',
+                'email' => 'admin@admin.com',
+                'is_admin' => '1',
+                'password' => bcrypt('123456789'),
 
             ],
             [
-               'nom'=>'writer',
-               'prenoms'=>'writer',
-               'telephone'=>'111111',
-               'email'=>'writer@writer.com',
-               'is_admin'=>'0',
-               'password'=> bcrypt('123456789'),
+                'nom' => 'writer',
+                'prenoms' => 'writer',
+                'telephone' => '111111',
+                'email' => 'writer@writer.com',
+                'is_admin' => '0',
+                'password' => bcrypt('123456789'),
 
             ],
             [
-                'nom'=>'user',
-                'prenoms'=>'user',
-                'telephone'=>'121212',
-                'email'=>'user@user.com',
-                'is_admin'=>'0',
-                'password'=> bcrypt('123456789'),
- 
-             ],
- 
+                'nom' => 'user',
+                'prenoms' => 'user',
+                'telephone' => '121212',
+                'email' => 'user@user.com',
+                'is_admin' => '0',
+                'password' => bcrypt('123456789'),
+
+            ],
+
 
         ];
 
@@ -52,7 +52,6 @@ class CreateUsersSeeder extends Seeder
         foreach ($user as $key => $value) {
 
             User::create($value);
-
         }
     }
 }
