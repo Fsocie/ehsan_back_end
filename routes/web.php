@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
   Route::get('/parametre', [ParamètreController::class, 'index'])->name('admin.paramatre.index');
+
   //pays
   Route::get('/pays', [PaysController::class, 'index'])->name('admin.pays.index');
   Route::get('/addpays', [PaysController::class, 'viewformadd'])->name('admin.pays.store');
@@ -43,6 +44,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/update/pays/{id}', [PaysController::class, 'viewformupdate'])->name('admin.pays.update');
   Route::post('/update/pays/{id}', [PaysController::class, 'update'])->name('admin.pays.update');
   Route::get('/delete/pays/{id}', [PaysController::class, 'destroy'])->name('admin.pays.delete');
+
   // Signalement d'un cas
   Route::get('/cas/signal', [CasController::class, 'index'])->name('admin.signal.index');
   Route::get('/show/cas/{id}', [CasController::class, 'show'])->name('admin.signal.show');
@@ -58,36 +60,50 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   //message
   Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');
+  Route::get('/recherche', [App\Http\Controllers\MessageController::class, 'recherche'])->name('message.recherche');
+  Route::get('/notification', [App\Http\Controllers\MessageController::class, 'notification'])->name('notification');
+
   Route::get('/compose', [App\Http\Controllers\ComposeController::class, 'compose'])->name('compose');
   Route::post('/composePost', [App\Http\Controllers\ComposeController::class, 'composePost'])->name('composePost');
+
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
-
-
-     //collectes
-     Route::get("collectes",[CollectController::class,'index'])->name("admin.collectes.index");
-     Route::get("collectes/create",[CollectController::class,'create'])->name("admin.collectes.create");
-     Route::POST("collectes/store",[CollectController::class,'store'])->name("admin.collectes.store");
-     Route::get("collectes/show/{collect}",[CollectController::class,'show'])->name("admin.collectes.show");
-     Route::get("collectes/edit/{collecte}",[CollectController::class,'edit'])->name("admin.collectes.edit");
-     Route::put("collectes/update/{collecte}",[CollectController::class,'update'])->name("admin.collectes.update");
-     Route::delete("collectes/delete/{collecte}",[CollectController::class,'destroy'])->name("admin.collectes.delete");
-     //whatsapp
-     //https://web.whatsapp.com/
-     Route::view("whatsapp","backend/whatsapp/whatsapp")->name("whatsapp.index");
-
+  Route::post('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'postMessage'])->name('rm-post');
 });
 
-Route::group(['middleware' => 'role:Admin'],function(){
-     //users
-     Route::resource("/users",UserController::class);
-     //roles
-     Route::resource("/roles",RoleController::class);
+
+
+//collectes
+Route::get("collectes", [CollectController::class, 'index'])->name("admin.collectes.index");
+Route::get("collectes/create", [CollectController::class, 'create'])->name("admin.collectes.create");
+Route::POST("collectes/store", [CollectController::class, 'store'])->name("admin.collectes.store");
+Route::get("collectes/show/{collect}", [CollectController::class, 'show'])->name("admin.collectes.show");
+Route::get("collectes/edit/{collecte}", [CollectController::class, 'edit'])->name("admin.collectes.edit");
+Route::put("collectes/update/{collecte}", [CollectController::class, 'update'])->name("admin.collectes.update");
+Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy'])->name("admin.collectes.delete");
+//whatsapp
+//https://web.whatsapp.com/
+Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
+
+
+
+Route::group(['middleware' => 'role:Admin'], function () {
+  //users
+  Route::resource("/users", UserController::class);
+  //roles
+  Route::resource("/roles", RoleController::class);
 });
-   
-  
 
 
 
 
 
 
+
+
+
+Route::group(['middleware' => 'role:Admin'], function () {
+  //users
+  Route::resource("/users", UserController::class);
+  //roles
+  Route::resource("/roles", RoleController::class);
+});

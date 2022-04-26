@@ -17,13 +17,13 @@
                             </button>
                         </div>
                     </div>
-                    @if ($message->count() > 0)
+                    @if ($compter->count() > 0)
                         <div class="card-body p-0">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item active">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('message') }}" class="nav-link">
                                         <i class="fas fa-inbox"></i> Boîte de réception
-                                        <span class="badge bg-primary float-right">{{ $message->where('lu',null)->count() }}</span>
+                                        <span class="badge bg-primary float-right">{{ $compter->where('lu',null)->count() }}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -42,14 +42,14 @@
                     <div class="card-header">
                         <h3 class="card-title">Boîte de réception</h3>
                         <div class="card-tools">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="Trouver ...">
+                            <form action="{{ route('message.recherche') }}" class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Trouver ..." name="q">
                                 <div class="input-group-append">
-                                    <div class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-search"></i>
-                                    </div>
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     
@@ -60,16 +60,20 @@
                                     <tbody>
                                         @foreach ($message as $msg)
                                         <tr>
-                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $user->nom }}</a></td>
-                                            <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - {{ $msg->audio }}</td>
+                                            <td class="mailbox-name"><a href="{{ route('rm', ['contact_id'=>$msg->id]) }} ">{{ $msg->nom }}</a></td>
+                                            @if ($msg->lu == '')
+                                                <td class="mailbox-subject"><b>Message Ehsan Afrique</b> - <b>{{ $msg->audio }}</b></td>
+                                            @else
+                                                <td class="mailbox-subject"> Message Ehsan Afrique - {{ $msg->audio }}</td>
+                                            @endif                                            
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">{{ $msg->created_at }}</td>
+                                            <td class="mailbox-date">{{ date('d-m-Y', strtotime($msg->created_at)) }}</td>
                                         </tr>
                                         @endforeach                        
                                     </tbody>
                                 </table>
                             @else
-                                <p style="padding-top: 30px;">Aucun nouveau message</p>
+                                <h5><p style="padding-top: 30px; text-align: center;">Aucun nouveau message</p></h5>
                             @endif                            
                         </div>
                     </div>

@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-        /**
+    /**
 
      * Display a listing of the resource.
 
@@ -23,17 +23,16 @@ class RoleController extends Controller
 
     {
 
-         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
 
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
+        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
 
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
 
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-
+        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
-    
+
 
     /**
 
@@ -49,15 +48,28 @@ class RoleController extends Controller
 
     {
 
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
 
-        return view('backend.roles.index',compact('roles'))
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+
+        return view('backend.roles.index', compact('roles', 'compter', 'messageNotification'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
-
     }
 
-    
+
 
     /**
 
@@ -74,12 +86,24 @@ class RoleController extends Controller
     {
 
         $permissions = Permission::get();
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
 
-        return view('backend.roles.create',compact('permissions'));
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
+        return view('backend.roles.create', compact('permissions','messageNotification','compter'));
     }
 
-    
+
 
     /**
 
@@ -105,18 +129,17 @@ class RoleController extends Controller
 
         ]);
 
-    
+
 
         $role = Role::create(['name' => $request->input('name')]);
 
         $role->syncPermissions($request->input('permission'));
 
-    
+
 
         return redirect()->route('roles.index')
 
-                        ->with('success','Role created successfully');
-
+            ->with('success', 'Role created successfully');
     }
 
     /**
@@ -137,15 +160,27 @@ class RoleController extends Controller
 
         $role = Role::find($id);
 
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")->where("role_has_permissions.role_id",$id)->get();
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")->where("role_has_permissions.role_id", $id)->get();
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
 
-   
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-        return view('backend.roles.view',compact('role','rolePermissions'));
 
+
+        return view('backend.roles.view', compact('role', 'rolePermissions','messageNotification','compter'));
     }
 
-    
+
 
     /**
 
@@ -167,19 +202,31 @@ class RoleController extends Controller
 
         $permissions = Permission::get();
 
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
 
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
 
             ->all();
+            $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
 
-    
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
 
-        return view('backend.roles.update',compact('role','permissions','rolePermissions'));
 
+
+        return view('backend.roles.update', compact('role', 'permissions', 'rolePermissions','compter', 'messageNotification'));
     }
 
-    
+
 
     /**
 
@@ -207,8 +254,7 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index')->with('success','Role updated successfully');
-
+        return redirect()->route('roles.index')->with('success', 'Role updated successfully');
     }
 
     /**
@@ -227,11 +273,10 @@ class RoleController extends Controller
 
     {
 
-        DB::table("roles")->where('id',$id)->delete();
+        DB::table("roles")->where('id', $id)->delete();
 
         return redirect()->route('roles.index')
 
-                        ->with('success','Role deleted successfully');
-
+            ->with('success', 'Role deleted successfully');
     }
 }

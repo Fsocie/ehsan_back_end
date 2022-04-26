@@ -80,19 +80,26 @@
                 <!-- /.info-box -->
               </div>
 
+              
+              <div class="col-12 col-sm-4 col-md-4">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-currency"></i></span>
 
-
-
-
-
+                  <div class="info-box-content">
+                    <a href="">
+                      <span class="info-box-text">Transaction totale (XOF) </span>
+                      <span class="info-box-number"> {{$transactions}} </span>
+                    </a>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+            
 
           </div>
         <!-- /.row -->
-
-
-
-
-            <!-- /.col -->
+        <!-- /.col -->
           </div>
 
           <!-- Main row -->
@@ -172,8 +179,10 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Derniers messages</h3>
-
+                  <h3 class="card-title">Derniers messages 
+                    <span class="badge bg-primary float-right">{{ $compter->where('lu',null)->count() }}</span>
+                  </h3>
+                  
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
@@ -188,15 +197,34 @@
                   <ul class="products-list product-list-in-card pl-2 pr-2">
 
                     <li class="item">
-                      <div class="product-img">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                      <span class="online_icon"></span> </div>
-                      <div class="product-info">
-
-                        <span class="product-description">
-
-                        </span>
-                      </div>
+                      @foreach ($message as $msg)
+                        @if ($msg->lu == '')
+                            <a href="{{ route('rm', ['contact_id'=>$msg->id]) }} " class="dropdown-item">
+                                <div class="media">           
+                                    <img src="{{ asset('admin/dist/img/default.jpg') }}" alt="{{ $msg->nom }}" class="img-size-50 mr-3 img-circle">
+                                        @if ($msg->lu == '')
+                                            <b>
+                                                <div class="media-body">
+                                                    <h3 class="dropdown-item-title">
+                                                        {{ $msg->nom }}
+                                                    </h3>
+                                                    <p class="text-sm">{{ $msg->audio }}</p>
+                                                    
+                                                </div> 
+                                            </b>
+                                        @else
+                                            <div class="media-body">
+                                                <h3 class="dropdown-item-title">
+                                                    {{ $msg->nom }}
+                                                </h3>
+                                                <p class="text-sm">{{ $msg->audio }}</p>
+                                                
+                                            </div> 
+                                        @endif       
+                                </div>
+                            </a>
+                        @endif
+                      @endforeach
                     </li>
 
                   </ul>
@@ -210,7 +238,6 @@
             <!-- /.col -->
           </div>
           <!-- /.row -->
-
 
           <div class="row">
             <div class="col-12">
@@ -245,7 +272,7 @@
                           {{ $user->telephone }}
                           </th>
                           <th>
-                          {{ $user->created_at }}
+                          {{ date('d-m-Y', strtotime($user->created_at)) }}
                          </th>
 
                           <th>
@@ -272,6 +299,62 @@
             </div>
             <!-- /.col -->
           </div>
+          
+          <div class="row">
+            <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                <h3 class="card-title">Listes des transactions journalière</h3>
+                </div>
+                <!-- /.card-header -->
+            <div class="card-body ">
+                <div class="table-responsive">
+
+                    <table id="listCommande" class="table table-bordered table-striped">
+                    <thead>
+
+                    <tr>
+                        <th>Nom</th>
+                        <th>Montant</th>
+                        <th>Mode de paiement</th>
+                        <th>Téléphone</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($transactionsJours as $transactionsJour)
+                    <tr>
+                        <th>
+                            {{ $transactionsJour->nom }} |   {{ $transactionsJour->prenoms }}
+                        </th>
+                        <th>
+                            {{ $transactionsJour->montant }}
+                        </th>
+                        <th>
+                            {{ $transactionsJour->mode_paiement }}
+                        </th>
+                        <th>
+                            {{ $transactionsJour->telephone }}
+                        </th>
+                        <th>
+                            {{ date('d-m-Y', strtotime($transactionsJour->created_at)) }}
+                        </th>
+                    </tr>
+
+                    </tbody>
+                    @endforeach
+                    </table>
+
+                </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
 	@endsection
 
   @section('javascripts')

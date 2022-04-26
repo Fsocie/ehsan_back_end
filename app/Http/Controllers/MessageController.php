@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -17,10 +18,77 @@ class MessageController extends Controller
         $this->contact_id = $contact_id;
     }
 
+    public function recherche()
+    {
+        $q = request()->input('q');
+        //dump($q);    
+        $recherchers = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->where('contacts.audio', 'LIKE', "%$q%")
+            ->orWhere('contacts.id', 'LIKE', "%$q%")
+            ->orWhere('users.nom', 'LIKE', "%$q%")
+            ->select('*')
+            ->get();
 
-    public function message(){
-        $user = Auth::user();
-        $message = contacts::orderBy('created_at','DESC')->where('user_id',$user->id)->get();
-        return view('backend.message.message', ['message'=>$message, 'user'=>$user]);
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        return view('backend.message.recherche', ['recherchers' => $recherchers, 'messageNotification' => $messageNotification, 'compter' => $compter]);
+    }
+
+    public function notification()
+    {
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+        return view('backend.message.notification', ['messageNotification' => $messageNotification, 'compter' => $compter]);
+    }
+
+
+
+    public function message()
+    {
+        $message = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+
+        $messageNotification = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->skip(5)
+            ->take(4)
+            ->select('*')
+            ->get();
+
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->orderBy('contacts.id', 'desc')
+            ->select('*')
+            ->get();
+        return view('backend.message.message', ['message' => $message, 'messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 }
