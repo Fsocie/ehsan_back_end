@@ -67,7 +67,7 @@
                                                 <td class="mailbox-subject"> Message Ehsan Afrique - {{ $msg->audio }}</td>
                                             @endif                                            
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">{{ $msg->created_at }}</td>
+                                            <td class="mailbox-date">{{ date('d-m-Y', strtotime($msg->created_at)) }}</td>
                                         </tr>
                                         @endforeach                        
                                     </tbody>

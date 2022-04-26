@@ -23,7 +23,7 @@ class UserController extends Controller
     {
 
         $users = User::orderBy('id', 'DESC')->paginate(5)->where('is_admin', 1);
-        $message = DB::table('users')
+        $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
             ->skip(5)
@@ -37,7 +37,8 @@ class UserController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.users.index', compact('users', 'message', 'compter'))
+
+        return view('backend.users.index', compact('users', 'messageNotification', 'compter'))
 
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -59,21 +60,22 @@ class UserController extends Controller
     {
 
         $roles = Role::all();
-        $message = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
-            ->take(4)
-            ->select('*')
-            ->get();
+        $messageNotification = DB::table('users')
+        ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        ->orderBy('contacts.id', 'desc')
+        ->skip(5)
+        ->take(4)
+        ->select('*')
+        ->get();
 
-        $compter = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->select('*')
-            ->get();
+    $compter = DB::table('users')
+        ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        ->orderBy('contacts.id', 'desc')
+        ->select('*')
+        ->get();
 
-        return view('backend.users.create', compact('roles', 'message', 'compter'));
+
+        return view('backend.users.create', compact('roles', 'messageNotification', 'compter'));
     }
 
 

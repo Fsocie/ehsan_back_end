@@ -30,6 +30,11 @@ class ParamètreController extends Controller
             ->select('*')
             ->get();
 
-        return view('backend.parametre.index', ['messageNotification' => $messageNotification, 'compter' => $compter]);
+        $transactions =DB::table('users')
+            ->join('transactions', 'users.id', '=', 'transactions.user_id')
+            ->orderBy('transactions.id', 'desc')
+            ->get();
+
+        return view('backend.parametre.index', ['messageNotification' => $messageNotification, 'compter' => $compter, 'transactions' => $transactions]);
     }
 }
