@@ -35,31 +35,7 @@ class ReadMessageController extends Controller
             echo "Votre message a été bien enrégistré 1";
             //dump($_POST['messageValue'], $contact_id);
         } elseif (isset($_FILES['blob'])) {
-            // if($request->hasFile('audio')){
-            //     $uniqueid=uniqid();
-            //     $original_name=$request->file('audio')->getClientOriginalName();
-            //     $size=$request->file('audio')->getSize();
-            //     $extension=$request->file('audio')->getClientOriginalExtension();
-            //     $filename=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
-            //     $audiopath=url('/storage/upload/files/audio/'.$filename);
-            //     $path=$file->storeAs('public/upload/files/audio/',$filename);
-            //     $all_audios=$audiopath;
-            //    }
-
-            // $contact = contacts::where('id', $contact_id);
-
-            // $size = $_FILES['audio_data']['size']; 
-            // $input = $_FILES['audio_data']['tmp_name']; 
-            // $output = $_FILES['audio_data']['name'].".wav";
-            // move_uploaded_file($input, $output);
-
-            // $name = $request->file('audio_data')->getClientOriginalName();
-            // $path = $request->file('audio_data')->store('public/files');
-
-            // $contact->reponses = $name;
-
-            //dump($request->file);
-            //dump($request->audio_data);
+            
             echo "Votre message a été bien enrégistré 2";
             dump($_POST['messageValue2'], $contact_id);
         } else {
