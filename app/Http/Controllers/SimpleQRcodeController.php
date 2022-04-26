@@ -60,6 +60,14 @@ class SimpleQRcodeController extends Controller
             ->select('*')
             ->get();
 
+        $info=json_encode($response);
+
+        $identifiant = $enfant->nom.'+'.$enfant->prenom;
+    	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$identifiant.'.svg');
+
+           // dd($qrcode );
+    	return view("backend.enfant.showCode", compact('qrcode','enfant'))->with('success','code Qr générer et enregistrer ');;
+
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
@@ -68,5 +76,6 @@ class SimpleQRcodeController extends Controller
 
 
         return view("backend.enfant.showCode", compact('qrcode', 'messageNotification', 'compter'))->with('success', 'code Qr générer et enregistrer ');
+
     }
 }
