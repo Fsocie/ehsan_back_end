@@ -28,21 +28,21 @@ class ParamètreController extends Controller
                 $end_date = Carbon::parse($request->input('end_date'));
 
                 if ($end_date->greaterThan($start_date)) {
-                    $filtres = DB::table('transactions')
-                    ->join('users', 'users.id', '=', 'transactions.user_id')
+                    $filtres = DB::table('users')
+                    ->join('transactions', 'users.id', '=', 'transactions.user_id')
                     ->whereBetween('transactions.created_at', [$start_date, $end_date])
                     ->orderBy('transactions.id', 'desc')
                     ->get();
                 } else {
-                    $filtres =  DB::table('transactions')
-                    ->join('users', 'users.id', '=', 'transactions.user_id')
+                    $filtres =  DB::table('users')
+                    ->join('transactions', 'users.id', '=', 'transactions.user_id')
                     ->orderBy('transactions.id', 'desc')
                     ->latest('transactions.created_at')
                     ->get();
                 }
             } else {
-                $filtres = DB::table('transactions')
-                ->join('users', 'users.id', '=', 'transactions.user_id')
+                $filtres = DB::table('users')
+                ->join('transactions', 'users.id', '=', 'transactions.user_id')
                 ->orderBy('transactions.id', 'desc')
                 ->latest('transactions.created_at')
                 ->get();
