@@ -8,7 +8,7 @@
 
 		    <!-- Info boxes -->
           <div class="row">
-              <div class="col-12 col-sm-4 col-md-4s">
+              <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box">
                   <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
@@ -83,7 +83,7 @@
               
               <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
-                  <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-exchange" aria-hidden="false"></i></span>
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-refresh"></i></span>
 
                   <div class="info-box-content">
                     <a href="">

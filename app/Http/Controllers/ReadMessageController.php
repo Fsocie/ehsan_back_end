@@ -34,10 +34,12 @@ class ReadMessageController extends Controller
                 ->update(['reponses' => $_POST['messageValue']]);
             echo "Votre message a été bien enrégistré 1";
             //dump($_POST['messageValue'], $contact_id);
-        } elseif (isset($_FILES['messageValue2'])) {
+        } elseif (isset($_POST['audio-filename'])) {
+            $contact = contacts::find($contact_id);
             
+            $contact->reponses = $_POST['audio-filename'];
+            $contact->save();
             echo "Votre message a été bien enrégistré 2";
-            dump($_POST['messageValue2'], $contact_id);
         } else {
             echo "Echec";
         }
