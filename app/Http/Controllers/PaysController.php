@@ -14,15 +14,12 @@ class PaysController extends Controller
         $pays = Pays::all();
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -36,15 +33,12 @@ class PaysController extends Controller
         $pays = Pays::find($id);
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -57,15 +51,12 @@ class PaysController extends Controller
 
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 

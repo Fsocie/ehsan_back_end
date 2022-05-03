@@ -51,15 +51,12 @@ class RoleController extends Controller
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -88,15 +85,12 @@ class RoleController extends Controller
         $permissions = Permission::get();
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -163,19 +157,14 @@ class RoleController extends Controller
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")->where("role_has_permissions.role_id", $id)->get();
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
-
-
 
         return view('backend.roles.view', compact('role', 'rolePermissions','messageNotification','compter'));
     }
@@ -209,19 +198,14 @@ class RoleController extends Controller
             ->all();
             $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
-
-
 
         return view('backend.roles.update', compact('role', 'permissions', 'rolePermissions','compter', 'messageNotification'));
     }

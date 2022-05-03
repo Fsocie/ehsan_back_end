@@ -38,23 +38,19 @@ class HomeController extends Controller
 
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
-        $message = DB::table('users')
+        $messagesss = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
             ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(1)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -65,7 +61,7 @@ class HomeController extends Controller
             ->get();
             //dump($transactions);
 
-        return view('backend.home.index', compact('users', 'cas', 'messageNotification', 'message', 'compter', 'transactionsJours', 'transactions'));
+        return view('backend.home.index', compact('users', 'cas', 'messageNotification', 'messagesss', 'compter', 'transactionsJours', 'transactions'));
     }
 
 

@@ -83,7 +83,7 @@
               
               <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
-                  <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-refresh"></i></span>
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-refresh"></i></span>
 
                   <div class="info-box-content">
                     <a href="">
@@ -179,9 +179,7 @@
 
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Derniers messages 
-                    <span class="badge bg-primary float-right">{{ $compter->where('lu',null)->count() }}</span>
-                  </h3>
+                  <h3 class="card-title">Dernier message </h3>
                   
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -197,7 +195,7 @@
                   <ul class="products-list product-list-in-card pl-2 pr-2">
 
                     <li class="item">
-                      @foreach ($message as $msg)
+                      @foreach ($messagesss as $msg)
                         @if ($msg->lu == '')
                             <a href="{{ route('rm', ['contact_id'=>$msg->id]) }} " class="dropdown-item">
                                 <div class="media">           
@@ -226,7 +224,6 @@
                         @endif
                       @endforeach
                     </li>
-
                   </ul>
                 </div>
                 <!-- /.card-body -->

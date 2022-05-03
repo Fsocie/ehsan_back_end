@@ -86,7 +86,7 @@
         #send
         {
             height: 50px;
-            width: 24%;
+            width: 20%;
             position: absolute;
             right: 0;
             border: none;
