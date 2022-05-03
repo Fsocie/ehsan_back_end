@@ -34,12 +34,20 @@ class ReadMessageController extends Controller
                 ->update(['reponses' => $_POST['messageValue']]);
             echo "Votre message a été bien enrégistré 1";
             //dump($_POST['messageValue'], $contact_id);
-        } elseif (isset($_POST['audio-filename'])) {
+        } elseif (isset($_POST['audio-filename']) && isset($_FILES['audio-blob'])) {
+            
             $contact = contacts::find($contact_id);
+            $contact->reponses = $request->file('audio-blob')->storeAs('audio', $_FILES['audio-blob']['name'], 'uploads');
+            // $tempName = $_FILES['audio-blob']['tmp_name'];
+            // $filePath = "asset('admin/dist/')" . $_FILES['audio-blob']['name'];
+            
+            // //$contact->storeAs('audio',  $_FILES['audio-blob']['name'], 'uploads');
+            // move_uploaded_file($filePath, $tempName);
             
             $contact->reponses = $_POST['audio-filename'];
             $contact->save();
-            echo "Votre message a été bien enrégistré 2";
+            //var_dump($_FILES);
+            echo "Votre message a été bien enrégistré 2";            
         } else {
             echo "Echec";
         }

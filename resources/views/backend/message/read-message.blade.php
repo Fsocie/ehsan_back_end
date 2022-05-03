@@ -387,8 +387,11 @@
         $("#mailbox-read-message").append($appendUserVocal);
         playAudio();
         console.log("blob2 : ",blob);
-
-		var counter = 0;		
+        function entierAleatoire(min, max)
+        {
+            return Math.floor(Math.random() * (max -min)) +min;
+        }                             
+		var counter = entierAleatoire(0, 999999999999999999999999999);		
 		var url = URL.createObjectURL(blob);      
 		var fileName = 'Recording'+counter+'.wav';		
 		var fileObject = new File([blob], fileName, {type: 'audio/wav'});
