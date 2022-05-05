@@ -419,7 +419,7 @@
                 $("#mailbox-read-message").append($appendBotResponse);
             },
             error: function (data) {
-                alert('Error');
+                alert('Error, une erreur s\'est produite côté ajax jquery');
             }
         });
         console.log("blob3 : ",blob);
