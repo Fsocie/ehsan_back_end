@@ -162,11 +162,7 @@
                                 Votre navigateur ne supporte pas l'élément audio.
                             </audio>
                         </div>
-                        <style>
-                            span{
-                                cursor: pointer;
-                            }
-                        </style>
+                        
                         <div class="card-body"> 
                             <form action="{{ route('rm-post',['contact_id'=>$msg->id]) }}" class="form-group" enctype="multipart/form-data" id="formulaire">
                                 @csrf
@@ -393,7 +389,7 @@
         }                             
 		var counter = entierAleatoire(0, 999999999999999999999999999);		
 		var url = URL.createObjectURL(blob);      
-		var fileName = 'Recording'+counter+'.wav';		
+		var fileName = 'Ehsan_Afrique'+counter+'.wav';		
 		var fileObject = new File([blob], fileName, {type: 'audio/wav'});
 		var formData = new FormData();
                         // recorded data
