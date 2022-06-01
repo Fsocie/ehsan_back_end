@@ -67,7 +67,7 @@
 
               <div class="col-12 col-sm-4 col-md-4">
                 <div class="info-box mb-3">
-                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-sack"></i></span>
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-currency"></i></span>
 
                   <div class="info-box-content">
                     <a href="">
@@ -144,7 +144,7 @@
                         <th>
                         {{ $cas->id }}
                           </th>
-                          <th>
+                          <th>8
                             <a href="">
                             {{ $cas->user->nom }} |   {{ $cas->user->prenoms }}
                           </a>
