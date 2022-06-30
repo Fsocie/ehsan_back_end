@@ -34,36 +34,17 @@ class ReadMessageController extends Controller
                 ->update(['reponses' => $_POST['messageValue']]);
             echo "Votre message a été bien enrégistré 1";
             //dump($_POST['messageValue'], $contact_id);
-        } elseif (isset($_FILES['blob'])) {
-            // if($request->hasFile('audio')){
-            //     $uniqueid=uniqid();
-            //     $original_name=$request->file('audio')->getClientOriginalName();
-            //     $size=$request->file('audio')->getSize();
-            //     $extension=$request->file('audio')->getClientOriginalExtension();
-            //     $filename=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
-            //     $audiopath=url('/storage/upload/files/audio/'.$filename);
-            //     $path=$file->storeAs('public/upload/files/audio/',$filename);
-            //     $all_audios=$audiopath;
-            //    }
+        } elseif (isset($_POST['audio-filename']) && isset($_FILES['audio-blob'])) {
 
-            // $contact = contacts::where('id', $contact_id);
+            $contact = contacts::find($contact_id);
+            $contact->reponses = $request->file('audio-blob')->storeAs('audio', $_POST['audio-filename'], 'uploads');
 
-            // $size = $_FILES['audio_data']['size']; 
-            // $input = $_FILES['audio_data']['tmp_name']; 
-            // $output = $_FILES['audio_data']['name'].".wav";
-            // move_uploaded_file($input, $output);
-
-            // $name = $request->file('audio_data')->getClientOriginalName();
-            // $path = $request->file('audio_data')->store('public/files');
-
-            // $contact->reponses = $name;
-
-            //dump($request->file);
-            //dump($request->audio_data);
+            $contact->reponses = $_POST['audio-filename'];
+            $contact->save();
+            //var_dump($_FILES);
             echo "Votre message a été bien enrégistré 2";
-            dump($_POST['messageValue2'], $contact_id);
         } else {
-            echo "Echec";
+            echo " Echec, une erreur s'est produite ";
         }
     }
 
@@ -82,15 +63,12 @@ class ReadMessageController extends Controller
 
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
         return view('backend.message.read-message', ['message' => $message, 'compter' => $compter, 'messageNotification' => $messageNotification]);

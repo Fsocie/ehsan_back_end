@@ -86,7 +86,7 @@
         #send
         {
             height: 50px;
-            width: 24%;
+            width: 20%;
             position: absolute;
             right: 0;
             border: none;
@@ -98,6 +98,21 @@
             background: #007bff;
             cursor: pointer;
             display: none;
+        }
+        #btn_audio
+        {
+            height: 50px;
+            width: 10%;
+            position: absolute;
+            right: 0;
+            border: none;
+            outline: none;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: 20px;
+            background: #007bff;
+            cursor: pointer;
         }
     </style>
     <div class="row">
@@ -147,19 +162,15 @@
                                 Votre navigateur ne supporte pas l'élément audio.
                             </audio>
                         </div>
-                        <style>
-                            span{
-                                cursor: pointer;
-                            }
-                        </style>
+                        
                         <div class="card-body"> 
                             <form action="{{ route('rm-post',['contact_id'=>$msg->id]) }}" class="form-group" enctype="multipart/form-data" id="formulaire">
                                 @csrf
                                 <div id="userInput" >
                                     <input type="text" name="messages" id="messages" autocomplete="OFF" placeholder="Entrez votre message" required />
-                                    <span class="float-right cliquer" style="max-width: 100%; padding: 1em; max-height: 100%; background: #007bff;" id="span_audio">
+                                    <button id="btn_audio" type="submit" name="btn_audio">
                                         <i class="fa fa-microphone"></i>
-                                    </span>  
+                                    </button>  
                                     <input type="submit" value="Send" id="send" name="send" />
                                 </div>         
                             </form>                                                         
@@ -230,7 +241,7 @@
         var context = null;
         var blob = null;
 
-        $('.cliquer').on("click",function(e) {
+        $('#btn_audio').on("click",function(e) {
             // Initialize recorder
             navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
             navigator.getUserMedia(
@@ -315,7 +326,7 @@
         playAudio.src = url;
     }
 
-    $('.cliquer').on("dblclick",function(e){  
+    $('#btn_audio').on("dblclick",function(e){  
         // stop recording
         recorder.disconnect(context.destination);
         mediaStream.disconnect(recorder);
@@ -362,7 +373,7 @@
         console.log("blob : ",blob);
     });
 
-    $('.cliquer').on("dblclick",function(e){
+    $('#btn_audio').on("dblclick",function(e){
         e.preventDefault();
 
         $userVocal = blob;
@@ -372,9 +383,19 @@
         $("#mailbox-read-message").append($appendUserVocal);
         playAudio();
         console.log("blob2 : ",blob);
-
-        //var formData =$("#span_audio").append("audio_data", blob.files[0]);
-        //console.log("forme Data :",formData);
+        function entierAleatoire(min, max)
+        {
+            return Math.floor(Math.random() * (max -min)) +min;
+        }                             
+		var counter = entierAleatoire(0, 999999999999999999999999999);		
+		var url = URL.createObjectURL(blob);      
+		var fileName = 'Ehsan_Afrique'+counter+'.wav';		
+		var fileObject = new File([blob], fileName, {type: 'audio/wav'});
+		var formData = new FormData();
+                        // recorded data
+		formData.append('audio-blob', fileObject);
+                        // file name
+        formData.append('audio-filename', fileObject.name);
 
         // ajax start   
         $.ajaxSetup({
@@ -387,7 +408,10 @@
             url: $(this).attr('action'),
             type: 'POST',
             // sending data
-            data: {messageValue2: $userVocal},
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
             // response text
             success: function(data){
                 // show response
@@ -395,10 +419,10 @@
                 $("#mailbox-read-message").append($appendBotResponse);
             },
             error: function (data) {
-                alert('Error');
+                alert('Error, une erreur s\'est produite côté ajax jquery');
             }
         });
-        console.log("forme data : ",formData);
+        console.log("blob3 : ",blob);
     });
 
     </script>  

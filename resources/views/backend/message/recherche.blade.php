@@ -67,13 +67,13 @@
                                                 <td class="mailbox-subject">Message Ehsan Afrique - {{ $rechercher->audio }}</td>
                                             @endif                                            
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">{{ $rechercher->created_at }}</td>
+                                            <td class="mailbox-date">{{ date('d-m-Y', strtotime($rechercher->created_at)) }}</td>
                                         </tr>
                                         @endforeach                        
                                     </tbody>
                                 </table>
                             @else
-                                <h5><p style="padding-top: 30px; text-align: center;">Aucun nouveau message</p></h5>
+                                <h5><p style="padding-top: 30px; text-align: center;">AUCUN NOUVEAU MESSAGE</p></h5>
                             @endif                            
                         </div>
                     </div>

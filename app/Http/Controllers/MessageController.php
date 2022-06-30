@@ -28,20 +28,19 @@ class MessageController extends Controller
             ->where('contacts.audio', 'LIKE', "%$q%")
             ->orWhere('contacts.id', 'LIKE', "%$q%")
             ->orWhere('users.nom', 'LIKE', "%$q%")
+            //->orWhereDay('contacts.created_at', 'LIKE', "%$q%")
+            //->orWhereMonth('contacts.created_at', 'LIKE', "%$q%")
             ->select('*')
             ->get();
 
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
 
@@ -52,15 +51,12 @@ class MessageController extends Controller
     {
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
         return view('backend.message.notification', ['messageNotification' => $messageNotification, 'compter' => $compter]);
@@ -78,15 +74,12 @@ class MessageController extends Controller
 
         $messageNotification = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
-            ->skip(5)
             ->take(4)
             ->select('*')
             ->get();
 
         $compter = DB::table('users')
             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->orderBy('contacts.id', 'desc')
             ->select('*')
             ->get();
         return view('backend.message.message', ['message' => $message, 'messageNotification' => $messageNotification, 'compter' => $compter]);

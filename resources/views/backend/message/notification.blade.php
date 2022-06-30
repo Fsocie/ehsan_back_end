@@ -21,7 +21,7 @@
                                                 {{ $msg->nom }}
                                             </h3>
                                             <p class="text-sm">{{ $msg->audio }}</p>
-                                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ $msg->created_at }}</p>
+                                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ date('d-m-Y', strtotime($msg->created_at)) }}</p>
                                         </div> 
                                     </b>
                                 @else
@@ -30,7 +30,7 @@
                                             {{ $msg->nom }}
                                         </h3>
                                         <p class="text-sm">{{ $msg->audio }}</p>
-                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ $msg->created_at }}</p>
+                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ date('d-m-Y', strtotime($msg->created_at)) }}</p>
                                     </div> 
                                 @endif       
                         </div>

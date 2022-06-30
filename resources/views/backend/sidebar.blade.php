@@ -94,7 +94,8 @@
                   @can('parametre-list')
                     <li class="nav-item" >
                         <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
-                        <i class="fas fa-cog"></i> Paramètre
+                        <i class="fas fa-cog"></i> <p>Paramètre<span class="right badge badge-danger messages"></span>
+                        </p>
                         </a>
                     </li>
                   @endcan
