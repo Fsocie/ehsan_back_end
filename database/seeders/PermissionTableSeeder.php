@@ -15,6 +15,7 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         //
+        //1- php artisan db:seed --class=PermissionTableSeeder
         $permissions = [
             'parametre-list',
 

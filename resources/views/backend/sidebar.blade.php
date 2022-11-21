@@ -27,7 +27,7 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="{{route('admin.signal.index')}}" class="nav-link">
                     <i class="fab fa-shopify"></i>
 
@@ -37,7 +37,7 @@
                       <span class="right badge badge-danger commandes"></span>
                     </p>
                   </a>
-                </li>
+                </li>-->
 
 
                   <li class="nav-item">
@@ -51,7 +51,7 @@
                   </li>
 
                 <li class="nav-item">
-                <a href="{{route('admin.qrcode.index')}}" class="nav-link">
+                <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
                       <i class="fa fa-qrcode"></i>
                     <p>
                     Enfants & code Qr
@@ -61,7 +61,7 @@
                 </li>
 
 
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="{{ route('message') }}" class="nav-link">
                     <i class="fas fa-envelope"></i>
                     <p>
@@ -69,7 +69,7 @@
                       <span class="right badge badge-danger messages"></span>
                     </p>
                   </a>
-                </li>
+                </li>-->
 
                  {{-- collecte begin --}}
                  @can('collecte-list')
@@ -82,12 +82,12 @@
                  </li>
                  @endcan
                   {{-- collecte begin pizza-slice--}}
-                  <li class="nav-item">
+                  <!--<li class="nav-item">
                     <a href="{{ route('whatsapp.index')}}" target="_top" class="nav-link">
                       <i class="fas fa-pizza-slice"></i>
                       <p>WhatsApp<span class="right badge badge-danger messages"></span></p>
                     </a>
-                  </li>
+                  </li>-->
                  {{-- collecte begin --}}
                  @role('Admin')
                  {{-- parametre begin --}}

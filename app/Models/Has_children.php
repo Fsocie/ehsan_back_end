@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Has_children extends Model
 {
     use HasFactory;
+    protected $table = "has_childrens";
     protected $fillable = [
         'nom',
         'prenom',

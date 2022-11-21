@@ -56,8 +56,9 @@
                                         <th>{{$enfant->date_naissance}}</th>
                                         <th>{{$enfant->user->nom}}   {{$enfant->user->prenoms}}</th>
                                         <th>
+                                            <!--{{ route('admin.qrcode.show', $enfant->id) }}-->
                                             <div class="btn-group">
-                                                <a type="button" class="btn btn-warning" href="{{ route('admin.qrcode.show', $enfant->id) }}" title="Qr code" ><i class="nav-icon fas fa-qrcode"></i></a>
+                                                <a type="button" class="btn btn-warning" href="" title="Qr code" ><i class="nav-icon fas fa-qrcode"></i></a>
                                             </div>
                                         </th>
                                     </tr>
