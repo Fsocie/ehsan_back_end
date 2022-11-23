@@ -62,27 +62,24 @@
                                             {{ ++$i }}
                                         </th>
                                         <th >
-                                        @foreach ($carnet->user as $object)
-                                            {{ $object->nom }}  {{ $object->prenoms }}
-                                          @endforeach
+                                            
+                                            @foreach ($carnet->user as $object)
+                                                <a href="{{route('profile.user',$object->id)}}" title="Détails"> {{ $object->nom }}  {{ $object->prenoms }}</a>
+                                            @endforeach
 
                                         </th>
                                         <th>
-                                            {{$carnet->antecedents}}
+                                            {{$carnet->antecedent}}
                                         </th>
                                         <th>
-                                            {{$carnet->interdiction}}
+                                            {{$carnet->allergie}}
                                         </th>
 
                                         <th>
-
                                             <div class="btn-group">
-
                                                   <a type="button" class="btn btn-primary" href="{{ route('admin.carnet.show', $carnet->id) }}" title="Détails" ><i class="nav-icon fas fa-eye"></i></a>
 
-
                                              </div>
-
                                         </th>
 
                                     </tr>

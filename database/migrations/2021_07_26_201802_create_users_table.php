@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-
+            $table->double('montant')->nullable();
             $table->rememberToken();
             $table->string('profession')->nullable();
             $table->foreignId('current_team_id')->nullable();

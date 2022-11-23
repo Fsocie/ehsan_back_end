@@ -84,7 +84,8 @@ Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy
 //whatsapp
 //https://web.whatsapp.com/
 Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
-
+//Page de profile du parent d'un enfant dont on a le carnet de santé
+Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
 
 
 Route::group(['middleware' => 'role:Admin'], function () {
@@ -93,6 +94,5 @@ Route::group(['middleware' => 'role:Admin'], function () {
   //roles
   Route::resource("/roles", RoleController::class);
 });
-
 
 

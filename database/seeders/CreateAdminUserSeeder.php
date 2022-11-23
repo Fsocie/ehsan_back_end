@@ -19,25 +19,25 @@ class CreateAdminUserSeeder extends Seeder
     {
         //
         $user1 = User::create([
-            'nom'=>'Admin',
-            'prenoms'=>'dav',
+            'nom'=>'Abalo',
+            'prenoms'=>'Koffi',
             'telephone'=>'93624686',
-            'email'=>'admin@ehsan.com',
+            'email'=>'admin@admin.com',
             'is_admin'=>'1',
             'password'=> bcrypt('123456'),
         ]);
         $user2 = User::create([
-            'nom'=>'editeur',
-            'prenoms'=>'editeur',
-            'telephone'=>'1010',
+            'nom'=>'AFI',
+            'prenoms'=>'Kemenou',
+            'telephone'=>'90102030',
             'email'=>'editeur@editeur.com',
             'is_admin'=>'1',
             'password'=> bcrypt('123456'),
         ]);
         $user3 = User::create([
-            'nom'=>'utilisateur',
-            'prenoms'=>'utilisateur',
-            'telephone'=>'1111',
+            'nom'=>'Agbevivi',
+            'prenoms'=>'komlan',
+            'telephone'=>'90908070',
             'email'=>'utilisateur@utilisateur.com',
             'is_admin'=>'1',
             'password'=> bcrypt('123456'),

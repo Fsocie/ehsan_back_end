@@ -30,7 +30,7 @@
                   <h3 class="timeline-header"><a href="#">Antécédents</a></h3>
 
                   <div class="timeline-body">
-                   {{$carnet->antecedents}}
+                   {{$carnet->antecedent}}
                   </div>
 
                 </div>

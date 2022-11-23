@@ -63,10 +63,10 @@ class UserController extends Controller
         ->select('*')
         ->get();
 
-    $compter = DB::table('users')
-        ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        ->select('*')
-        ->get();
+        $compter = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->select('*')
+            ->get();
 
 
         return view('backend.users.create', compact('roles', 'messageNotification', 'compter'));
@@ -266,5 +266,13 @@ class UserController extends Controller
         return redirect()->route('users.index')
 
             ->with('success', 'User deleted successfully');
+    }
+
+
+    public function ProfileUtilisateur($id){
+        $users = DB::SELECT("SELECT * FROM users WHERE id=$id");
+        $users = $users[0];
+        //dd($users);
+        return view("backend.users.profile",compact('id','users'));
     }
 }
