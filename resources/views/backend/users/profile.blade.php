@@ -98,7 +98,7 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
                   <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ajouter Montant</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -314,14 +314,14 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="#" method="">
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">Montant</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                          <input type="number" class="form-control" id="inputName" placeholder="Entrer le montant">
                         </div>
                       </div>
-                      <div class="form-group row">
+                      <!--<div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
                           <input type="email" class="form-control" id="inputEmail" placeholder="Email">
@@ -344,19 +344,19 @@
                         <div class="col-sm-10">
                           <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
                         </div>
-                      </div>
+                      </div>-->
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                           <div class="checkbox">
                             <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                              <input type="checkbox"> J'accepte <a href="#">les termes et conditions</a>
                             </label>
                           </div>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" class="btn btn-danger">Enregistrer</button>
                         </div>
                       </div>
                     </form>
