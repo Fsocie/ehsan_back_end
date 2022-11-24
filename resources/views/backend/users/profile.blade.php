@@ -37,10 +37,10 @@
                     <b>Telephone</b> <a class="float-right">{{$users->telephone}}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
+                    <b>Montant</b> <a class="float-right">{{$users->montant}} XOF</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
+                    <b>Profession</b> <a class="float-right">{{$users->profession}}</a>
                   </li>
                 </ul>
 
@@ -230,7 +230,7 @@
                         <i class="fas fa-envelope bg-primary"></i>
                         <div class="timeline-item">
                           <h3 class="timeline-header"><a href="#">Antécédents</a></h3>
-                          <div class="timeline-body">Neant</div>
+                          <div class="timeline-body">{{$users->antecedent}}</div>
                         </div>
                       </div>
                       <!-- END timeline item -->
@@ -239,7 +239,7 @@
                         <i class="fas fa-user bg-info"></i>
                         <div class="timeline-item">
                           <h3 class="timeline-header"><a href="#">Allergie</a></h3>
-                          <div class="timeline-body">Glucose</div>
+                          <div class="timeline-body">{{$users->allergie}}</div>
                         </div>
                       </div>
                       <!-- END timeline item -->
@@ -247,8 +247,16 @@
                       <div>
                         <i class="fas fa-comments bg-warning"></i>
                         <div class="timeline-item">
+                          <h3 class="timeline-header"><a href="#">Vaccination</a></h3>
+                          <div class="timeline-body">{{$users->vaccination}}</div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+                      <div>
+                        <i class="fas fa-comments bg-warning"></i>
+                        <div class="timeline-item">
                           <h3 class="timeline-header"><a href="#">Maladie</a></h3>
-                          <div class="timeline-body">Tension</div>
+                          <div class="timeline-body">{{$users->maladie}}</div>
                         </div>
                       </div>
                       <!-- END timeline item -->
@@ -262,7 +270,7 @@
                             <i class="fas fa-camera bg-purple"></i>
                             <div class="timeline-item">
                                 <h3 class="timeline-header"><a href="#">Poids</a></h3>
-                                <div class="timeline-body">65kg</div>
+                                <div class="timeline-body">{{$users->poids}}</div>
                             </div>
                         </div>
                         <!--TimeLine end-->
@@ -270,7 +278,7 @@
                             <i class="far fa-clock bg-gray"></i>
                             <div class="timeline-item">
                                 <h3 class="timeline-header"><a href="#">Taille </a></h3>
-                                <div class="timeline-body">160cm</div>
+                                <div class="timeline-body">{{$users->taille}}</div>
                             </div>
                         </div>
                         <!--TimeLine end-->
@@ -279,7 +287,7 @@
                             <i class="far fa-clock bg-gray"></i>
                             <div class="timeline-item">
                                 <h3 class="timeline-header"><a href="#">Groupe </a></h3>
-                                <div class="timeline-body">AB-</div>
+                                <div class="timeline-body">{{$users->groupe}}</div>
                             </div>
                         </div>
                         <!--TimeLine end-->
@@ -288,7 +296,7 @@
                             <i class="far fa-clock bg-gray"></i>
                             <div class="timeline-item">
                                 <h3 class="timeline-header"><a href="#">Genre </a></h3>
-                                <div class="timeline-body">M</div>
+                                <div class="timeline-body">{{$users->sexe}}</div>
                             </div>
                         </div>
                         <!--TimeLine end-->
@@ -297,7 +305,7 @@
                             <i class="far fa-clock bg-gray"></i>
                             <div class="timeline-item">
                                 <h3 class="timeline-header"><a href="#">Creé le </a></h3>
-                                <div class="timeline-body">2021-09-20 20:15:39</div>
+                                <div class="timeline-body">{{$users->created_at}}</div>
                             </div>
                         </div>
                         <!--TimeLine end-->

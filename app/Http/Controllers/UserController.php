@@ -270,7 +270,11 @@ class UserController extends Controller
 
 
     public function ProfileUtilisateur($id){
-        $users = DB::SELECT("SELECT * FROM users WHERE id=$id");
+        $users = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.telephone,users.email,users.montant,users.profession,
+        carnet_santes.antecedent,carnet_santes.sexe,carnet_santes.poids,carnet_santes.taille,carnet_santes.groupe,
+        carnet_santes.allergie,carnet_santes.vaccination,carnet_santes.maladie,carnet_santes.created_at
+        FROM users,carnet_santes 
+        WHERE users.carnet_sante_id = carnet_santes.id and users.id = $id");
         $users = $users[0];
         //dd($users);
         return view("backend.users.profile",compact('id','users'));
