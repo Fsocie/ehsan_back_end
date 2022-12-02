@@ -13,7 +13,8 @@ class Has_children extends Model
         'nom',
         'prenom',
         'date_naissance',
-        'description'
+        'description',
+        'photo'
     ];
 
 

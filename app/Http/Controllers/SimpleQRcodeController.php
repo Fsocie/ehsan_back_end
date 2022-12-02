@@ -17,6 +17,7 @@ class SimpleQRcodeController extends Controller
         $enfant = Has_children::all();
         return view("backend.enfant.joi", compact('enfant'));
     }*/
+    //Liste des enfants
     public function TestCodeQrFunc() {
         $enfant = Has_children::all();
         return view("backend.enfant.enfant", compact('enfant'));

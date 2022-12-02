@@ -105,33 +105,35 @@
                   </li>-->
                  {{-- collecte begin --}}
                  @role('Admin')
-                 {{-- parametre begin --}}
-                  @can('parametre-list')
-                    <li class="nav-item" >
-                        <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
-                        <i class="fas fa-cog"></i> <p>Paramètre<span class="right badge badge-danger messages"></span>
-                        </p>
-                        </a>
-                    </li>
-                  @endcan
-                  {{-- parametre end --}}
+                  {{-- parametre begin --}}
+                    @can('parametre-list')
+                      <li class="nav-item" >
+                          <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
+                          <i class="fas fa-cog"></i> <p>Paramètre<span class="right badge badge-danger messages"></span>
+                          </p>
+                          </a>
+                      </li>
+                    @endcan
+                    {{-- parametre end --}}
                   @endrole
-                  <li class="nav-header">AGENTS DE TERRAIN</li>
-                    <li class="nav-item" >
-                        <a href="{{route('admin.beneficiare.view')}}" class="nav-link" >
-                          <i class="fas fa-users"></i> <p>Enregistrer Parent<span class="right badge badge-danger messages"></span></p>
+                  @role('Agent')
+                    <li class="nav-header">AGENTS DE TERRAIN</li>
+                      <li class="nav-item" >
+                          <a href="{{route('admin.beneficiare.view')}}" class="nav-link" >
+                            <i class="fas fa-users"></i> <p>Enregistrer Parent<span class="right badge badge-danger messages"></span></p>
+                          </a>
+                      </li>
+                      <li class="nav-item" >
+                        <a href="{{route('admin.formulaire.ajoutEnfant')}}" class="nav-link" >
+                          <i class="fas fa-users"></i> <p>Enregistrer Enfant<span class="right badge badge-danger messages"></span></p>
                         </a>
-                    </li>
-                    <li class="nav-item" >
-                      <a href="{{route('admin.beneficiare.view')}}" class="nav-link" >
-                        <i class="fas fa-users"></i> <p>Enregistrer Enfant<span class="right badge badge-danger messages"></span></p>
-                      </a>
-                    </li>
-                    <li class="nav-item" >
-                      <a href="{{route('admin.user.listeBeneficiaire')}}" class="nav-link" >
-                        <i class="fas fa-users"></i> <p>Liste Bénéficiaire<span class="right badge badge-danger messages"></span></p>
-                      </a>
-                    </li>
+                      </li>
+                      <li class="nav-item" >
+                        <a href="{{route('admin.user.listeBeneficiaire')}}" class="nav-link" >
+                          <i class="fas fa-users"></i> <p>Liste Bénéficiaire<span class="right badge badge-danger messages"></span></p>
+                        </a>
+                      </li>
+                    @endrole
 
 
 

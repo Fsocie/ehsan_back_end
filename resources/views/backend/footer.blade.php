@@ -18,7 +18,8 @@
   <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-
+  <!-- Select2 -->
+  <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
    {{-- <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script> --}}
 
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
@@ -31,9 +32,15 @@
 
 
         <script>
-         /* $(document).ready(function() {
-            $('#select2').select2();
-          });*/
+          $(document).ready(function() {
+            //$('#select2').select2();
+             //Initialize Select2 Elements
+            $('.select2').select2()
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+              theme: 'bootstrap4'
+            })
+          });
         </script>
 
   <script>

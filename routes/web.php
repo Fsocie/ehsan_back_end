@@ -69,6 +69,20 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
   Route::post('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'postMessage'])->name('rm-post');
+
+  /******************************************************************************************************************/
+
+//Page de profile du parent d'un enfant dont on a le carnet de santé
+Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
+//Formulaire d'Ajoute des Beneficiaires
+Route::view("formulaire-ajoute-Beneficiaire","backend.users.beneficiaire")->name('admin.beneficiare.view');
+Route::post("ajouterBeneficiaire",[UserController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
+//Liste des bénéficiaires
+Route::get('liste-des-beneficiaires',[UserController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
+//Forlumaire d'ajout d'enfant
+Route::get('formulaire-ajout-enfant',[UserController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
+Route::post("ajouterEnfant",[UserController::class,'addEnfant'])->name('admin.enfant.store');
+/******************************************************************************************************************/
 });
 
 
@@ -84,14 +98,6 @@ Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy
 //whatsapp
 //https://web.whatsapp.com/
 Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
-//Page de profile du parent d'un enfant dont on a le carnet de santé
-Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
-
- //Formulaire d'Ajoute des Beneficiaires
- Route::view("formulaire-ajoute-Beneficiaire","backend.users.beneficiaire")->name('admin.beneficiare.view');
- Route::post("ajouterBeneficiaire",[UserController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
- //Liste des bénéficiaires
- Route::get('liste-des-beneficiaires',[UserController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
 
 Route::group(['middleware' => 'role:Admin'], function () {
   //users
