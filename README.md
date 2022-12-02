@@ -64,3 +64,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### DEMARER LE PROJET
+0- php artisan migrate:fresh : Vider la Base de Donnée et Envoyer les nouvelles données
+1- php artisan db:seed --class=PermissionTableSeeder : Pour ajouter des permission en BD
+2- php artisan db:seed --class=CreateAdminUserSeeder : Pour ajouter des roles et utilisateurs en BD dans les tables users et roles
+
+Mot de passe par defaut : 123456

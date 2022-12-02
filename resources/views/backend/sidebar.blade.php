@@ -16,6 +16,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+             @role('Admin')
              <li class="nav-header">ADMINISTRATEURS</li>
                 <li class="nav-item">
                   <a href="{{route('admin.dashboard')}}" class="nav-link">
@@ -54,7 +55,7 @@
                   </a>
                 </li>-->
 
-
+                  
                   <li class="nav-item">
                     <a href="{{route('admin.carnet.index')}}" class="nav-link">
                       <i class="fas fa-users"></i>
@@ -64,9 +65,9 @@
                       </p>
                     </a>
                   </li>
-
+                
                 <li class="nav-item">
-                <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
+                  <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
                       <i class="fa fa-qrcode"></i>
                     <p>
                     Enfants & code Qr
@@ -74,6 +75,7 @@
                     </p>
                   </a>
                 </li>
+                
 
 
                 <!--<li class="nav-item">
@@ -104,7 +106,7 @@
                     </a>
                   </li>-->
                  {{-- collecte begin --}}
-                 @role('Admin')
+                 
                   {{-- parametre begin --}}
                     @can('parametre-list')
                       <li class="nav-item" >
@@ -116,6 +118,7 @@
                     @endcan
                     {{-- parametre end --}}
                   @endrole
+
                   @role('Agent')
                     <li class="nav-header">AGENTS DE TERRAIN</li>
                       <li class="nav-item" >
@@ -128,12 +131,22 @@
                           <i class="fas fa-users"></i> <p>Enregistrer Enfant<span class="right badge badge-danger messages"></span></p>
                         </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
+                            <i class="fa fa-qrcode"></i>
+                          <p>
+                          Enfants & code Qr
+                            <span class="right badge badge-danger "></span>
+                          </p>
+                        </a>
+                      </li>
                       <li class="nav-item" >
                         <a href="{{route('admin.user.listeBeneficiaire')}}" class="nav-link" >
                           <i class="fas fa-users"></i> <p>Liste Bénéficiaire<span class="right badge badge-danger messages"></span></p>
                         </a>
                       </li>
                     @endrole
+               
 
 
 
