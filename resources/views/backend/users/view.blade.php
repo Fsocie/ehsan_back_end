@@ -1,16 +1,30 @@
 
-    <div class="modal fade" id="modal-default{{$role->id}}" style="display: none;" aria-hidden="true">
+    <div class="modal fade" id="modal-default{{$user->id}}" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Voire le role: <em>{{$role->name}}</em> </h5>
+                <h5 class="modal-title">Voire l'utilisateur : {{$user->nom}} {{$user->prenoms}} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
 
             <div class="modal-body">
-                <p>{{$role->name}}</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Nom : <label for="">{{$user->nom}}</label></p></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Prenom : <label for="">{{$user->prenoms}}</label></p></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Email : <label for="">{{$user->email}}</label></p></label>
+                    </div>
+                    
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

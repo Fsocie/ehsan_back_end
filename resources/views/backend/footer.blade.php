@@ -19,25 +19,25 @@
   <script src="{{ asset('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
-   <!-- <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script> -->
+   {{-- <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script> --}}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>-->
 
-  <script src="{{asset('lobibox/dist/js/lobibox.min.js')}}"></script>
+  {{--<script src="{{asset('lobibox/dist/js/lobibox.min.js')}}"></script>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>  
-  <script src="{{asset('admin/badge_notifications.js')}}"></script>
+  <script src="{{asset('admin/badge_notifications.js')}}"></script>--}}
 
 
         <script>
-$(document).ready(function() {
- $('#select2').select2();
-});
-</script>
+         /* $(document).ready(function() {
+            $('#select2').select2();
+          });*/
+        </script>
 
   <script>
-    var pusher = new Pusher('710a42ce02a3f4836392');
+    /*var pusher = new Pusher('710a42ce02a3f4836392');
     var channel = pusher.subscribe('chat_channel');
     channel.bind('chat', function(data) {
       
@@ -53,7 +53,7 @@ $(document).ready(function() {
                   });
       }   
      
-  });
+    });*/
   </script>
 
   @yield('javascripts')

@@ -16,14 +16,29 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-
-             <li class="nav-item">
+             <li class="nav-header">ADMINISTRATEURS</li>
+                <li class="nav-item">
                   <a href="{{route('admin.dashboard')}}" class="nav-link">
                     <i class="fas fa-home"></i>
                     <p>
                       Accueil
                       <span class="right badge badge-danger commandes"></span>
                     </p>
+                  </a>
+                </li>
+                <li class="nav-item" >
+                  <a href="{{route('users.index')}}" class="nav-link" >
+                    <i class="fas fa-users"></i> <p>Liste des administrateurs<span class="right badge badge-danger messages"></span></p>
+                  </a>
+                </li>
+                <li class="nav-item" >
+                  <a href="{{route('agents.liste')}}" class="nav-link" >
+                    <i class="fas fa-users"></i> <p>Liste des Agents<span class="right badge badge-danger messages"></span></p>
+                  </a>
+                </li>
+                <li class="nav-item" >
+                  <a href="{{route('utilisateurs.liste')}}" class="nav-link" >
+                    <i class="fas fa-users"></i> <p>Liste des utilisateurs<span class="right badge badge-danger messages"></span></p>
                   </a>
                 </li>
 
@@ -101,7 +116,22 @@
                   @endcan
                   {{-- parametre end --}}
                   @endrole
-
+                  <li class="nav-header">AGENTS DE TERRAIN</li>
+                    <li class="nav-item" >
+                        <a href="{{route('admin.beneficiare.view')}}" class="nav-link" >
+                          <i class="fas fa-users"></i> <p>Enregistrer Parent<span class="right badge badge-danger messages"></span></p>
+                        </a>
+                    </li>
+                    <li class="nav-item" >
+                      <a href="{{route('admin.beneficiare.view')}}" class="nav-link" >
+                        <i class="fas fa-users"></i> <p>Enregistrer Enfant<span class="right badge badge-danger messages"></span></p>
+                      </a>
+                    </li>
+                    <li class="nav-item" >
+                      <a href="{{route('admin.user.listeBeneficiaire')}}" class="nav-link" >
+                        <i class="fas fa-users"></i> <p>Liste Bénéficiaire<span class="right badge badge-danger messages"></span></p>
+                      </a>
+                    </li>
 
 
 

@@ -18,7 +18,7 @@
                         <div class="float-left">
                             <p class="lead">
                                 <i class="fa fa-globe-africa"></i>
-                                <strong> Liste des Administrateurs </strong>
+                                <strong> Liste des Utilisateurs </strong>
                             </p>
                         </div>
                         <div class="float-right">
@@ -61,14 +61,14 @@
 
                             <tbody>
                                 @php ($i = 0)
-                                @forelse($users as $user)
+                                @forelse($utilisateurs as $user)
 
                                     <tr >
                                         <td>{{ ++$i }}</td>
                                         <td>{{$user->nom}}</td>     
                                         <td>{{$user->prenoms}}</td>  
                                         <td>{{$user->email}}</td>  
-                                        <td>{{$user->role_name}}</td> 
+                                        <td>{{$user->role_name}}</td>
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">

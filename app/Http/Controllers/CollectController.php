@@ -78,6 +78,7 @@ class CollectController extends Controller
             'description' => 'required|string',
             'image' => 'required|file|max:1024'
         ]);
+        //dd($data);
         $filename = time() . '.' . $request->image->extension();
         $img = $request->file('image')->storeAs('collectesImages', $filename, 'public');
         $data = new Collecte();

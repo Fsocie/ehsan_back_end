@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 	@section('page')
-		Users
+		Liste des Bénéficiaires
 	@endsection
 
 
@@ -18,7 +18,7 @@
                         <div class="float-left">
                             <p class="lead">
                                 <i class="fa fa-globe-africa"></i>
-                                <strong> Liste des Administrateurs </strong>
+                                <strong> Liste des Bénéficiaires </strong>
                             </p>
                         </div>
                         <div class="float-right">
@@ -61,20 +61,20 @@
 
                             <tbody>
                                 @php ($i = 0)
-                                @forelse($users as $user)
+                                @forelse($utilisateurs as $user)
 
                                     <tr >
                                         <td>{{ ++$i }}</td>
                                         <td>{{$user->nom}}</td>     
                                         <td>{{$user->prenoms}}</td>  
                                         <td>{{$user->email}}</td>  
-                                        <td>{{$user->role_name}}</td> 
+                                        <td>{{$user->role_name}}</td>
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
                                                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$user->id}}" href="{{ route('users.show', $user->id) }}" title="Voire" ><i class="nav-icon fas fa-eye"></i></a>
                                                     @can("user-edit")
-                                                        <a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                        <!--<a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>-->
                                                     @endcan
                                                     @can("user-delete")
                                                         <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
@@ -88,7 +88,7 @@
                                     @include('backend.users.delete')
                                     @include('backend.users.view')
                                 @empty
-                                    <tr class="text-danger text-center"><td>Pas de users disponibles</td></tr>
+                                    <tr class="text-danger text-center"><td>Pas de Bénéficiaires disponibles</td></tr>
                                 @endforelse
                             </tbody>
 

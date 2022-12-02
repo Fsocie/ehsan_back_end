@@ -132,6 +132,6 @@ $(document).ready(function(){
    
 
     });
-    var pusher = new Pusher('710a42ce02a3f4836392');
+    //var pusher = new Pusher('710a42ce02a3f4836392');
     //var channel = pusher.subscribe('notification_channel');
     

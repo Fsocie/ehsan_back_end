@@ -87,10 +87,21 @@ Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 //Page de profile du parent d'un enfant dont on a le carnet de santé
 Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
 
+ //Formulaire d'Ajoute des Beneficiaires
+ Route::view("formulaire-ajoute-Beneficiaire","backend.users.beneficiaire")->name('admin.beneficiare.view');
+ Route::post("ajouterBeneficiaire",[UserController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
+ //Liste des bénéficiaires
+ Route::get('liste-des-beneficiaires',[UserController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
 
 Route::group(['middleware' => 'role:Admin'], function () {
   //users
   Route::resource("/users", UserController::class);
+  //Liste des Agents
+  Route::get('agents',[UserController::class,'listeAgent'])->name("agents.liste");
+  //Liste de simple Utilisateurs
+  Route::get('utilisateurs',[UserController::class,'listeUtilisteurs'])->name("utilisateurs.liste");
+  Route::post("ajouterUtilisateur/create",[UserController::class,'createUser'])->name("admin.user.store");
+  
   //roles
   Route::resource("/roles", RoleController::class);
 });
