@@ -134,15 +134,12 @@
                       <li class="nav-item">
                         <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
                             <i class="fa fa-qrcode"></i>
-                          <p>
-                          Enfants & code Qr
-                            <span class="right badge badge-danger "></span>
-                          </p>
+                          <p>Liste des Enfants<span class="right badge badge-danger "></span></p>
                         </a>
                       </li>
                       <li class="nav-item" >
                         <a href="{{route('admin.user.listeBeneficiaire')}}" class="nav-link" >
-                          <i class="fas fa-users"></i> <p>Liste Bénéficiaire<span class="right badge badge-danger messages"></span></p>
+                          <i class="fas fa-users"></i> <p>Liste des Parents<span class="right badge badge-danger messages"></span></p>
                         </a>
                       </li>
                     @endrole

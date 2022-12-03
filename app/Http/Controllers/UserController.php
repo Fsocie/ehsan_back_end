@@ -136,15 +136,24 @@ class UserController extends Controller
             'telephone' => 'required|string|unique:users',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required',
-            'roles'     => 'required'
+            'roles'     => 'required',
         ]);
         $input = $request->all();
         //dd($request->roles[0]);
         //dd($input);
-        $input['password'] = Hash::make($input['password']);
+        $u              = new User();
+        $u->nom         = $request->nom;
+        $u->prenoms     = $request->prenoms;
+        $u->telephone   = $request->telephone;
+        $u->email       = $request->email;
+        $u->password    = Hash::make($request->password);
         $input['is_admin'] = 1;
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        if($request->roles[0]=="2"){ 
+            $u->code_agent = $input['nom'].'-'.$input['prenoms'].'+'.$input['telephone'].'='.$input['email'].time();
+        }
+        //$user = User::create($input);
+        $u->save();
+        $u->assignRole($request->input('roles'));
         if($request->roles[0]=="1"){
             return redirect()->route('users.index')->with('success', 'Nouvelle Administrateur ajouté avec succès');
         }elseif($request->roles[0]=="2"){
