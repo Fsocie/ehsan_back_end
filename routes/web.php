@@ -26,8 +26,8 @@ use App\Http\Controllers\CollectController;
 
 
 Auth::routes();
-
-
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
 Route::post('/home', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
 
@@ -100,8 +100,8 @@ Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy
 Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 
 Route::group(['middleware' => 'role:Admin'], function () {
-  Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-  Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
+  
+ 
   //users
   Route::resource("/users", UserController::class);
   //Liste des Agents

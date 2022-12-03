@@ -23,12 +23,12 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->double('montant')->nullable();
+            $table->double('montant')->default(0);
             $table->rememberToken();
             $table->string('profession')->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-
+            $table->string('code_agent')->nullable()->unique();
             $table->integer('pays_id')->unsigned()->nullable();
             $table->foreign('pays_id')
                 ->references('id')
