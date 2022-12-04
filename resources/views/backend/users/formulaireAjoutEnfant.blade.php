@@ -83,7 +83,7 @@
                             @forelse ($utilisateurs as $item)
                                 <option value="{{$item->id}}">{{$item->nom}} {{$item->prenoms}}</option>
                             @empty
-                                <p>Pas de Parents disponibles...</p>
+                            <option value="">Pas de Parents disponibles..</option>
                             @endforelse
                         </select>
                    

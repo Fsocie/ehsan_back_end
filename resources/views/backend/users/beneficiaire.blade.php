@@ -181,7 +181,7 @@
                     <div class="form-group">
                         <div class="form-group ">
                             <label for="">Maladie</label>
-                            <textarea name="maladie" class="form-control @error('maladie') is-invalid @enderror" placeholder="Les maladie du bénéficiaire" id="" cols="5" rows="2">{{old('maladie')}}</textarea>
+                            <textarea name="maladie" class="form-control @error('maladie') is-invalid @enderror" placeholder="Les maladies dont souffre le parent..." id="" cols="5" rows="2">{{old('maladie')}}</textarea>
                             @error('maladie')
                                 <div class="invalid-feedback">
                                     {{$errors->first('maladie')}}

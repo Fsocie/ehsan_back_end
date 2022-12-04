@@ -49,7 +49,7 @@ class UserController extends Controller
         $enfants = DB::SELECT("SELECT has_childrens.id,has_childrens.nom,
         has_childrens.prenom,has_childrens.created_at,
         has_childrens.date_naissance,users.nom as nom_parent,users.prenoms as prenom_parent from has_childrens,users
-        WHERE has_childrens.user_id = users.id AND has_childrens.code_agent = '$user'");
+        WHERE has_childrens.user_id = users.id AND has_childrens.code_agent = '$user' ORDER BY has_childrens.id DESC");
         return view('backend.users.listeEnfants',compact('enfants'));
     }
     //Liste des administrateurs
@@ -247,15 +247,16 @@ class UserController extends Controller
         $user->assignRole('Utilisateur');
         return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Parent ajouté avec succès');
     }
-    //Formulaire pour ajouter un Enfant
+    //Formulaire pour ajouter un Enfant && recuperation des parents ajouté par l'agent connecté
     public function formulaireAjoutEnfant(){
+        $user = auth()->user()->code_agent;
         $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
         FROM users,model_has_roles,roles
         WHERE users.id = model_has_roles.model_id
         AND
         model_has_roles.role_id = roles.id 
         AND
-        roles.name = 'Utilisateur' ORDER BY users.id DESC limit 5");
+        roles.name = 'Utilisateur' AND users.code_agent = '$user' ORDER BY users.id DESC limit 5");
 
         return view('backend.users.formulaireAjoutEnfant',compact("utilisateurs"));
     }
