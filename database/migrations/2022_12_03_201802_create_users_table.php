@@ -49,12 +49,7 @@ class CreateUsersTable extends Migration
                             ->on('carnet_santes')
                             ->onDelete('cascade')
                             ->onUpdate('cascade');
-            $table->integer('agent_id')->unsigned()->nullable();
-            $table->foreign('agent_id')
-                    ->references('id')
-                    ->on('agents')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            
 
 
             $table->timestamps();

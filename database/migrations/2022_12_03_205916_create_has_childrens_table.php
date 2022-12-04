@@ -28,11 +28,7 @@ class CreateHasChildrensTable extends Migration
                     ->on('users')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->foreign('agent_id')
-                    ->references('id')
-                    ->on('agents')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+
             $table->string('code_agent')->nullable();
             $table->timestamps();
         });

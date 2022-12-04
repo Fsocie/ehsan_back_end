@@ -54,6 +54,7 @@
                                     <th>Prenom</th>
                                     <th>Date Naissance</th>
                                     <th>Parent</th>
+                                    <th>Date Création</th>
                                     <th>Action</th>
                                 </tr>
 
@@ -68,7 +69,8 @@
                                         <td>{{$user->nom}}</td>     
                                         <td>{{$user->prenom}}</td>  
                                         <td>{{$user->date_naissance}}</td>  
-                                        <td>{{$user->nom_parent}} {{$user->prenom_parent}}</td>  
+                                        <td>{{$user->nom_parent}} {{$user->prenom_parent}}</td> 
+                                        <td>{{$user->created_at}}</td>   
                                         {{--<td>{{$user->role_name}}</td>--}}
                                         <td>
                                             <div class="">

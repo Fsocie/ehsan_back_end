@@ -53,6 +53,7 @@
                                     <th>Nom</th>
                                     <th>Prenom</th>
                                     <th>Email</th>
+                                    <th>Date Creation</th>
                                     <th>Action</th>
                                 </tr>
 
@@ -67,6 +68,7 @@
                                         <td>{{$user->nom}}</td>     
                                         <td>{{$user->prenoms}}</td>  
                                         <td>{{$user->email}}</td>  
+                                        <td>{{$user->created_at}}</td>  
                                         {{--<td>{{$user->role_name}}</td>--}}
                                         <td>
                                             <div class="">
@@ -87,7 +89,7 @@
                                     @include('backend.users.delete')
                                     @include('backend.users.view')
                                 @empty
-                                    <tr class="text-danger text-center"><td>Pas de Bénéficiaires disponibles</td></tr>
+                                    <tr class="text-danger text-center"><td>Pas de Parents disponibles</td></tr>
                                 @endforelse
                             </tbody>
 

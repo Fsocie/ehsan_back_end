@@ -47,7 +47,7 @@ class UserController extends Controller
     public function listeEnfants(){
         $user = auth()->user()->code_agent;
         $enfants = DB::SELECT("SELECT has_childrens.id,has_childrens.nom,
-        has_childrens.prenom,
+        has_childrens.prenom,has_childrens.created_at,
         has_childrens.date_naissance,users.nom as nom_parent,users.prenoms as prenom_parent from has_childrens,users
         WHERE has_childrens.user_id = users.id AND has_childrens.code_agent = '$user'");
         return view('backend.users.listeEnfants',compact('enfants'));
@@ -174,16 +174,19 @@ class UserController extends Controller
         }
         
     }
+    //Fonction pour recuprer la liste des parents enregistré par l'Agent Connecté
     public function listeBeneficiaire(){
-        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
+        $user = auth()->user()->code_agent;
+        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,users.created_at,roles.name as role_name
         FROM users,model_has_roles,roles
         WHERE users.id = model_has_roles.model_id
         AND
         model_has_roles.role_id = roles.id 
         AND
-        roles.name = 'Utilisateur' ORDER BY users.id DESC");
+        roles.name = 'Utilisateur' AND users.code_agent='$user' ORDER BY users.id DESC");
         return view('backend.users.listeBeneficiaire',compact('utilisateurs'));
     }
+    //Fonction pour Ajouter Des Parents
     public function addBeneficiaire(Request $request){
         //dd(auth()->user()->code_agent);
         $message = [
@@ -239,11 +242,12 @@ class UserController extends Controller
         $user->email            = $request->email;
         $user->telephone        = $request->telephone;
         $user->carnet_sante_id  = $cs_id->id;
-        //$user->code_agent = auth()->user()->code_agent;
+        $user->code_agent       = auth()->user()->code_agent;
         $user->save();
         $user->assignRole('Utilisateur');
-        return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Bénéficiaire ajouté avec succès');
+        return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Parent ajouté avec succès');
     }
+    //Formulaire pour ajouter un Enfant
     public function formulaireAjoutEnfant(){
         $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
         FROM users,model_has_roles,roles

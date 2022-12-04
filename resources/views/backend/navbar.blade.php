@@ -37,7 +37,7 @@
 
               <a class="dropdown-item"  href=""> <i class="fas fa-user "></i> Profils</a>
 
-              <a class="dropdown-item"  href="javascript:;">   <i class="fas fa-question-circle"></i> Aide</a>
+              <a class="dropdown-item"  href="javascript:;">   <i class="fas fa-question-circle"></i> {{auth()->user()->nom}} {{auth()->user()->prenoms}}</a>
               <a class="dropdown-item" href="{{ route('admin.logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="fas fa-sign-out-alt "></i>  Deconnexion </a>
               <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
