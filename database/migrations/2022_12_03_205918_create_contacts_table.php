@@ -17,8 +17,10 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('audio')->nullable();
             $table->Integer('user_id')->unsigned()->nullable();
-            $table->timestamps();
+            $table->boolean('lu')->nullable();
+            $table->string('reponses')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 

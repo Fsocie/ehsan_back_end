@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 	@section('page')
-		Liste des Bénéficiaires
+		Liste des Enfants
 	@endsection
 
 
@@ -18,7 +18,7 @@
                         <div class="float-left">
                             <p class="lead">
                                 <i class="fa fa-globe-africa"></i>
-                                <strong> Liste des Parents </strong>
+                                <strong> Liste des Enfants </strong>
                             </p>
                         </div>
                         <div class="float-right">
@@ -52,7 +52,8 @@
                                     <th>No</th>
                                     <th>Nom</th>
                                     <th>Prenom</th>
-                                    <th>Email</th>
+                                    <th>Date Naissance</th>
+                                    <th>Parent</th>
                                     <th>Action</th>
                                 </tr>
 
@@ -60,20 +61,21 @@
 
                             <tbody>
                                 @php ($i = 0)
-                                @forelse($utilisateurs as $user)
+                                @forelse($enfants as $user)
 
                                     <tr >
                                         <td>{{ ++$i }}</td>
                                         <td>{{$user->nom}}</td>     
-                                        <td>{{$user->prenoms}}</td>  
-                                        <td>{{$user->email}}</td>  
+                                        <td>{{$user->prenom}}</td>  
+                                        <td>{{$user->date_naissance}}</td>  
+                                        <td>{{$user->nom_parent}} {{$user->prenom_parent}}</td>  
                                         {{--<td>{{$user->role_name}}</td>--}}
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
-                                                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$user->id}}" href="{{ route('users.show', $user->id) }}" title="Voire" ><i class="nav-icon fas fa-eye"></i></a>
+                                                    <a type="button" class="btn btn-warning" href="{{route('admin.qrcode.show', $user->id)}}" title="Qr code" ><i class="nav-icon fas fa-qrcode"></i></a>
                                                     @can("user-edit")
-                                                        <!--<a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>-->
+                                                        {{--<a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>--}}
                                                     @endcan
                                                     @can("user-delete")
                                                         <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
@@ -85,9 +87,9 @@
 
                                
                                     @include('backend.users.delete')
-                                    @include('backend.users.view')
+                               
                                 @empty
-                                    <tr class="text-danger text-center"><td>Pas de Bénéficiaires disponibles</td></tr>
+                                    <tr class="text-danger text-center"><td>Pas d'Enfants disponibles</td></tr>
                                 @endforelse
                             </tbody>
 

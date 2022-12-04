@@ -36,22 +36,41 @@ class CreateAdminUserSeeder extends Seeder
             'password'=> bcrypt('123456'),
         ]);
         /********************AGENTS********************/
-        $user3 = User::create([
+        $user3 = new User();
+        $user3->nom ="AFI";
+        $user3->prenoms ="Kemenou";
+        $user3->telephone ="90102030";
+        $user3->email ="agent@agent.com";
+        $user3->is_admin ="0";
+        $user3->password =bcrypt('123456');
+        $user3->code_agent =$user3['nom'].'-'.$user3['prenoms'].'+'.$user3['telephone'].'='.$user3['email'].time();
+        $user3->save();
+        /*$user3 = User::create([
             'nom'=>'AFI',
             'prenoms'=>'Kemenou',
             'telephone'=>'90102030',
             'email'=>'agent@agent.com',
             'is_admin'=>'0',
             'password'=> bcrypt('123456'),
-        ]);
-        $user4 = User::create([
+            'code_agent'=>$user3['nom'].'-'.$user3['prenoms'].'+'.$user3['telephone'].'='.$user3['email'].time()
+        ]);*/
+        /*$user4 = User::create([
             'nom'=>'Agbevivi',
             'prenoms'=>'komlan',
             'telephone'=>'90908070',
             'email'=>'agent@agent1.com',
             'is_admin'=>'0',
             'password'=> bcrypt('123456'),
-        ]);
+        ]);*/
+        $user4 = new User();
+        $user4->nom ="Agbevivi";
+        $user4->prenoms ="komlan";
+        $user4->telephone ="90908070";
+        $user4->email ="agent@agent1.com";
+        $user4->is_admin ="0";
+        $user4->password =bcrypt('123456');
+        $user4->code_agent =$user4['nom'].'-'.$user4['prenoms'].'+'.$user4['telephone'].'='.$user4['email'].time();
+        $user4->save();
         /********************UTILISATEURS********************/
         $user5 = User::create([
             'nom'=>'Olawole',

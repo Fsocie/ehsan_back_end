@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('profession')->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('code_agent')->nullable()->unique();
+            $table->string('code_agent')->nullable();
             $table->integer('pays_id')->unsigned()->nullable();
             $table->foreign('pays_id')
                 ->references('id')
@@ -49,6 +49,12 @@ class CreateUsersTable extends Migration
                             ->on('carnet_santes')
                             ->onDelete('cascade')
                             ->onUpdate('cascade');
+            $table->integer('agent_id')->unsigned()->nullable();
+            $table->foreign('agent_id')
+                    ->references('id')
+                    ->on('agents')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
 
 
             $table->timestamps();

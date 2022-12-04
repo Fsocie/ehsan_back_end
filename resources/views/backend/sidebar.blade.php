@@ -132,7 +132,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
+                        <a href="{{route('admin.users.listeEnfant')}}" class="nav-link">
                             <i class="fa fa-qrcode"></i>
                           <p>Liste des Enfants<span class="right badge badge-danger "></span></p>
                         </a>

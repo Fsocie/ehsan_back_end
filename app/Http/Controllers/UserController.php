@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carnet_sante;
+use auth;
 use App\Models\User;
+use Illuminate\Support\Arr;
+use App\Models\Carnet_sante;
 use App\Models\Has_children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -41,6 +42,15 @@ class UserController extends Controller
             AND
             roles.name = 'Utilisateur'");
         return view('backend.users.utilisateurs',compact('utilisateurs'));
+    }
+     //Liste des Enfants Enregistrer pas l'Agent de terrain actuellement conneté
+    public function listeEnfants(){
+        $user = auth()->user()->code_agent;
+        $enfants = DB::SELECT("SELECT has_childrens.id,has_childrens.nom,
+        has_childrens.prenom,
+        has_childrens.date_naissance,users.nom as nom_parent,users.prenoms as prenom_parent from has_childrens,users
+        WHERE has_childrens.user_id = users.id AND has_childrens.code_agent = '$user'");
+        return view('backend.users.listeEnfants',compact('enfants'));
     }
     //Liste des administrateurs
     public function index(Request $request)
@@ -107,7 +117,6 @@ class UserController extends Controller
      */
 
     public function store(Request $request)
-
     {
         //dd($request->all());
         $data = $request->validate([
@@ -176,6 +185,7 @@ class UserController extends Controller
         return view('backend.users.listeBeneficiaire',compact('utilisateurs'));
     }
     public function addBeneficiaire(Request $request){
+        //dd(auth()->user()->code_agent);
         $message = [
             'nom.required'          => 'Veuillez saisir le nom du bénéficiaire',
             'prenoms.required'      => 'Veuillez saisir le prenom du bénéficiaire',
@@ -210,7 +220,7 @@ class UserController extends Controller
             'allergie'      =>'required|string|min:2|max:20',
             'maladie'       =>'required|string|min:2|max:20'
         ],$message);
-
+        $input = $request->all();
         //dd($request->all());
         $cs = new Carnet_sante();
         $cs->antecedent     = $request->antecedent;
@@ -229,6 +239,7 @@ class UserController extends Controller
         $user->email            = $request->email;
         $user->telephone        = $request->telephone;
         $user->carnet_sante_id  = $cs_id->id;
+        //$user->code_agent = auth()->user()->code_agent;
         $user->save();
         $user->assignRole('Utilisateur');
         return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Bénéficiaire ajouté avec succès');
@@ -244,6 +255,7 @@ class UserController extends Controller
 
         return view('backend.users.formulaireAjoutEnfant',compact("utilisateurs"));
     }
+    //Ajouté un enfant par l'Agent de terrain connecté
     public function addEnfant(Request $request){
         $message = [
             'nom.required'                  =>'Veuillez entrer le nom !!!',
@@ -275,9 +287,10 @@ class UserController extends Controller
         $child->date_naissance  = $request->date_naissance;
         $child->description     = $request->description;
         $child->user_id         = $request->user_id;
+        $child->code_agent      = auth()->user()->code_agent;
         $child->photo           = $img;
         $child->save();
-        return redirect()->route('admin.qrcode.joi')->with('success','Enfant ajouté avec success');
+        return redirect()->route('admin.users.listeEnfant')->with('success','Enfant ajouté avec success');
     }
 
 

@@ -5,7 +5,7 @@
     @endsection
 
 	@section('page')
-	    Ajout de Beneficiaires
+	    Ajout de Parents
 	@endsection
 
 
@@ -112,7 +112,7 @@
                     <div class="form-group">
                         <div class="form-group ">
                             <label for="">Poids</label>
-                            <input type="text" name="poids" value="{{old('poids')}}" class="form-control @error('poids') is-invalid @enderror" id="" placeholder="Poids du bénéficiaire">
+                            <input type="number" name="poids" value="{{old('poids')}}" class="form-control @error('poids') is-invalid @enderror" id="" placeholder="Poids du bénéficiaire">
                             @error('poids')
                                 <div class="invalid-feedback">
                                     {{$errors->first('poids')}}

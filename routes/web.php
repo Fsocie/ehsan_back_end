@@ -82,6 +82,7 @@ Route::get('liste-des-beneficiaires',[UserController::class,'listeBeneficiaire']
 //Forlumaire d'ajout d'enfant
 Route::get('formulaire-ajout-enfant',[UserController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
 Route::post("ajouterEnfant",[UserController::class,'addEnfant'])->name('admin.enfant.store');
+Route::get("liste-des-enfant",[UserController::class,'listeEnfants'])->name('admin.users.listeEnfant');
 /******************************************************************************************************************/
 });
 
