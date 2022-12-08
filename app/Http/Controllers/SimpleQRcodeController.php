@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Has_children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,35 +23,32 @@ class SimpleQRcodeController extends Controller
         $enfant = Has_children::all();
         return view("backend.enfant.enfant", compact('enfant'));
     }
-
+    //Gnerer un Code Qr pour les enfant
     public function generate($id)
     {
-
         $enfant = Has_children::find($id);
-
         $response = [
             'nom' =>  $enfant->nom,
             'prenom' =>  $enfant->prenom,
             'description' =>  $enfant->description,
             'date de naissance' =>  $enfant->date_naissance,
         ];
-
         $info = json_encode($response);
-
         $identifiant = $enfant->nom . '+' . $enfant->prenom;
         $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $identifiant . '.svg');
+    	return view("backend.enfant.showCode", compact('qrcode','enfant'))->with('success','code Qr générer et enregistrer ');
+    }
 
-        $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $enfant->prenom . '.svg');
-
-        $info=json_encode($response);
-
-        $identifiant = $enfant->nom.'+'.$enfant->prenom;
-    	$qrcode = QrCode::size(200)->generate($info,'../public/codes-qr/'.$identifiant.'.svg');
-
-           // dd($qrcode );
-    	return view("backend.enfant.showCode", compact('qrcode','enfant'))->with('success','code Qr générer et enregistrer ');;
-
-
-
+    public function parentQrCodeGenerate($id){
+        $parent = User::find($id);
+        $response = [
+            'nom' =>  $parent->nom,
+            'prenoms' =>  $parent->prenoms,
+        ];
+        $info = json_encode($response);
+        $identifiant = $parent->nom . '+' . $parent->prenoms;
+        $qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $identifiant . '.svg');
+        //dd($qrcode);
+        return view("backend.users.showParentQrCode", compact('qrcode','parent'))->with('success','Code Qr générer et enregistrer ');
     }
 }

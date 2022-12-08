@@ -78,7 +78,7 @@
             <!--CARNET DE SANTE BEGIN-->
             <div class="row">
                 <div class="col-md-6">
-                    
+                        <label for="">Parent</label>
                         <select name="user_id" id="" class="form-control">
                             @forelse ($utilisateurs as $item)
                                 <option value="{{$item->id}}">{{$item->nom}} {{$item->prenoms}}</option>

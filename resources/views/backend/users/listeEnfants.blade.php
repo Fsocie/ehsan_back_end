@@ -75,7 +75,7 @@
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
-                                                    <a type="button" class="btn btn-warning" href="{{route('admin.qrcode.show', $user->id)}}" title="Qr code" ><i class="nav-icon fas fa-qrcode"></i></a>
+                                                    <a type="button" class="btn btn-warning btn-sm" href="{{route('admin.qrcode.show', $user->id)}}" title="Qr code" ><i class="nav-icon fas fa-qrcode"></i></a>
                                                     @can("user-edit")
                                                         {{--<a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>--}}
                                                     @endcan

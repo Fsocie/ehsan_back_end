@@ -70,8 +70,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'readMessage'])->name('rm');
   Route::post('/read-message/{contact_id}', [App\Http\Controllers\ReadMessageController::class, 'postMessage'])->name('rm-post');
 
-  /******************************************************************************************************************/
-
+/******************************************************************************************************************/
+//Qr code Parents
+Route::get("parent-qrcode/{id}",  [SimpleQRcodeController::class, 'parentQrCodeGenerate'])->name('admin.parentQrcode.show');
 //Page de profile du parent d'un enfant dont on a le carnet de santé
 Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
 //Formulaire d'Ajoute des Beneficiaires
