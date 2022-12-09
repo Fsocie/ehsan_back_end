@@ -6,6 +6,7 @@ use auth;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use App\Models\Carnet_sante;
+use App\Models\Location;
 use App\Models\Has_children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -177,7 +178,7 @@ class UserController extends Controller
     //Fonction pour recuprer la liste des parents enregistré par l'Agent Connecté
     public function listeBeneficiaire(){
         $user = auth()->user()->code_agent;
-        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,users.created_at,roles.name as role_name
+        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,users.telephone,users.created_at,roles.name as role_name
         FROM users,model_has_roles,roles
         WHERE users.id = model_has_roles.model_id
         AND
@@ -188,26 +189,31 @@ class UserController extends Controller
     }
     //Fonction pour Ajouter Des Parents
     public function addBeneficiaire(Request $request){
+        //dd($request->all());
         //dd(auth()->user()->code_agent);
         $message = [
-            'nom.required'          => 'Veuillez saisir le nom du bénéficiaire',
-            'prenoms.required'      => 'Veuillez saisir le prenom du bénéficiaire',
-            'telephone.required'    => 'Veuillez saisir le telephone du bénéficiaire',
+            'nom.required'          => 'Veuillez saisir le nom ',
+            'prenoms.required'      => 'Veuillez saisir le prenom ',
+            'telephone.required'    => 'Veuillez saisir le telephone ',
 
-            'antecedent.required'   => 'Veuillez saisir l\'antecedent du bénéficiaire',
-            'sexe.required'         => 'Veuillez choisir le genre du bénéficiaire',
+            'antecedent.required'   => 'Veuillez saisir l\'antecedent ',
+            'sexe.required'         => 'Veuillez choisir le genre ',
             'sexe.min'              => 'Genre trop court',
             'sexe.max'              => 'Genre trop long',
-            'poids.required'        => 'Veuillez saisir le poids du bénéficiaire',
+            'poids.required'        => 'Veuillez saisir le poids ',
             'poids.min'             => 'Poids trop petit',
             'poids.max'             => 'Genre trop grand',
-            'taille.required'       => 'Veuillez saisir la taille du bénéficiaire',
+            'taille.required'       => 'Veuillez saisir la taille ',
             'taille.min'            => 'Taille trop petit',
             'taille.max'            => 'Taille trop grand',
-            'groupe.required'       => 'Veuillez saisir le groupe sanguin du bénéficiaire',
-            'vaccination.required'  => 'Veuillez saisir la vaccination du bénéficiaire',
-            'allergie.required'     => 'Veuillez saisir l\'allergie du bénéficiaire',
-            'maladie.required'      => 'Veuillez saisir la maladie du bénéficiaire',
+            'groupe.required'       => 'Veuillez saisir le groupe sanguin ',
+            'vaccination.required'  => 'Veuillez saisir la vaccination ',
+            'allergie.required'     => 'Veuillez saisir l\'allergie ',
+            'maladie.required'      => 'Veuillez saisir la maladie ',
+            'pays.required'         => 'Veuillez saisir le Pays ',
+            'region.required'       => 'Veuillez saisir la Region ',
+            'ville.required'        => 'Veuillez saisir la ville ',
+            'village.required'      => 'Veuillez saisir le village ',
         ];
         $request->validate([
             'nom'       => 'required|string|min:2|max:20',
@@ -216,16 +222,20 @@ class UserController extends Controller
             //'email'     => 'required|email|unique:users,email',
             'antecedent'    =>'required|string|min:2|max:20',
             'sexe'          =>'required|string|min:1|max:1',
-            'poids'         =>'required|numeric|min:2|max:200',
-            'taille'        =>'required|numeric|min:2|max:210',
+            //'poids'         =>'required|numeric|min:2|max:200',
+            //'taille'        =>'required|numeric|min:2|max:210',
             'groupe'        =>'required|string|min:2|max:20',
             'vaccination'   =>'required|string|min:2|max:20',
             'allergie'      =>'required|string|min:2|max:20',
-            'maladie'       =>'required|string|min:2|max:20'
+            'maladie'       =>'required|string|min:2|max:50',
+            'pays'          =>'required|string|min:2|max:20',
+            'region'        =>'required|string|min:2|max:20',
+            'ville'         =>'required|string|min:2|max:20',
+            'village'       =>'required|string|min:2|max:20',
         ],$message);
         $input = $request->all();
         //dd($request->all());
-        $cs = new Carnet_sante();
+        $cs                 = new Carnet_sante();
         $cs->antecedent     = $request->antecedent;
         $cs->sexe           = $request->sexe;
         $cs->poids          = $request->poids;
@@ -236,12 +246,24 @@ class UserController extends Controller
         $cs->maladie        = $request->maladie;
         $cs->save();
         $cs_id = DB::table('carnet_santes')->latest('id')->first();
+        $lc                     = new Location();
+        $lc->pays               = $request->pays;
+        $lc->region             = $request->region;
+        $lc->ville              = $request->ville;
+        $lc->village            = $request->village;
+        $lc->save();
+        $lc_id = DB::table('locations')->latest('id')->first();
         $user                   = new User();
         $user->nom              = $request->nom;
         $user->prenoms          = $request->prenoms;
         $user->email            = $request->email;
         $user->telephone        = $request->telephone;
+        $user->telephone2       = $request->telephone2;
+        $user->date_naissance   = $request->date_naissance;
+        $user->genre            = $request->sexe;
+        $user->profession       = $request->profession;
         $user->carnet_sante_id  = $cs_id->id;
+        $user->location_id      = $lc_id->id;
         $user->code_agent       = auth()->user()->code_agent;
         $user->save();
         $user->assignRole('Utilisateur');

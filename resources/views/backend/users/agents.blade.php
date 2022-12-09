@@ -72,12 +72,12 @@
                                         <td>
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
-                                                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$user->id}}" href="{{ route('users.show', $user->id) }}" title="Voire" ><i class="nav-icon fas fa-eye"></i></a>
+                                                    <a type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default{{$user->id}}" href="{{ route('users.show', $user->id) }}" title="Voire" ><i class="nav-icon fas fa-eye"></i></a>
                                                     @can("user-edit")
-                                                        <a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                        {{--<a type="button" class="btn btn-warning" href="{{ route('users.edit', $user->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>--}}
                                                     @endcan
                                                     @can("user-delete")
-                                                        <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                        <button class="btn btn-danger btn-sm start_chat" data-toggle="modal" data-target="#modal-danger{{$user->id}}" title="delete"><i class="fas fa-trash"></i></button>
                                                     @endcan
                                                 </div>
                                             </div>

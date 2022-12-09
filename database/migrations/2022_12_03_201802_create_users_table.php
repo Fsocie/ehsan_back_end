@@ -18,8 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('nom');
             $table->string('prenoms');
             $table->string('telephone')->unique();
+            $table->string('telephone2')->unique()->nullable();
             $table->string('email')->nullable();
             $table->string('date_naissance')->nullable();
+            $table->string('genre')->nullable();
             $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -47,6 +49,13 @@ class CreateUsersTable extends Migration
             $table->foreign('carnet_sante_id')
                             ->references('id')
                             ->on('carnet_santes')
+                            ->onDelete('cascade')
+                            ->onUpdate('cascade');
+
+            $table->integer('location_id')->unsigned()->nullable();
+            $table->foreign('location_id')
+                            ->references('id')
+                            ->on('locations')
                             ->onDelete('cascade')
                             ->onUpdate('cascade');
             

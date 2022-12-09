@@ -52,7 +52,7 @@
                                     <th>No</th>
                                     <th>Nom</th>
                                     <th>Prenom</th>
-                                    <th>Email</th>
+                                    <th>Telephone</th>
                                     <th>Date Creation</th>
                                     <th>Action</th>
                                 </tr>
@@ -67,7 +67,7 @@
                                         <td>{{ ++$i }}</td>
                                         <td>{{$user->nom}}</td>     
                                         <td>{{$user->prenoms}}</td>  
-                                        <td>{{$user->email}}</td>  
+                                        <td>{{$user->telephone}}</td>  
                                         <td>{{$user->created_at}}</td>  
                                         {{--<td>{{$user->role_name}}</td>--}}
                                         <td>
