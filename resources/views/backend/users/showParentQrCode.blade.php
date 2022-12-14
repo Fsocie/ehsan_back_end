@@ -51,7 +51,7 @@
                                     </div>
                                     <!---->
                                     <div class="card-body">
-                                        <img class="img-fluid pad" src="/codes-qr/junior.svg" alt="Photo">
+                                        <img class="img-fluid pad" src="{{asset($img_qrcode)}}" alt="Photo">
                                         
                                         {{--<button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
                                         <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
