@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use App\Models\Carnet_sante;
 use App\Models\Location;
 use App\Models\Has_children;
+use App\Models\PersonneAPrevenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -193,10 +194,12 @@ class UserController extends Controller
         //dd(auth()->user()->code_agent);
         $message = [
             'nom.required'          => 'Veuillez saisir le nom ',
+            'nom.max'                => 'nom trop long',
             'prenoms.required'      => 'Veuillez saisir le prenom ',
             'telephone.required'    => 'Veuillez saisir le telephone ',
 
             'antecedent.required'   => 'Veuillez saisir l\'antecedent ',
+            'antecedent.max'        => 'Antecedent trop long',
             'sexe.required'         => 'Veuillez choisir le genre ',
             'sexe.min'              => 'Genre trop court',
             'sexe.max'              => 'Genre trop long',
@@ -207,13 +210,19 @@ class UserController extends Controller
             'taille.min'            => 'Taille trop petit',
             'taille.max'            => 'Taille trop grand',
             'groupe.required'       => 'Veuillez saisir le groupe sanguin ',
+            'groupe.max'            => 'Groupe sanguin trop long',
             'vaccination.required'  => 'Veuillez saisir la vaccination ',
+            'vaccination.max'       => 'Vaccination trop long',
             'allergie.required'     => 'Veuillez saisir l\'allergie ',
             'maladie.required'      => 'Veuillez saisir la maladie ',
             'pays.required'         => 'Veuillez saisir le Pays ',
+            'pays.max'              => 'Nom du Pays trop long',
             'region.required'       => 'Veuillez saisir la Region ',
+            'region.max'            => 'Region du Pays trop long',
             'ville.required'        => 'Veuillez saisir la ville ',
+            'ville.max'             => 'Ville du Pays trop long',
             'village.required'      => 'Veuillez saisir le village ',
+            'village.max'           => 'Village du Pays trop long',
         ];
         $request->validate([
             'nom'       => 'required|string|min:2|max:20',
@@ -225,7 +234,7 @@ class UserController extends Controller
             //'poids'         =>'required|numeric|min:2|max:200',
             //'taille'        =>'required|numeric|min:2|max:210',
             'groupe'        =>'required|string|min:2|max:20',
-            'vaccination'   =>'required|string|min:2|max:20',
+            'vaccination'   =>'required|string|min:2|max:50',
             'allergie'      =>'required|string|min:2|max:20',
             'maladie'       =>'required|string|min:2|max:50',
             'pays'          =>'required|string|min:2|max:20',
@@ -253,6 +262,18 @@ class UserController extends Controller
         $lc->village            = $request->village;
         $lc->save();
         $lc_id = DB::table('locations')->latest('id')->first();
+            $pap = new PersonneAPrevenir();
+            $pap->nom_personne1         = $request->nom_personne1;
+            $pap->prenom_personne1      = $request->prenom_personne1;
+            $pap->telephone_personne1   = $request->telephone_personne1;
+            $pap->nom_personne2         = $request->nom_personne2;
+            $pap->prenom_personne2      = $request->prenom_personne2;
+            $pap->telephone_personne2   = $request->telephone_personne2;
+            $pap->nom_personne3         = $request->nom_personne3;
+            $pap->prenom_personne3      = $request->prenom_personne3;
+            $pap->telephone_personne3   = $request->telephone_personne3;
+            $pap->save();
+            $pap_id = DB::table('personne_a_prevenirs')->latest('id')->first();
         $user                   = new User();
         $user->nom              = $request->nom;
         $user->prenoms          = $request->prenoms;
@@ -262,8 +283,10 @@ class UserController extends Controller
         $user->date_naissance   = $request->date_naissance;
         $user->genre            = $request->sexe;
         $user->profession       = $request->profession;
+        $user->supports         = $request->input('supports');
         $user->carnet_sante_id  = $cs_id->id;
         $user->location_id      = $lc_id->id;
+        $user->personne_a_prevenir_id  = $pap_id->id;
         $user->code_agent       = auth()->user()->code_agent;
         $user->save();
         $user->assignRole('Utilisateur');
@@ -335,7 +358,6 @@ class UserController extends Controller
      */
 
     public function show($id)
-
     {
 
         $user = User::find($id);
@@ -370,7 +392,6 @@ class UserController extends Controller
      */
 
     public function edit($id)
-
     {
 
         $user = User::find($id);
@@ -411,7 +432,6 @@ class UserController extends Controller
      */
 
     public function update(Request $request, $id)
-
     {
 
         $this->validate($request, [
@@ -472,9 +492,7 @@ class UserController extends Controller
      */
 
     public function destroy($id)
-
     {
-
         User::find($id)->delete();
 
         return redirect()->route('users.index')

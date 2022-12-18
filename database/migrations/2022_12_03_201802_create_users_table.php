@@ -58,6 +58,20 @@ class CreateUsersTable extends Migration
                             ->on('locations')
                             ->onDelete('cascade')
                             ->onUpdate('cascade');
+            //Une personne a plusieurs support
+            $table->string('supports')->nullable();
+            /*$table->foreign('support_id')
+                            ->references('id')
+                            ->on('supports')
+                            ->onDelete('cascade')
+                            ->onUpdate('cascade');*/
+            //Une personne a plusieurs personnes a prevenir
+            $table->integer('personne_a_prevenir_id')->unsigned()->nullable();
+            $table->foreign('personne_a_prevenir_id')
+                            ->references('id')
+                            ->on('personne_a_prevenirs')
+                            ->onDelete('cascade')
+                            ->onUpdate('cascade');
             
 
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\SimpleQRcodeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CollectController;
+use App\Http\Controllers\SupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +115,9 @@ Route::group(['middleware' => 'role:Admin'], function () {
   
   //roles
   Route::resource("/roles", RoleController::class);
+
+  //Les supports
+  Route::resource("/supports", SupportController::class);
 });
 
 

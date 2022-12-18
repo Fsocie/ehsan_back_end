@@ -98,6 +98,13 @@
                    </a>
                  </li>
                  @endcan
+                 <li class="nav-item">
+                    <a href="{{route("supports.index")}}" class="nav-link">
+                      <i class="fas fa-dice"></i>
+                      <p>Supports<span class="right badge badge-danger messages"></span>
+                      </p>
+                    </a>
+                  </li>
                   {{-- collecte begin pizza-slice--}}
                   <!--<li class="nav-item">
                     <a href="{{ route('whatsapp.index')}}" target="_top" class="nav-link">

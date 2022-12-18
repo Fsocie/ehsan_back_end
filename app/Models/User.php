@@ -62,5 +62,14 @@ class User extends Authenticatable
         return $this->belongsTo(contacts::class, 'id_user', 'id');
     }
 
+    public function setSupportsAttribute($value)
+    {
+        $this->attributes['supports'] =json_encode($value);
+    }
+    public function getSupportsAttribute($value)
+    {
+        return $this->attributes['supports'] =json_decode($value);
+    }
+
    
 }

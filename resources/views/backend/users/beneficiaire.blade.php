@@ -180,6 +180,149 @@
                 </div>
             </div>
             <hr>
+            <h3 class="text-center">PERSONNES  A PREVENIR</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="">Nom</label>
+                                <input type="text" name="nom_personne1" value="{{old('nom_personne1')}}" class="form-control @error('nom_personne1') is-invalid @enderror" id="" placeholder="Nom personne1...">
+                                @error('nom_personne1')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('nom_personne1')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Prenom</label>
+                                <input type="text" name="prenom_personne1" value="{{old('prenom_personne1')}}" class="form-control @error('prenom_personne1') is-invalid @enderror" id="" placeholder="Prenom personne1...">
+                                @error('prenom_personne1')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('prenom_personne1')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Contact</label>
+                                <input type="text" name="telephone_personne1" value="{{old('telephone_personne1')}}" class="form-control @error('telephone_personne1') is-invalid @enderror" id="" placeholder="Contact personne1...">
+                                @error('telephone_personne1')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('telephone_personne1')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="">Nom</label>
+                                <input type="text" name="nom_personne2" value="{{old('nom_personne1')}}" class="form-control @error('nom_personne2') is-invalid @enderror" id="" placeholder="Nom personne2...">
+                                @error('nom_personne2')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('nom_personne2')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Prenom</label>
+                                <input type="text" name="prenom_personne2" value="{{old('prenom_personne2')}}" class="form-control @error('prenom_personne2') is-invalid @enderror" id="" placeholder="Prenom personne2...">
+                                @error('prenom_personne2')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('prenom_personne2')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Contact</label>
+                                <input type="text" name="telephone_personne2" value="{{old('telephone_personne2')}}" class="form-control @error('telephone_personne2') is-invalid @enderror" id="" placeholder="Contact personne2...">
+                                @error('telephone_personne2')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('telephone_personne2')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="">Nom</label>
+                                <input type="text" name="nom_personne3" value="{{old('nom_personne3')}}" class="form-control @error('nom_personne3') is-invalid @enderror" id="" placeholder="Nom personne3...">
+                                @error('nom_personne3')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('nom_personne3')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Prenom</label>
+                                <input type="text" name="prenom_personne3" value="{{old('prenom_personne3')}}" class="form-control @error('prenom_personne3') is-invalid @enderror" id="" placeholder="Prenom personne3...">
+                                @error('prenom_personne3')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('prenom_personne3')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group ">
+                                <label for="">Contact</label>
+                                <input type="text" name="telephone_personne3" value="{{old('telephone_personne3')}}" class="form-control @error('telephone_personne3') is-invalid @enderror" id="" placeholder="Contact personne3...">
+                                @error('telephone_personne3')
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('telephone_personne3')}}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <hr>
+            <div class="form-group">
+                <h3 class="text-center">TYPES DE SUPPORT</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><input type="checkbox" name="supports[]" value="CARTE"> CARTE</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label><input type="checkbox" name="supports[]" value="COLIER"> COLIER</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label><input type="checkbox" name="supports[]" value="PORTE CLE"> PORTE CLE</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label><input type="checkbox" name="supports[]" value="BRACELET"> BRACELET</label>
+                    </div>
+                </div>
+            </div> 
+            <hr>
             <!--CARNET DE SANTE BEGIN-->
             <div class="row">
                 <div class="col-md-6">

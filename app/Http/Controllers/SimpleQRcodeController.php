@@ -79,9 +79,11 @@ class SimpleQRcodeController extends Controller
         ];
         $info = json_encode($response);
         //Methode de nommage du fichier img du CodeQr.
-        $firstCharacter =strtoupper(substr($parent->nom, 0, 3));
-        $secondCharacter =strtoupper(substr($parent->prenoms, 0, 3));
-        $identifiant = $firstCharacter .''.$secondCharacter.$parent->telephone;
+        /*$firstCharacter =strtoupper(substr($parent->nom, 0, 3));
+        $secondCharacter =strtoupper(substr($parent->prenoms, 0, 3));*/
+        $firstCharacter =strtoupper($parent->nom);
+        $secondCharacter =strtoupper($parent->prenoms);
+        $identifiant = $firstCharacter .'-'.$secondCharacter.$parent->telephone;
         //$qrcode = QrCode::size(200)->generate($info, '../public/codes-qr/' . $identifiant . '.svg');
         /********************************************************************/
         $data = new User();
