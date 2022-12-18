@@ -1,7 +1,8 @@
 @extends('backend.layouts.app')
 
-    @section('button')
-
+    @section('linkCss')
+        <!-- BS Stepper -->
+        <link rel="stylesheet" href="{{ asset('admin/plugins/bs-stepper/css/bs-stepper.min.css') }}">
     @endsection
 
 	@section('page')
@@ -15,6 +16,7 @@
 
     <form method="POST" action="{{route('admin.beneficiaire.store')}}">
         @csrf
+
         <div class="form-group">
             <!--PARENTS BEGIN-->
             <div class="row">
@@ -324,6 +326,7 @@
             </div> 
             <hr>
             <!--CARNET DE SANTE BEGIN-->
+            <h3 class="text-center">INFORMATIONS DE SANTE</h3>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -445,6 +448,40 @@
 
         <button type="submit" name="submit" class="btn btn-primary">Valider</button>
     </form>
+
+@endsection
+
+
+@section('javascripts')
+<script>
+    /*$(".btn-submit").click(function(e){
+
+                e.preventDefault();
+
+                var data = $(this).serialize();
+                console.log(data);
+                var url = '{{ url('ajouterBeneficiaire') }}';
+                $(document).find("span.text-danger").remove();
+                $.ajax({
+                url:url,
+                method:'POST',
+                data:data,
+                success:function(response){
+                    if(response.success){
+                        alert(response.message) //Message come from controller
+                    }else{
+                        alert("Error")
+                    }
+                },
+                error:function(response){
+                    console.log("valeur de response:",response)
+                    $.each(response.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span class="text-strong text-danger">' +error+ '</span>')
+                    })
+                }
+                });
+    });*/
+</script>
 
 @endsection
 

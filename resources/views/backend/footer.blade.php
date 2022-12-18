@@ -7,6 +7,8 @@
   <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- overlayScrollbars -->
   <script src="{{ asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+   <!-- BS-Stepper -->
+   <script src="{{ asset('admin/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
 
@@ -20,6 +22,7 @@
   <script src="{{ asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <!-- Select2 -->
   <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
+ 
    {{-- <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script> --}}
 
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
@@ -41,6 +44,10 @@
               theme: 'bootstrap4'
             })
           });
+          // BS-Stepper Init
+          document.addEventListener('DOMContentLoaded', function () {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+          })
         </script>
 
   <script>
