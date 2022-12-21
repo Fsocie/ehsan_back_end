@@ -53,8 +53,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/show/carnet/{id}', [CarnetController::class, 'show'])->name('admin.carnet.show');
 
   //Qr code enfant
-  Route::get("simple-qrcode/{id}",  [SimpleQRcodeController::class, 'generate'])->name('admin.qrcode.show');
-  Route::get("TestCodeQr",  [SimpleQRcodeController::class, 'TestCodeQrFunc'])->name('admin.qrcode.joi');
+  Route::get("simple-qrcode/{id}",[SimpleQRcodeController::class, 'generate'])->name('admin.qrcode.show');
+  Route::get("enfants",[SimpleQRcodeController::class, 'index'])->name('admin.enfants.liste');
 
   //message
   Route::get('/message', [App\Http\Controllers\MessageController::class, 'message'])->name('message');

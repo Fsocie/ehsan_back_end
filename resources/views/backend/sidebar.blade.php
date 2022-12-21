@@ -43,78 +43,75 @@
                   </a>
                 </li>
 
-                <!--<li class="nav-item">
-                  <a href="{{route('admin.signal.index')}}" class="nav-link">
-                    <i class="fab fa-shopify"></i>
+                    {{--<li class="nav-item">
+                      <a href="{{route('admin.signal.index')}}" class="nav-link">
+                        <i class="fab fa-shopify"></i>
 
-                    <p>
+                        <p>
 
-                       Listes des cas signalés
-                      <span class="right badge badge-danger commandes"></span>
-                    </p>
-                  </a>
-                </li>-->
+                          Listes des cas signalés
+                          <span class="right badge badge-danger commandes"></span>
+                        </p>
+                      </a>
+                    </li>--}}
 
                   
-                  <li class="nav-item">
-                    <a href="{{route('admin.carnet.index')}}" class="nav-link">
-                      <i class="fas fa-users"></i>
-                      <p>
-                      Utilisateurs & Carnets
-                        <span class="right badge badge-danger"></span>
-                      </p>
-                    </a>
-                  </li>
+                    <li class="nav-item">
+                      <a href="{{route('admin.carnet.index')}}" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <p>
+                        Utilisateurs & Carnets
+                          <span class="right badge badge-danger"></span>
+                        </p>
+                      </a>
+                    </li>
                 
-                <li class="nav-item">
-                  <a href="{{route('admin.qrcode.joi')}}" class="nav-link">
-                      <i class="fa fa-qrcode"></i>
-                    <p>
-                    Enfants & code Qr
-                      <span class="right badge badge-danger "></span>
-                    </p>
-                  </a>
-                </li>
+                    <li class="nav-item">
+                      <a href="{{route('admin.enfants.liste')}}" class="nav-link">
+                        <i class="fa fa-qrcode"></i>
+                        <p>Enfants & code Qr<span class="right badge badge-danger "></span></p>
+                      </a>
+                    </li>
                 
 
 
-                <!--<li class="nav-item">
-                  <a href="{{ route('message') }}" class="nav-link">
-                    <i class="fas fa-envelope"></i>
-                    <p>
-                      Messages 
-                      <span class="right badge badge-danger messages"></span>
-                    </p>
-                  </a>
-                </li>-->
+                    {{--<li class="nav-item">
+                      <a href="{{ route('message') }}" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <p>
+                          Messages 
+                          <span class="right badge badge-danger messages"></span>
+                        </p>
+                      </a>
+                    </li>--}}
 
-                 {{-- collecte begin --}}
-                 @can('collecte-list')
-                 <li class="nav-item">
-                   <a href="{{route("admin.collectes.index")}}" class="nav-link">
-                     <i class="fas fa-dice"></i>
-                     <p>Lancer une collecte<span class="right badge badge-danger messages"></span>
-                     </p>
-                   </a>
-                 </li>
-                 @endcan
-                 <li class="nav-item">
-                    <a href="{{route("supports.index")}}" class="nav-link">
-                      <i class="fas fa-dice"></i>
-                      <p>Supports<span class="right badge badge-danger messages"></span>
-                      </p>
-                    </a>
-                  </li>
-                  {{-- collecte begin pizza-slice--}}
-                  <!--<li class="nav-item">
-                    <a href="{{ route('whatsapp.index')}}" target="_top" class="nav-link">
-                      <i class="fas fa-pizza-slice"></i>
-                      <p>WhatsApp<span class="right badge badge-danger messages"></span></p>
-                    </a>
-                  </li>-->
-                 {{-- collecte begin --}}
-                 
-                  {{-- parametre begin --}}
+                    {{-- collecte begin --}}
+                    @can('collecte-list')
+                      <li class="nav-item">
+                        <a href="{{route("admin.collectes.index")}}" class="nav-link">
+                          <i class="fas fa-dice"></i>
+                          <p>Lancer une collecte<span class="right badge badge-danger messages"></span>
+                          </p>
+                        </a>
+                      </li>
+                    @endcan
+                    <li class="nav-item">
+                      <a href="{{route("supports.index")}}" class="nav-link">
+                        <i class="fas fa-dice"></i>
+                        <p>Supports<span class="right badge badge-danger messages"></span>
+                        </p>
+                      </a>
+                    </li>
+                    {{-- collecte begin pizza-slice--}}
+                      {{--<li class="nav-item">
+                        <a href="{{ route('whatsapp.index')}}" target="_top" class="nav-link">
+                          <i class="fas fa-pizza-slice"></i>
+                          <p>WhatsApp<span class="right badge badge-danger messages"></span></p>
+                        </a>
+                    </li>--}}
+                    {{-- collecte begin --}}
+                  
+                    {{-- parametre begin --}}
                     @can('parametre-list')
                       <li class="nav-item" >
                           <a href="{{route('admin.paramatre.index')}}" class="nav-link" >
@@ -149,7 +146,7 @@
                           <i class="fas fa-users"></i> <p>Liste des Parents<span class="right badge badge-danger messages"></span></p>
                         </a>
                       </li>
-                    @endrole
+                  @endrole
                
 
 
