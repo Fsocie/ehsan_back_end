@@ -13,7 +13,7 @@
 @section('content')
 
 
-    <form method="POST" action="{{route('admin.user.store')}}">
+    <form method="POST" action="{{route('users.store')}}">
         @csrf
         <div class="form-group">
             <div class="form-group">

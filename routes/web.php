@@ -6,13 +6,14 @@ use App\Http\Controllers\CasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\CarnetController;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParamètreController;
 use App\Http\Controllers\SimpleQRcodeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CollectController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\BeneficiaireController;
+use App\Http\Controllers\EnfantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +42,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   //pays
   Route::get('/pays', [PaysController::class, 'index'])->name('admin.pays.index');
-  /*Route::get('/addpays', [PaysController::class, 'viewformadd'])->name('admin.pays.store');
-    Route::post('/addpays', [PaysController::class, 'store'])->name('admin.pays.store');*/
-  /*Route::get('/update/pays/{id}', [PaysController::class, 'viewformupdate'])->name('admin.pays.update');
-    Route::post('/update/pays/{id}', [PaysController::class, 'update'])->name('admin.pays.update');*/
   Route::get('/delete/pays/{id}', [PaysController::class, 'destroy'])->name('admin.pays.delete');
 
   // Signalement d'un cas
@@ -52,7 +49,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
   Route::get('/show/cas/{id}', [CasController::class, 'show'])->name('admin.signal.show');
 
   //carnet utilisation
-
   Route::get('/carnet/index', [CarnetController::class, 'index'])->name('admin.carnet.index');
   Route::get('/show/carnet/{id}', [CarnetController::class, 'show'])->name('admin.carnet.show');
 
@@ -76,15 +72,16 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::get("parent-qrcode/{id}",  [SimpleQRcodeController::class, 'parentQrCodeGenerate'])->name('admin.parentQrcode.show');
 //Page de profile du parent d'un enfant dont on a le carnet de santé
 Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
-//Formulaire d'Ajoute des Beneficiaires
+
+//**********************************MODULE DES BENEFICIAIRES**********************************
 Route::view("formulaire-ajoute-Beneficiaire","backend.users.beneficiaire")->name('admin.beneficiare.view');
-Route::post("ajouterBeneficiaire",[UserController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
-//Liste des bénéficiaires
-Route::get('liste-des-beneficiaires',[UserController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
-//Forlumaire d'ajout d'enfant
-Route::get('formulaire-ajout-enfant',[UserController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
-Route::post("ajouterEnfant",[UserController::class,'addEnfant'])->name('admin.enfant.store');
-Route::get("liste-des-enfant",[UserController::class,'listeEnfants'])->name('admin.users.listeEnfant');
+Route::post("ajouterBeneficiaire",[BeneficiaireController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
+Route::get('liste-des-beneficiaires',[BeneficiaireController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
+
+//**********************************MODULE DES ENFANTS**********************************
+Route::get('formulaire-ajout-enfant',[EnfantController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
+Route::post("ajouterEnfant",[EnfantController::class,'addEnfant'])->name('admin.enfant.store');
+Route::get("liste-des-enfant",[EnfantController::class,'listeEnfants'])->name('admin.users.listeEnfant');
 /******************************************************************************************************************/
 });
 
@@ -102,20 +99,16 @@ Route::delete("collectes/delete/{collecte}", [CollectController::class, 'destroy
 //https://web.whatsapp.com/
 Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 
+
 Route::group(['middleware' => 'role:Admin'], function () {
-  
- 
   //users
   Route::resource("/users", UserController::class);
   //Liste des Agents
   Route::get('agents',[UserController::class,'listeAgent'])->name("agents.liste");
   //Liste de simple Utilisateurs
   Route::get('utilisateurs',[UserController::class,'listeUtilisteurs'])->name("utilisateurs.liste");
-  Route::post("ajouterUtilisateur/create",[UserController::class,'createUser'])->name("admin.user.store");
-  
   //roles
   Route::resource("/roles", RoleController::class);
-
   //Les supports
   Route::resource("/supports", SupportController::class);
 });

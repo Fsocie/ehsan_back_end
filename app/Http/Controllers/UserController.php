@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use auth;
 use App\Models\User;
 use Illuminate\Support\Arr;
-use App\Models\Carnet_sante;
-use App\Models\Location;
-use App\Models\Has_children;
-use App\Models\PersonneAPrevenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -45,18 +42,8 @@ class UserController extends Controller
             roles.name = 'Utilisateur'");
         return view('backend.users.utilisateurs',compact('utilisateurs'));
     }
-     //Liste des Enfants Enregistrer pas l'Agent de terrain actuellement conneté
-    public function listeEnfants(){
-        $user = auth()->user()->code_agent;
-        $enfants = DB::SELECT("SELECT has_childrens.id,has_childrens.nom,
-        has_childrens.prenom,has_childrens.created_at,
-        has_childrens.date_naissance,users.nom as nom_parent,users.prenoms as prenom_parent from has_childrens,users
-        WHERE has_childrens.user_id = users.id AND has_childrens.code_agent = '$user' ORDER BY has_childrens.id DESC");
-        return view('backend.users.listeEnfants',compact('enfants'));
-    }
     //Liste des administrateurs
     public function index(Request $request)
-
     {
 
         $users = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
@@ -71,21 +58,12 @@ class UserController extends Controller
 
 
     }
-
-
-
     /**
-
      * Show the form for creating a new resource.
-
      *
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function create()
-
     {
 
         $roles = Role::all();
@@ -103,44 +81,14 @@ class UserController extends Controller
 
         return view('backend.users.create', compact('roles'));
     }
-
-
-
     /**
-
-     * Store a newly created resource in storage.
-
+     * Creer un nouvel utiliateur
      *
-
      * @param  \Illuminate\Http\Request  $request
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $data = $request->validate([
-            'name'      => 'required',
-            'nom'       => 'required|string',
-            'prenoms'   => 'required|string',
-            'telephone' => 'required|string|unique:users',
-            'email'     => 'required|email|unique:users,email',
-            'password'  => 'required',
-            'roles'     => 'required'
-        ]);
-        dd($data);
-        $input = $request->all();
-        dd($input);
-        $input['password'] = Hash::make($input['password']);
-        $input['is_admin'] = 1;
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-        return redirect()->route('users.index')->with('success', 'User created successfully');
-    }
-
-    public function createUser(Request $request){
         $request->validate([
             'nom'       => 'required|string',
             'prenoms'   => 'required|string',
@@ -150,8 +98,6 @@ class UserController extends Controller
             'roles'     => 'required',
         ]);
         $input = $request->all();
-        //dd($request->roles[0]);
-        //dd($input);
         $u              = new User();
         $u->nom         = $request->nom;
         $u->prenoms     = $request->prenoms;
@@ -174,189 +120,13 @@ class UserController extends Controller
         }else{
             return redirect()->route('users.index')->with('success', 'Nouvelle utilisateur ajouté avec succès');
         }
-        
     }
-    //Fonction pour recuprer la liste des parents enregistré par l'Agent Connecté
-    public function listeBeneficiaire(){
-        $user = auth()->user()->code_agent;
-        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,users.telephone,users.created_at,roles.name as role_name
-        FROM users,model_has_roles,roles
-        WHERE users.id = model_has_roles.model_id
-        AND
-        model_has_roles.role_id = roles.id 
-        AND
-        roles.name = 'Utilisateur' AND users.code_agent='$user' ORDER BY users.id DESC");
-        return view('backend.users.listeBeneficiaire',compact('utilisateurs'));
-    }
-    //Fonction pour Ajouter Des Parents
-    public function addBeneficiaire(Request $request){
-        //dd($request->all());
-        //dd(auth()->user()->code_agent);
-        $message = [
-            'nom.required'          => 'Veuillez saisir le nom ',
-            'nom.max'                => 'nom trop long',
-            'prenoms.required'      => 'Veuillez saisir le prenom ',
-            'telephone.required'    => 'Veuillez saisir le telephone ',
-
-            'antecedent.required'   => 'Veuillez saisir l\'antecedent ',
-            'antecedent.max'        => 'Antecedent trop long',
-            'sexe.required'         => 'Veuillez choisir le genre ',
-            'sexe.min'              => 'Genre trop court',
-            'sexe.max'              => 'Genre trop long',
-            'poids.required'        => 'Veuillez saisir le poids ',
-            'poids.min'             => 'Poids trop petit',
-            'poids.max'             => 'Genre trop grand',
-            'taille.required'       => 'Veuillez saisir la taille ',
-            'taille.min'            => 'Taille trop petit',
-            'taille.max'            => 'Taille trop grand',
-            'groupe.required'       => 'Veuillez saisir le groupe sanguin ',
-            'groupe.max'            => 'Groupe sanguin trop long',
-            'vaccination.required'  => 'Veuillez saisir la vaccination ',
-            'vaccination.max'       => 'Vaccination trop long',
-            'allergie.required'     => 'Veuillez saisir l\'allergie ',
-            'maladie.required'      => 'Veuillez saisir la maladie ',
-            'pays.required'         => 'Veuillez saisir le Pays ',
-            'pays.max'              => 'Nom du Pays trop long',
-            'region.required'       => 'Veuillez saisir la Region ',
-            'region.max'            => 'Region du Pays trop long',
-            'ville.required'        => 'Veuillez saisir la ville ',
-            'ville.max'             => 'Ville du Pays trop long',
-            'village.required'      => 'Veuillez saisir le village ',
-            'village.max'           => 'Village du Pays trop long',
-        ];
-        $request->validate([
-            'nom'       => 'required|string|min:2|max:20',
-            'prenoms'   => 'required|string|min:2|max:50',
-            'telephone' => 'required|string|unique:users',
-            //'email'     => 'required|email|unique:users,email',
-            'antecedent'    =>'required|string|min:2|max:20',
-            'sexe'          =>'required|string|min:1|max:1',
-            //'poids'         =>'required|numeric|min:2|max:200',
-            //'taille'        =>'required|numeric|min:2|max:210',
-            'groupe'        =>'required|string|min:2|max:20',
-            'vaccination'   =>'required|string|min:2|max:50',
-            'allergie'      =>'required|string|min:2|max:20',
-            'maladie'       =>'required|string|min:2|max:50',
-            'pays'          =>'required|string|min:2|max:20',
-            'region'        =>'required|string|min:2|max:20',
-            'ville'         =>'required|string|min:2|max:20',
-            'village'       =>'required|string|min:2|max:20',
-        ],$message);
-        $input = $request->all();
-        //dd($request->all());
-        $cs                 = new Carnet_sante();
-        $cs->antecedent     = $request->antecedent;
-        $cs->sexe           = $request->sexe;
-        $cs->poids          = $request->poids;
-        $cs->taille         = $request->taille;
-        $cs->groupe         = $request->groupe;
-        $cs->allergie       = $request->allergie;
-        $cs->vaccination    = $request->vaccination;
-        $cs->maladie        = $request->maladie;
-        $cs->save();
-        $cs_id = DB::table('carnet_santes')->latest('id')->first();
-        $lc                     = new Location();
-        $lc->pays               = $request->pays;
-        $lc->region             = $request->region;
-        $lc->ville              = $request->ville;
-        $lc->village            = $request->village;
-        $lc->save();
-        $lc_id = DB::table('locations')->latest('id')->first();
-            $pap = new PersonneAPrevenir();
-            $pap->nom_personne1         = $request->nom_personne1;
-            $pap->prenom_personne1      = $request->prenom_personne1;
-            $pap->telephone_personne1   = $request->telephone_personne1;
-            $pap->nom_personne2         = $request->nom_personne2;
-            $pap->prenom_personne2      = $request->prenom_personne2;
-            $pap->telephone_personne2   = $request->telephone_personne2;
-            $pap->nom_personne3         = $request->nom_personne3;
-            $pap->prenom_personne3      = $request->prenom_personne3;
-            $pap->telephone_personne3   = $request->telephone_personne3;
-            $pap->save();
-            $pap_id = DB::table('personne_a_prevenirs')->latest('id')->first();
-        $user                   = new User();
-        $user->nom              = $request->nom;
-        $user->prenoms          = $request->prenoms;
-        $user->email            = $request->email;
-        $user->telephone        = $request->telephone;
-        $user->telephone2       = $request->telephone2;
-        $user->date_naissance   = $request->date_naissance;
-        $user->genre            = $request->sexe;
-        $user->profession       = $request->profession;
-        $user->supports         = $request->input('supports');
-        $user->carnet_sante_id  = $cs_id->id;
-        $user->location_id      = $lc_id->id;
-        $user->personne_a_prevenir_id  = $pap_id->id;
-        $user->code_agent       = auth()->user()->code_agent;
-        $user->save();
-        $user->assignRole('Utilisateur');
-        return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Parent ajouté avec succès');
-    }
-    //Formulaire pour ajouter un Enfant && recuperation des parents ajouté par l'agent connecté
-    public function formulaireAjoutEnfant(){
-        $user = auth()->user()->code_agent;
-        $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
-        FROM users,model_has_roles,roles
-        WHERE users.id = model_has_roles.model_id
-        AND
-        model_has_roles.role_id = roles.id 
-        AND
-        roles.name = 'Utilisateur' AND users.code_agent = '$user' ORDER BY users.id DESC limit 5");
-
-        return view('backend.users.formulaireAjoutEnfant',compact("utilisateurs"));
-    }
-    //Ajouté un enfant par l'Agent de terrain connecté
-    public function addEnfant(Request $request){
-        $message = [
-            'nom.required'                  =>'Veuillez entrer le nom !!!',
-            'nom.string'                    =>'Veuillez entrer une chaine de caractère !!!',
-            'prenom.required'               =>'Veuillez entrer le prenom !!!',
-            'prenom.string'                 =>'Veuillez entrer une chaine de caractère !!!',
-            'date_naissance.required'       =>'Veuillez entrer votre taille !!!',
-            'date_naissance.string'         =>'Veuillez entrer une date !!!',
-            'description.required'          =>'Veuillez entrer une description !!!',
-            'description.string'            =>'Veuillez choisir une chaine de caractère !!!',
-            'photo.required'                =>'Veuillez choisir une image de votre enfant',
-            'photo.file'                    =>'Veuillez choisir un fichier image',
-            'photo.mimes'                   =>'L\'extension de votre image n\'est pas autorisé',
-            'photo.max'                     =>'La taille de votre image n\'est pas autorisé',
-        ];
-        $request->validate([
-            'nom'               =>'required|string',
-            'prenom'            =>'required|string',
-            'date_naissance'    =>'required|string',
-            'description'       =>'required|string',
-            'photo'             =>'required|file|mimes:jpg,png,jpeg|max:1024',
-            'user_id'           =>'required|integer'
-        ],$message);
-        $filename = time().'.'.$request->photo->extension();
-        $img = $request->file('photo')->storeAs('EnfantsImage',$filename,'public');
-        $child = new Has_children();
-        $child->nom             = $request->nom;
-        $child->prenom          = $request->prenom;
-        $child->date_naissance  = $request->date_naissance;
-        $child->description     = $request->description;
-        $child->user_id         = $request->user_id;
-        $child->code_agent      = auth()->user()->code_agent;
-        $child->photo           = $img;
-        $child->save();
-        return redirect()->route('admin.users.listeEnfant')->with('success','Enfant ajouté avec success');
-    }
-
-
-
     /**
-
      * Display the specified resource.
-
      *
-
      * @param  int  $id
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function show($id)
     {
 
@@ -376,21 +146,12 @@ class UserController extends Controller
 
         return view('backend.users.show', compact('user', 'message', 'compter'));
     }
-
-
-
     /**
-
      * Show the form for editing the specified resource.
-
      *
-
      * @param  int  $id
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function edit($id)
     {
 
@@ -414,23 +175,13 @@ class UserController extends Controller
 
         return view('backend.users.update', compact('user', 'roles', 'userRole', 'message', 'compter'));
     }
-
-
-
     /**
-
      * Update the specified resource in storage.
-
      *
-
      * @param  \Illuminate\Http\Request  $request
-
      * @param  int  $id
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function update(Request $request, $id)
     {
 
@@ -476,21 +227,12 @@ class UserController extends Controller
 
             ->with('success',  "L'utilisateur a été mise à jour avec succès !!!");
     }
-
-
-
     /**
-
      * Remove the specified resource from storage.
-
      *
-
      * @param  int  $id
-
      * @return \Illuminate\Http\Response
-
-     */
-
+    */
     public function destroy($id)
     {
         User::find($id)->delete();
@@ -499,8 +241,6 @@ class UserController extends Controller
 
             ->with('success', "L'utilisateur a été supprimé avec succès !!!");
     }
-
-
     public function ProfileUtilisateur($id){
         $users = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.telephone,users.email,users.montant,users.profession,
         carnet_santes.antecedent,carnet_santes.sexe,carnet_santes.poids,carnet_santes.taille,carnet_santes.groupe,
