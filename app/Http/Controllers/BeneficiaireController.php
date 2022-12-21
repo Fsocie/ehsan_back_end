@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Location;
-use Illuminate\Http\Request;
 use App\Models\PersonneAPrevenir;
 use App\Models\Carnet_sante;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +12,7 @@ use App\Http\Requests\CreateBeneficiaireRequest;
 class BeneficiaireController extends Controller
 {
     //
-     //Fonction pour recuprer la liste des parents enregistré par l'Agent Connecté
+     //Fonction pour recuprer la liste des parents(Beneficiaire) enregistré par l'Agent Connecté
     public function listeBeneficiaire(){
         $user = auth()->user()->code_agent;
         $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,users.telephone,users.created_at,roles.name as role_name
@@ -25,7 +24,7 @@ class BeneficiaireController extends Controller
         roles.name = 'Utilisateur' AND users.code_agent='$user' ORDER BY users.id DESC");
         return view('backend.beneficiaires.listeBeneficiaire',compact('utilisateurs'));
     }
-    //Fonction pour Ajouter Des Parents
+    //Fonction pour Ajouter Des Parents(Beneficiaire)
     public function addBeneficiaire(CreateBeneficiaireRequest $request){
         //dd($request->all());
         //dd(auth()->user()->code_agent);

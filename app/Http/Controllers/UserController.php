@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use auth;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -20,17 +18,7 @@ class UserController extends Controller
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
-    //Liste des Agents
-    public function listeAgent(){
-        $agents = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
-            FROM users,model_has_roles,roles
-            WHERE users.id = model_has_roles.model_id
-            AND
-            model_has_roles.role_id = roles.id 
-            AND
-            roles.name = 'Agent'");
-        return view('backend.users.agents',compact('agents'));
-    }
+   
     //Liste des Utilisateurs
     public function listeUtilisteurs(){
         $utilisateurs = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.email,roles.name as role_name
@@ -241,6 +229,7 @@ class UserController extends Controller
 
             ->with('success', "L'utilisateur a été supprimé avec succès !!!");
     }
+    //Fonction pour aller sur le profile d'un utilisateur
     public function ProfileUtilisateur($id){
         $users = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.telephone,users.email,users.montant,users.profession,
         carnet_santes.antecedent,carnet_santes.sexe,carnet_santes.poids,carnet_santes.taille,carnet_santes.groupe,

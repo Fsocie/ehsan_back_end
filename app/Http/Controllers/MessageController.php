@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\contacts;
-use App\Models\User;
-use App\Notifications\message;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
@@ -61,8 +57,6 @@ class MessageController extends Controller
             ->get();
         return view('backend.message.notification', ['messageNotification' => $messageNotification, 'compter' => $compter]);
     }
-
-
 
     public function message()
     {

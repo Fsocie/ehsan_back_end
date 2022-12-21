@@ -103,8 +103,8 @@ Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 Route::group(['middleware' => 'role:Admin'], function () {
   //users
   Route::resource("/users", UserController::class);
-  //Liste des Agents
-  Route::get('agents',[UserController::class,'listeAgent'])->name("agents.liste");
+  //**********************************MODULE DES AGENTS**********************************
+  Route::get('agents',[AgentController::class,'index'])->name("agents.liste");
   //Liste de simple Utilisateurs
   Route::get('utilisateurs',[UserController::class,'listeUtilisteurs'])->name("utilisateurs.liste");
   //roles

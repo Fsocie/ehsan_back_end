@@ -3,15 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\contacts;
-use App\Models\User;
-use App\Notifications\message;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ReadMessageController extends Controller
 {

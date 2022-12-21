@@ -63,7 +63,6 @@ class PaysController extends Controller
         return view('backend.pays.add', ['messageNotification' => $messageNotification, 'compter' => $compter]);
     }
 
-
     /* Store a newly created resource in storage.
         *
         * @param  \Illuminate\Http\Request  $request
