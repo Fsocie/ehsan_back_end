@@ -11,6 +11,7 @@ use App\Http\Requests\CreateBeneficiaireRequest;
 
 class BeneficiaireController extends Controller
 {
+    
     //
      //Fonction pour recuprer la liste des parents(Beneficiaire) enregistré par l'Agent Connecté
     public function listeBeneficiaire(){
@@ -77,5 +78,23 @@ class BeneficiaireController extends Controller
         $user->save();
         $user->assignRole('Utilisateur');
         return redirect()->route('admin.user.listeBeneficiaire')->with('success', 'Nouveau Parent ajouté avec succès');
+    }
+
+    public function edit($id)
+    {
+        $user = DB::SELECT("SELECT users.nom,users.prenoms,users.profession,users.email,users.telephone,users.telephone2,
+        locations.pays,locations.region,locations.ville,locations.village,
+        personne_a_prevenirs.nom_personne1,personne_a_prevenirs.prenom_personne1,personne_a_prevenirs.telephone_personne1,
+        personne_a_prevenirs.nom_personne2,personne_a_prevenirs.prenom_personne2,personne_a_prevenirs.telephone_personne2,
+        personne_a_prevenirs.nom_personne3,personne_a_prevenirs.prenom_personne3,personne_a_prevenirs.telephone_personne3,
+        carnet_santes.antecedent,carnet_santes.poids,carnet_santes.taille,carnet_santes.groupe,carnet_santes.vaccination,
+        carnet_santes.maladie,carnet_santes.allergie
+        FROM users,locations,personne_a_prevenirs,carnet_santes
+        WHERE users.location_id = locations.id
+        AND users.personne_a_prevenir_id = personne_a_prevenirs.id
+        AND users.carnet_sante_id = carnet_santes.id
+        AND users.id = $id");
+        $user = $user[0];
+        return view('backend.beneficiaires.edit',compact('user'));
     }
 }

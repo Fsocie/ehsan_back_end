@@ -14,7 +14,7 @@ use App\Http\Controllers\CollectController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\BeneficiaireController;
 use App\Http\Controllers\EnfantController;
-
+use App\Http\Controllers\AgentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,9 +74,10 @@ Route::get("parent-qrcode/{id}",  [SimpleQRcodeController::class, 'parentQrCodeG
 Route::get('profile/{id}',[UserController::class,'ProfileUtilisateur'])->name('profile.user');
 
 //**********************************MODULE DES BENEFICIAIRES**********************************
-Route::view("formulaire-ajoute-Beneficiaire","backend.users.beneficiaire")->name('admin.beneficiare.view');
+Route::view("formulaire-ajoute-Beneficiaire","backend.beneficiaires.beneficiaire")->name('admin.beneficiare.view');
 Route::post("ajouterBeneficiaire",[BeneficiaireController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
 Route::get('liste-des-beneficiaires',[BeneficiaireController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
+Route::get("beneficiaire/{id}/edit",[BeneficiaireController::class,'edit'])->name('admin.beneficiaire.edit');
 
 //**********************************MODULE DES ENFANTS**********************************
 Route::get('formulaire-ajout-enfant',[EnfantController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
@@ -101,7 +102,7 @@ Route::view("whatsapp", "backend/whatsapp/whatsapp")->name("whatsapp.index");
 
 
 Route::group(['middleware' => 'role:Admin'], function () {
-  //users
+  //**********************************MODULE DES UTILISATEURS**********************************
   Route::resource("/users", UserController::class);
   //**********************************MODULE DES AGENTS**********************************
   Route::get('agents',[AgentController::class,'index'])->name("agents.liste");

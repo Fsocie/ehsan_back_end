@@ -68,12 +68,12 @@
                                             <div class="">
                                                 <div class="d-flex" style="justify-content: space-between">
 
-                                                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{$role->id}}" href="{{ route('roles.show', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
+                                                    <a type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default{{$role->id}}" href="{{ route('roles.show', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-eye"></i></a>
                                                     @can('role-edit')
-                                                        <a type="button" class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
+                                                        <a type="button" class="btn btn-warning btn-sm" href="{{ route('roles.edit', $role->id) }}" title="Editer" ><i class="nav-icon fas fa-edit"></i></a>
                                                     @endcan
                                                     @can('role-delete')
-                                                        <button class="btn btn-danger start_chat" data-toggle="modal" data-target="#modal-danger{{$role->id}}" title="delete"><i class="fas fa-trash"></i></button>
+                                                        <button class="btn btn-danger start_chat btn-sm" data-toggle="modal" data-target="#modal-danger{{$role->id}}" title="delete"><i class="fas fa-trash"></i></button>
                                                     @endcan
                                                 </div>
 
