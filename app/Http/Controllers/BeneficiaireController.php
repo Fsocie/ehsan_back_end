@@ -82,7 +82,7 @@ class BeneficiaireController extends Controller
 
     public function edit($id)
     {
-        $user = DB::SELECT("SELECT users.nom,users.prenoms,users.profession,users.email,users.telephone,users.telephone2,
+        $user = DB::SELECT("SELECT users.id,users.nom,users.prenoms,users.profession,users.email,users.telephone,users.telephone2,
         locations.pays,locations.region,locations.ville,locations.village,
         personne_a_prevenirs.nom_personne1,personne_a_prevenirs.prenom_personne1,personne_a_prevenirs.telephone_personne1,
         personne_a_prevenirs.nom_personne2,personne_a_prevenirs.prenom_personne2,personne_a_prevenirs.telephone_personne2,
@@ -96,5 +96,13 @@ class BeneficiaireController extends Controller
         AND users.id = $id");
         $user = $user[0];
         return view('backend.beneficiaires.edit',compact('user'));
+    }
+
+    public function update()
+    {
+        return redirect()->route('admin.user.listeBeneficiaire')->with('success','Les informations sont en cours de mise à jour...patientez');
+        return response()->json([
+            'message'=>'Les informations ont été mise à jour avec success !!!'
+        ],200);
     }
 }

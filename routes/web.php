@@ -78,6 +78,7 @@ Route::view("formulaire-ajoute-Beneficiaire","backend.beneficiaires.beneficiaire
 Route::post("ajouterBeneficiaire",[BeneficiaireController::class,'addBeneficiaire'])->name('admin.beneficiaire.store');
 Route::get('liste-des-beneficiaires',[BeneficiaireController::class,'listeBeneficiaire'])->name('admin.user.listeBeneficiaire');
 Route::get("beneficiaire/{id}/edit",[BeneficiaireController::class,'edit'])->name('admin.beneficiaire.edit');
+Route::put("beneficiaire/{id}",[BeneficiaireController::class,'update'])->name('admin.beneficiaire.update');
 
 //**********************************MODULE DES ENFANTS**********************************
 Route::get('formulaire-ajout-enfant',[EnfantController::class,'formulaireAjoutEnfant'])->name("admin.formulaire.ajoutEnfant");
